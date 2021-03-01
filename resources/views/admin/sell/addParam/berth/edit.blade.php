@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('admin.addParam.separatedRoom.update', ['number_of_separated_room'=>$separatedRoom->id]) }}" method="POST">
+                                <form action="{{ route('admin.addParam.berth.update', ['berth'=>$berth->id]) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label class="mb-1">Количество комнат</label>
-                                        <input type="text" class="form-control input-flat" name="number_of_separated_rooms" value="{{$separatedRoom->number_of_separated_rooms}}">
+                                        <label class="mb-1">Количество спальных мест</label>
+                                        <input type="text" class="form-control input-flat" name="number_of_berths" value="{{$berth->number_of_berths}}">
                                     </div>
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Сохранить </button>
                                 </form>

@@ -9,26 +9,26 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>Кол-во спальных мест</h4>
+                                <h4>Тип балкона</h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                    <a href="{{ route('admin.addParam.berth.create') }}" class="btn mb-1 btn-rounded btn-info">Добавить кол-во спальных мест</a>
+                                    <a href="{{ route('admin.addParam.balcony.create') }}" class="btn mb-1 btn-rounded btn-info">Добавить тип балкона</a>
                                     <tr>
                                         <th>#</th>
-                                        <th>Кол-во спальных мест</th>
+                                        <th>Тип балкона</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($berths as $berth)
+                                    @foreach($balconies as $balcony)
                                     <tr>
-                                        <th>{{ $berth->id }}</th>
-                                        <td>{{ $berth->number_of_berths }}</td>
-                                        <td> <a href="{{ route('admin.addParam.berth.edit', ['berth'=>$berth->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
+                                        <th>{{ $balcony->id }}</th>
+                                        <td>{{ $balcony->type_of_balcony }}</td>
+                                        <td> <a href="{{ route('admin.addParam.balcony.edit', ['balcony'=>$balcony->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
 
                                         <td>
-                                            <form action="{{ route('admin.addParam.berth.destroy', ['berth'=>$berth->id ])}}" method="post">
+                                            <form action="{{ route('admin.addParam.balcony.destroy', ['balcony'=>$balcony->id ])}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Delete</button>

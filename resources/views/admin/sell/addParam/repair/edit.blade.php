@@ -8,12 +8,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('admin.addParam.bathroom.update', ['bathroom'=>$bathroom->id]) }}" method="POST">
+                                <form action="{{ route('admin.addParam.repair.update', ['repair'=>$repair->id]) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label class="mb-1">Тип сан. узла</label>
-                                        <input type="text" class="form-control input-flat" name="type_of_bathrooms" value="{{$bathroom->type_of_bathrooms}}">
+                                        <label class="mb-1">Тип ремонта</label>
+                                        <input type="text" class="form-control input-flat" name="type_of_repairs" value="{{$repair->type_of_repairs}}">
                                     </div>
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Сохранить </button>
                                 </form>

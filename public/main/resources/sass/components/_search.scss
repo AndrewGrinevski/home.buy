@@ -25,7 +25,7 @@
         background-color: transparent;
         @include transition(all .4s ease);
         &:hover {
-            color: $color-1st;
+            color: #0c85d0;
         }
     }
     @media (max-width: 1440px) {

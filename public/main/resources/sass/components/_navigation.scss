@@ -29,7 +29,7 @@
             &:hover {
                 color: #fff;
                 padding-left: 20px;
-                background-color: $color-1st;
+                background-color: #0c85d0;
             }
         }
         &:last-child {
@@ -116,12 +116,12 @@
                 content: '';
                 width: 0;
                 height: 1px;
-                background-color: $color-1st;
+                background-color: #0c85d0;
                 @include transition(all .3s ease);
             }
             &:hover {
                 padding-left: 25px;
-                color: $color-1st;
+                color: #0c85d0;
                 &:before {
                     width: 20px;
                 }
@@ -140,7 +140,7 @@
             color: #1d1d1d;
             text-transform: uppercase;
             &:hover {
-                color: $color-1st;
+                color: #0c85d0;
             }
         }
     }
@@ -207,7 +207,7 @@
                 @include center();
                 height: 30px;
                 width: 100%;
-                background-color: $color-1st;
+                background-color: #0c85d0;
                 z-index: -1;
                 @include transition(all .4s ease);
                 @include border-radius(30px);

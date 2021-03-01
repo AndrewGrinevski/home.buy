@@ -12,7 +12,7 @@
         top: 0;
         left: 0;
         height: 100%;
-        background-color: $color-2nd;
+        background-color: #0c85d0;
         @include border-radius(0);
         border: none;
     }
@@ -23,7 +23,7 @@
         width: 18px;
         outline: none;
         cursor: pointer;
-        background-color: $color-2nd;
+        background-color: #0c85d0;
         border: 2px solid #fff;
         @include transform(translateY(-50%));
         @include border-radius(50%);

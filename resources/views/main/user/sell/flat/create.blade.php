@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('admin.sellFlats.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('home.addFlat.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <h4 class="card-title">Местоположение</h4>
                                     <br>

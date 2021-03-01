@@ -9,26 +9,26 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>Количество комнат</h4>
+                                <h4>Кол-во отдельных комнат</h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                    <a href="{{ route('admin.addParam.room.create') }}" class="btn mb-1 btn-rounded btn-info">Добавить кол-во комнат</a>
+                                    <a href="{{ route('admin.addParam.separatedRoom.create') }}" class="btn mb-1 btn-rounded btn-info">Добавить кол-во комнат</a>
                                     <tr>
                                         <th>#</th>
-                                        <th>Кол-во комнат</th>
+                                        <th>Кол-во отдельных комнат</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($rooms as $room)
+                                    @foreach($separatedRooms as $separatedRoom)
                                     <tr>
-                                        <th>{{ $room->id }}</th>
-                                        <td>{{ $room->number_of_rooms }}</td>
-                                        <td> <a href="{{ route('admin.addParam.room.edit', ['number_of_room'=>$room->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
+                                        <th>{{ $separatedRoom->id }}</th>
+                                        <td>{{ $separatedRoom->number_of_separated_rooms }}</td>
+                                        <td> <a href="{{ route('admin.addParam.separatedRoom.edit', ['number_of_separated_room'=>$separatedRoom->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
 
                                         <td>
-                                            <form action="{{ route('admin.addParam.room.destroy', ['number_of_room'=>$room->id ])}}" method="post">
+                                            <form action="{{ route('admin.addParam.separatedRoom.destroy', ['number_of_separated_room'=>$separatedRoom->id ])}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Delete</button>

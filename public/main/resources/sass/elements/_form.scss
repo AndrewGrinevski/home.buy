@@ -9,7 +9,7 @@
     &:focus {
         outline: none;
         @include box-shadow(none);
-        border-color: $color-1st;
+        border-color: #0c85d0;
     }
 }
 
@@ -72,7 +72,7 @@ textarea.form-control {
             left: 7px;
             width: 6px;
             height: 10px;
-            border: 3px solid $color-2nd;
+            border: 3px solid #0c85d0;
             border-top: none;
             border-left: none;
             z-index: 5;
@@ -176,7 +176,7 @@ textarea.form-control {
         button.btn {
             outline: none;
             @include box-shadow(none);
-            background-color: $color-1st !important;
+            background-color: #0c85d0 !important;
         }
     }
     .bs-caret {
@@ -220,7 +220,7 @@ textarea.form-control {
             width: 8px;
             height: 8px;
             @include border-radius(50%);
-            background-color: $color-1st;
+            background-color: #0c85d0;
             z-index: 10;
             opacity: 0;
             @include transform(scale(1.5, 1.5));
@@ -315,7 +315,7 @@ textarea.form-control {
         font-size: 20px;
         @include transition(all .4s ease);
         &:hover {
-            background-color: $color-2nd;
+            background-color: #0c85d0;
         }
         &.minus {
             float: left;

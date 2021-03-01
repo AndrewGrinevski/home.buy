@@ -47,11 +47,11 @@
             font-size: 16px;
             text-transform: uppercase;
             letter-spacing: .05em;
-            background-color: $color-1st;
+            background-color: #0c85d0;
             color: #fff;
             @include transition(all .4s ease);
             &:hover {
-                background-color: $color-2nd;
+                background-color: #0c85d0;
             }
         }
     }

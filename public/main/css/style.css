@@ -5313,7 +5313,7 @@ textarea.form-control {
     display: table; }
   .ps-product__columns .ps-product__column {
     float: left;
-    width: 20%;
+    width: 38%;
     padding: 0 15px; }
   @media (max-width: 1600px) {
     .ps-product__columns .ps-product__column {
@@ -6537,4 +6537,12 @@ html .bg--parallax {
 .pl-100 {
   padding-left: 100px; }
 
+.checkboxMy {
+    transform:scale(2.0);
+    margin-left: 10px;
+}
+
+.searchFlats {
+    background-color: white;
+}
 /*# sourceMappingURL=style.css.map */

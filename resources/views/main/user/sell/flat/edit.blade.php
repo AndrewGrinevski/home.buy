@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('admin.sellFlats.update', ['flat'=>$sellRoom->id ]) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('home.addFlat.update', ['add'=>$sellRoom->id ]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <h4 class="card-title">Местоположение</h4>
@@ -165,7 +165,7 @@
                                         </select>
                                     </div>
                                     <br>
-                                    <h4 class="card-title">Контактная информация</h4>
+                                    {{--<h4 class="card-title">Контактная информация</h4>
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Имя контактного лица</label>
@@ -192,7 +192,7 @@
                                         <label class="mb-1">В вашем объявлении будет отображаться кнопка "Написать в Viber"
                                             с возможностью написать вам (только в мобильной версии сайта).</label>
                                         <input type="text" class="form-control input-flat" name="viber_phone" value="{{ $sellRoom->userContact->viber_phone }}">
-                                    </div>
+                                    </div>--}}
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Изменить </button>
                                 </form>
                             </div>

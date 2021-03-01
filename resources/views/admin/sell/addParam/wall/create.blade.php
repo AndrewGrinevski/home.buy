@@ -8,11 +8,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('admin.addParam.repair.store') }}" method="POST">
+                                <form action="{{ route('admin.addParam.wall.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="mb-1">Тип ремонта</label>
-                                        <input type="text" class="form-control input-flat" name="type_of_repairs" value="">
+                                        <label class="mb-1">Тип стен</label>
+                                        <input type="text" class="form-control input-flat" name="type_of_walls" value="">
                                     </div>
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Создать </button>
                                 </form>
