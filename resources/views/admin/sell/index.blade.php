@@ -20,6 +20,7 @@
                                         <th>Город</th>
                                         <th>Адрес</th>
                                         <th>Кол-во комнат</th>
+                                        <th>email пользователя</th>
                                         <th>Стоимость</th>
                                         <th>Дата добавления</th>
                                     </tr>
@@ -31,6 +32,7 @@
                                         <td>{{$flat->town}}</td>
                                         <td>{{$flat->address}}</td>
                                         <td>{{$flat->room->number_of_rooms}}</td>
+                                        <td>{{$flat->user->email}}</td>
                                         <td class="color-primary">${{$flat->price}}</td>
                                         <td class="color-primary">{{$flat->created_at}}</td>
                                         <td> <a href="{{ route('admin.sellFlats.edit', ['flat'=>$flat->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
