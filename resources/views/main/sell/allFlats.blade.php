@@ -1,5 +1,12 @@
 @extends('layouts.main')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    <link href="{{ asset('main/css/custom.css') }}" rel="stylesheet">
+
     <div class="ps-products-wrap pt-80 pb-80">
         <div class="ps-products" data-mh="product-listing">
             <div class="ps-product-action">
@@ -8,13 +15,14 @@
                 </div>
             </div>
             <div class="ps-product__columns">
+                @if($sellFlats->count())
                 @foreach($sellFlats as $flat)
-                    <div class="ps-product__column">
+                    <div class="panel ps-product__column" data-id="{{ $flat->id }}">
                         <div class="ps-shoe mb-30">
-                            <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i
-                                        class="ps-icon-heart"></i>
-                                </a><img src="{{ \Illuminate\Support\Facades\Storage::url($flat->first_img_name) }}"
-                                         alt="">
+                            <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
+                                    <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
+                                </button>
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($flat->first_img_name) }}" alt="">
                                 <a class="ps-shoe__overlay"
                                    href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
                             </div>
@@ -41,14 +49,13 @@
                                 <div class="ps-shoe__detail"><a class="ps-shoe__name"
                                                                 href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
                                         {{$flat->number_of_rooms.', '.$flat->town.', '.$flat->address}}</a>
-                                    <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,
-                                        <a href="#"> Jordan</a></p><span
-                                        class="ps-shoe__price">${{ $flat->price }}</span>
+                                    <span class="ps-shoe__price">${{ $flat->price }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
+                @endif
             </div>
 
             <div class="ps-product-action">
@@ -71,7 +78,7 @@
                         </div>
                         <ul class="ps-list--checked">
                             <div class="col">
-                                <input type="text" class="form-control searchFlats" name="town" placeholder="Город">
+                                <input type="text" class="form-control searchFlats" name="town" placeholder="Город" value="{{ request()->town }}">
                             </div>
                         </ul>
                     </div>
@@ -94,10 +101,10 @@
                         <h5>Цена</h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_price" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_price" placeholder="От" value="{{ request()->min_price }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_price" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_price" placeholder="До" value="{{ request()->max_price }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -105,10 +112,10 @@
                         <h5>Общая площадь, м<sup>2</sup></h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_total_area" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_total_area" placeholder="От" value="{{ request()->min_total_area }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_total_are" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_total_are" placeholder="До" value="{{ request()->max_total_are }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -116,10 +123,10 @@
                         <h5>Жилая площадь, м<sup>2</sup></h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_living_area" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_living_area" placeholder="От" value="{{ request()->min_living_area }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_living_area" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_living_area" placeholder="До" value="{{ request()->max_living_area }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -127,10 +134,10 @@
                         <h5>Площадь кухни, м<sup>2</sup></h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_kitchen_area" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_kitchen_area" placeholder="От" value="{{ request()->min_kitchen_area }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_kitchen_area" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_kitchen_area" placeholder="До" value="{{ request()->max_kitchen_area }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -138,10 +145,10 @@
                         <h5>Этаж</h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_floor" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_floor" placeholder="От" value="{{ request()->min_floor }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_floor" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_floor" placeholder="До" value="{{ request()->max_floor }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -149,10 +156,10 @@
                         <h5>Этажность</h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_total_floor" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_total_floor" placeholder="От" value="{{ request()->min_total_floor }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_total_floor" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_total_floor" placeholder="До" value="{{ request()->max_total_floor }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -160,10 +167,10 @@
                         <h5>Год постройки</h5>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="min_year" placeholder="От">
+                        <input type="number" class="form-control searchFlats" name="min_year" placeholder="От" value="{{ request()->min_year }}">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control searchFlats" name="max_year" placeholder="До">
+                        <input type="number" class="form-control searchFlats" name="max_year" placeholder="До" value="{{ request()->max_year }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -192,7 +199,8 @@
                         </select>
                     </div>
                 </aside>
-                <button type="submit" class="btn mb-1 btn-rounded btn-info"> Найти </button>
+                <button type="submit" class="btn mb-1 btn-rounded btn-info">Найти</button>
+                <a href="{{ route('main.allFlats') }}" class="btn btn-warning">Сброс</a>
                 <!--aside.ps-widget--sidebar-->
                 <!--    .ps-widget__header: h3 Ads Banner-->
                 <!--    .ps-widget__content-->
@@ -219,4 +227,38 @@
         </form>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('i.glyphicon-heart, i.glyphicon-heart-empty').click(function(){
+                var id = $(this).parents(".panel").data('id');
+                var cObjId = this.id;
+                var cObj = $(this);
+
+                $.ajax({
+                    type:'POST',
+                    url:'/sell/ajaxRequest',
+                    data:{id:id},
+                    success:function(data){
+                        if(jQuery.isEmptyObject(data.success.attached)){
+                            $('#'+cObjId+'-bs3').html(parseInt(c)-1);
+                            $(cObj).removeClass("like-post");
+                        }else{
+                            $('#'+cObjId+'-bs3').html(parseInt(c)+1);
+                            $(cObj).addClass("like-post");
+                        }
+                    }
+                });
+
+
+            });
+        });
+    </script>
 @endsection

@@ -104,7 +104,7 @@
                                 </tr>
                                 <tr>
                                     <td>Этажность</td>
-                                    <td>{{ $sellFlat->floor }}</td>
+                                    <td>{{ $sellFlat->total_floors }}</td>
                                 </tr>
                                 <tr>
                                     <td>Материал стен</td>

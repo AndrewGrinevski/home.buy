@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 @section('content')
 
     <div class="content-body">
@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('home.addFlat.update', ['add'=>$sellRoom->id ]) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('home.addSellFlat.update', ['sell'=>$sellRoom->id ]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <h4 class="card-title">Местоположение</h4>
@@ -54,16 +54,15 @@
                                     </div>
                                     <div class="form-group mx-sm-3 mb-2 form-inline">
                                         <label class="mb-1">Площадь, м2</label>
-                                        <input type="text" class="form-control form-inline" placeholder="Общаяя" name="total_area" value="{{ $sellRoom->total_area }}">
-                                        <input type="text" class="form-control form-inline" placeholder="Жилая" name="living_area" value="{{ $sellRoom->living_area }}">
-                                        <input type="text" class="form-control form-inline" placeholder="Кухня" name="kitchen_area" value="{{ $sellRoom->kitchen_area }}">
-                                        <input type="text" class="form-control form-inline" placeholder="Продаваемая" name="sells_area" value="{{ $sellRoom->sells_area }}">
+                                        <input type="number" class="form-control form-inline" placeholder="Общаяя" name="total_area" value="{{ $sellRoom->total_area }}">
+                                        <input type="number" class="form-control form-inline" placeholder="Жилая" name="living_area" value="{{ $sellRoom->living_area }}">
+                                        <input type="number" class="form-control form-inline" placeholder="Кухня" name="kitchen_area" value="{{ $sellRoom->kitchen_area }}">
                                     </div>
                                     <div class="form-group mx-sm-3 mb-2 form-inline">
                                         <label class="mb-1">Этаж</label>
-                                        <input type="text" class="form-control form-inline" placeholder="3" name="floor" value="{{ $sellRoom->floor }}">
+                                        <input type="number" class="form-control form-inline" placeholder="3" name="floor" value="{{ $sellRoom->floor }}">
                                         <label class="mb-1">из</label>
-                                        <input type="text" class="form-control form-inline" placeholder="9" name="total_floors" value="{{ $sellRoom->total_floors }}">
+                                        <input type="number" class="form-control form-inline" placeholder="9" name="total_floors" value="{{ $sellRoom->total_floors }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Балкон</label>
@@ -120,13 +119,13 @@
                                         <label class="mb-1">Год постройки</label>
                                         <br>
                                         <label class="mb-1">(Не обязательно)</label>
-                                        <input type="text" class="form-control input-flat" name="year_of_construction" value="{{ $sellRoom->year_of_construction }}">
+                                        <input type="number" class="form-control input-flat" name="year_of_construction" value="{{ $sellRoom->year_of_construction }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Год кап. ремонта</label>
                                         <br>
                                         <label class="mb-1">(Не обязательно)</label>
-                                        <input type="text" class="form-control input-flat" name="year_of_overhaul" value="{{ $sellRoom->year_of_overhaul }}">
+                                        <input type="number" class="form-control input-flat" name="year_of_overhaul" value="{{ $sellRoom->year_of_overhaul }}">
                                     </div>
                                     <br>
                                     <h4 class="card-title">Фотографии</h4>
@@ -150,7 +149,7 @@
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Общая цена</label>
-                                        <input type="text" class="form-control input-flat" name="price" value="{{ $sellRoom->price }}">
+                                        <input type="number" class="form-control input-flat" name="price" value="{{ $sellRoom->price }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Условия сделки</label>

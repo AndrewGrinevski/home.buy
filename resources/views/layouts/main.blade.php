@@ -17,7 +17,8 @@
     <meta name="author" content="Nghia Minh Luong">
     <meta name="keywords" content="Default Description">
     <meta name="description" content="Default keyword">
-    <title>Shoe - Homepage</title>
+
+    <title>Сайт недвижимости</title>
     <!-- Fonts-->
     <link
         href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900"
@@ -42,7 +43,8 @@
     <!--WARNING: Respond.js doesn't work if you view the page via file://-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 </head>
 <!--[if IE 7]>
@@ -98,16 +100,15 @@
                             <div class="mega-wrap">
                                 <div class="mega-column">
                                     <ul class="mega-item">
-                                        <li><h3> Продажа </h3></li>
-                                        <li><a href="{{ route('home.addFlat.create') }}">Квартиры</a></li>
-                                        <li><a href="{{ route('main.showTwoRoomFlats') }}">Комнаты</a></li>
+                                        <li><h2 style="color: #0b0b0b"> Продажа </h2></li>
+                                        <li><a href="{{ route('home.addSellFlat.create') }}">Квартиры</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column">
                                     <ul class="mega-item">
-                                        <li><a href="{{ route('main.allFlats') }}"><h3> Аренда </h3></a></li>
-                                        <li><a href="{{ route('main.showOneRoomFlats') }}">Квартиры</a></li>
-                                        <li><a href="{{ route('main.showTwoRoomFlats') }}">Комнаты</a></li>
+                                        <li><h2 style="color: #0b0b0b"> Аренда </h2></li>
+                                        <li><a href="{{ route('home.addRentApartment.create') }}">Квартиры на сутки</a></li>
+                                        <li><a href="{{ route('home.addRentFlat.create') }}">Квартиры</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -124,28 +125,35 @@
                                         <li><a href="{{ route('main.showTwoRoomFlats') }}">2-комнатные</a></li>
                                         <li><a href="{{ route('main.showThreeRoomFlats') }}">3-комнатные</a></li>
                                         <li><a href="{{ route('main.showFourPlusRoomFlats') }}">4-комнатные и более</a>
-                                        </li>
-                                        <li><a href="product-listing.html">Комнаты в квартире</a></li>
-                                        <li><a href="product-listing.html">Недорогие квартиры</a></li>
+                                        <li><a href="#">Недорогие квартиры</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Аренда</a>
+                    <li class="menu-item menu-item-has-children has-mega-menu"><a href="{{ route('main.allRentFlats') }}">Аренда</a>
                         <div class="mega-menu">
                             <div class="mega-wrap">
                                 <div class="mega-column">
                                     <ul class="mega-item">
-                                        <li><a href="product-listing.html"><h3>Квартиры</h3></a></li>
-                                        <li><a href="product-listing.html">1-комнатные</a></li>
-                                        <li><a href="product-listing.html">2-комнатные</a></li>
-                                        <li><a href="product-listing.html">3-комнатные</a></li>
-                                        <li><a href="product-listing.html">4-комнатные</a></li>
-                                        <li><a href="product-listing.html">Комнаты в квартире</a></li>
-                                        <li><a href="product-listing.html">Недорогие квартиры</a></li>
+                                        <li><a href="{{ route('main.allRentFlats') }}"><h3>Квартиры</h3></a></li>
+                                        <li><a href="{{ route('main.showRentOneRoomFlats') }}">1-комнатные</a></li>
+                                        <li><a href="{{ route('main.showRentTwoRoomFlats') }}">2-комнатные</a></li>
+                                        <li><a href="{{ route('main.showRentThreeRoomFlats') }}">3-комнатные</a></li>
+                                        <li><a href="{{ route('main.showRentFourPlusRoomFlats') }}">4-комнатные и более</a></li>
+                                        <li><a href="#">Недорогие квартиры</a></li>
                                     </ul>
                                 </div>
+                                <div class="mega-column">
+                                <ul class="mega-item">
+                                    <li><a href="{{ route('main.allRentApartments') }}"><h3>На сутки</h3></a></li>
+                                    <li><a href="{{ route('main.showRentOneRoomApartments') }}">1-комнатные</a></li>
+                                    <li><a href="{{ route('main.showRentTwoRoomApartments') }}">2-комнатные</a></li>
+                                    <li><a href="{{ route('main.showRentThreeRoomApartments') }}">3-комнатные</a></li>
+                                    <li><a href="{{ route('main.showRentFourPlusRoomApartments') }}">4-комнатные и более</a></li>
+                                    <li><a href="#">Недорогие квартиры</a></li>
+                                </ul>
+                            </div>
                             </div>
                         </div>
                     </li>
@@ -160,19 +168,7 @@
                             <li class="menu-item"><a href="blog-list.html">Blog List</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item menu-item-has-children dropdown"><a href="#">Contact</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item"><a href="contact-us.html">Contact Us #1</a></li>
-                            <li class="menu-item"><a href="contact-us.html">Contact Us #2</a></li>
-                        </ul>
-                    </li>
                 </ul>
-            </div>
-            <div class="navigation__column right">
-                <form class="ps-search--header" action="do_action" method="post">
-                    <input class="form-control" type="text" placeholder="Search Product…">
-                    <button><i class="ps-icon-search"></i></button>
-                </form>
             </div>
     </nav>
 </header>
@@ -199,6 +195,7 @@
     </div>
 </main>
 <!-- JS Library-->
+
 <script type="text/javascript" src="{{ asset('main/plugins/jquery/dist/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('main/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript"

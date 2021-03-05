@@ -150,7 +150,7 @@
                                         </select>
                                     </div>
                                     <br>
-                                    <h4 class="card-title">Контактная информация</h4>
+                                    {{--<h4 class="card-title">Контактная информация</h4>
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Имя контактного лица</label>
@@ -177,7 +177,7 @@
                                         <label class="mb-1">В вашем объявлении будет отображаться кнопка "Написать в Viber"
                                             с возможностью написать вам (только в мобильной версии сайта).</label>
                                         <input type="text" class="form-control input-flat" name="viber_phone">
-                                    </div>
+                                    </div>--}}
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Создать </button>
                                 </form>
                             </div>

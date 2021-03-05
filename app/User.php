@@ -4,15 +4,19 @@ namespace App;
 
 use App\Models\Role;
 use App\Models\SellApartament;
+use App\Models\UsersRole;
 use App\Traits\RolesTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Overtrue\LaravelFollow\Followable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
+    use Followable;
     use Notifiable;
     use RolesTrait;
+
 
     /**
      * The attributes that are mass assignable.
@@ -45,6 +49,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(SellApartament::class);
     }
+
+  /*  public function favorites()
+    {
+        return $this->belongsToMany(SellApartament::class, 'favorites', 'user_id', 'ads_id')->withTimeStamps();
+    }*/
 
 
 }

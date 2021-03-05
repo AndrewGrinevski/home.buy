@@ -6,6 +6,7 @@ use App\Events\AddSellRoomEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Balcony;
 use App\Models\Bathroom;
+use App\Models\Image;
 use App\Models\Photo;
 use App\Models\Repair;
 use App\Models\Room;
@@ -14,7 +15,6 @@ use App\Models\SeparatedRoom;
 use App\Models\Transaction;
 use App\Models\UserContact;
 use App\Models\Wall;
-use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use function React\Promise\all;
@@ -64,6 +64,18 @@ class SellApartamentController extends Controller
            $paths[] = $file->store('usersImage');
         }
 
+        /*$images = Image::create(['first_img_name'=> $paths[0],
+            'second_img_name'=>$paths[1],'third_img_name'=>$paths[2],
+            'four_img_name'=>$paths[3],'five_img_name'=>$paths[4],]);
+
+        $params = $request->all();
+        $params['first_img_name'] = $paths[0];
+        $params['second_img_name'] = $paths[1];
+        $params['third_img_name'] = $paths[2];
+        $params['four_img_name'] = $paths[3];
+        $params['five_img_name'] = $paths[4];
+        $params['images_id'] = $images->id;*/
+
         $params = $request->all();
         $params['first_img_name'] = $paths[0];
         $params['second_img_name'] = $paths[1];
@@ -86,9 +98,9 @@ class SellApartamentController extends Controller
             $params['number_of_rooms'] = '7-комнатная квартира';
         }
         $sellRoom = SellApartament::create($params);
-        //foreach ($paths as $path) {
-        //    Image::create(['apartament_id'=>$sellRoom->id,'image'=>$path]);
-        //}
+        /*foreach ($paths as $path) {
+            Image::create(['apartment_id'=>$sellRoom->id,'image'=>$path]);
+        }*/
         UserContact::create($request->all());
         event(new AddSellRoomEvent($sellRoom));
         return redirect()->route('admin.sellFlats.index');

@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class AddAnnouncementController extends Controller
+class AddSellFlatController extends Controller
 {
     /**
      * Display a listing of the resource.

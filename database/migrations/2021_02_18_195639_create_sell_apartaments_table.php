@@ -27,7 +27,7 @@ class CreateSellApartamentsTable extends Migration
                 ->references('id')
                 ->on('separated_rooms');
             $table->float('total_area');
-            $table->float('living_area');
+            $table->float('living_area')->nullable();
             $table->float('kitchen_area');
             $table->float('sells_area')->nullable(); //квадратура в разделе продажа комнаты
             $table->integer('floor');
@@ -61,7 +61,7 @@ class CreateSellApartamentsTable extends Migration
             $table->string('five_img_name',255);
             $table->text('description')->nullable();
             $table->string('youtube_video', 255)->nullable();
-            $table->float('price');
+            $table->float('price')->nullable();
             $table->unsignedBigInteger('terms_of_a_transaction_id')->nullable();
             $table->foreign('terms_of_a_transaction_id')
                 ->references('id')
