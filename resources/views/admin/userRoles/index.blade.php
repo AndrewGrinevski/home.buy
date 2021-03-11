@@ -19,6 +19,7 @@
                                         <th>#</th>
                                         <th>Пользователь</th>
                                         <th>Роль</th>
+                                        <th>Email</th>
                                         <th>Дата добавления</th>
                                         <th>Дата изменения</th>
                                     </tr>
@@ -26,14 +27,15 @@
                                     <tbody>
                                     @foreach($userRoles as $userRole)
                                     <tr>
-                                        <th>{{$userRole->id}}</th>
-                                        <td>{{$userRole->user_id}}</td>
-                                        <td>{{$userRole->role_id}}</td>
+                                        <th>{{ $id+=1}}</th>
+                                        <td>{{$userRole->name}}</td>
+                                        <td>{{$userRole->roleName}}</td>
+                                        <td>{{$userRole->email}}</td>
                                         <td>{{$userRole->created_at}}</td>
                                         <td class="color-primary">{{$userRole->updated_at}}</td>
-                                        <td> <a href="{{ route('admin.addRole.edit', ['add_role'=>$userRole->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
+                                        <td> <a href="{{ route('admin.addRole.edit', ['add_role'=>$userRole->user_id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
                                         <td>
-                                            <form action="{{ route('admin.addRole.destroy', ['add_role'=>$userRole->id ])}}" method="post">
+                                            <form action="{{ route('admin.addRole.destroy', ['add_role'=>$userRole->user_id ])}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Удалить</button>
@@ -50,7 +52,7 @@
                     <!-- /# card -->
                 </div>
                 <div>
-                    {{ $userRoles->links() }}
+                    {{--{{ $userRoles->links() }}--}}
                 </div>
             </div>
         </div>

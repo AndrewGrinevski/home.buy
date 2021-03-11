@@ -6,11 +6,13 @@ use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFollow\Followable;
+use willvincent\Rateable\Rateable;
 
 class SellApartament extends Model
 {
     use Sluggable;
     use Followable;
+    use Rateable;
 
     /**
      * Return the sluggable configuration array for this model.

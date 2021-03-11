@@ -50,10 +50,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(SellApartament::class);
     }
 
-  /*  public function favorites()
-    {
-        return $this->belongsToMany(SellApartament::class, 'favorites', 'user_id', 'ads_id')->withTimeStamps();
-    }*/
 
 
 }

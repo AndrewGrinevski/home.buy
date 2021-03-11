@@ -39,6 +39,14 @@
     <!-- Custom-->
     <link rel="stylesheet" href="{{ asset('main/css/style.css') }}">
 
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="{{ asset('css/preview.css') }}" rel="stylesheet">
+
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--WARNING: Respond.js doesn't work if you view the page via file://-->
     <!--[if lt IE 9]>
@@ -202,37 +210,37 @@
         src="{{ asset('main/plugins/jquery-bar-rating/dist/jquery.barrating.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('main/plugins/owl-carousel/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('main/plugins/gmap3.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('main/plugins/imagesloaded.pkgd.js') }}"></script>
-<script type="text/javascript" src="{{ asset('main/plugins/isotope.pkgd.min.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('main/plugins/imagesloaded.pkgd.js') }}"></script>--}}
+{{--<script type="text/javascript" src="{{ asset('main/plugins/isotope.pkgd.min.js') }}"></script>--}}
 <script type="text/javascript"
         src="{{ asset('main/plugins/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('main/plugins/jquery.matchHeight-min.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('main/plugins/jquery.matchHeight-min.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('main/plugins/slick/slick/slick.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('main/plugins/elevatezoom/jquery.elevatezoom.js') }}"></script>
-<script type="text/javascript"
-        src="{{ asset('main/plugins/Magnific-Popup/dist/jquery.magnific-popup.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('main/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+{{--<script type="text/javascript"
+        src="{{ asset('main/plugins/Magnific-Popup/dist/jquery.magnific-popup.min.js') }}"></script>--}}
+{{--<script type="text/javascript" src="{{ asset('main/plugins/jquery-ui/jquery-ui.min.js') }}"></script>--}}
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx39JFH5nhxze1ZydH-Kl8xXM3OK4fvcg&amp;region=GB"></script>
 <script type="text/javascript" src="{{ asset('main/plugins/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
-<script type="text/javascript"
+{{--<script type="text/javascript"
         src="{{ asset('main/plugins/revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
 <script type="text/javascript"
         src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
 <script type="text/javascript"
         src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
 <script type="text/javascript"
-        src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
-<script type="text/javascript"
-        src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.navigation.min.js') }}"></script>
-<script type="text/javascript"
+        src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>--}}
+{{--<script type="text/javascript"
+        src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.navigation.min.js') }}"></script>--}}
+{{--<script type="text/javascript"
         src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.parallax.min.js') }}"></script>
 <script type="text/javascript"
         src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.actions.min.js') }}"></script>
 <script type="text/javascript"
         src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
 <script type="text/javascript"
-        src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.migration.min.js') }}"></script>
+        src="{{ asset('main/plugins/revolution/js/extensions/revolution.extension.migration.min.js') }}"></script>--}}
 <!-- Custom scripts-->
 <script type="text/javascript" src="{{ asset('main/js/main.js') }}"></script>
 </body>

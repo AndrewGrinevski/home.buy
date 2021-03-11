@@ -19,6 +19,9 @@
                 @foreach($sellFlats as $flat)
                     <div class="panel ps-product__column" data-id="{{ $flat->id }}">
                         <div class="ps-shoe mb-30">
+                            <input id="input-1" name="rate" class="rating rating-loading"
+                                   data-min="0" data-max="5" data-step="1"
+                                   value="{{ $flat->averageRating }}" data-size="xs" disabled>
                             <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
                                     <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
                                 </button>

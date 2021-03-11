@@ -64,15 +64,21 @@
                                 src="{{asset('main/images/shoe/3.jpg')}}" alt=""></div>
                     </div>
                     <div class="ps-product__info">
-                        <div class="ps-product__rating">
-                            <select class="ps-rating">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="2">5</option>
-                            </select><a href="#">(Read all 8 reviews)</a>
-                        </div>
+                        <form action="{{ route('flats.flat') }}" method="POST">
+                            @csrf
+                            <div class="ps-product__rating">
+                                <div class="rating">
+                                    <input id="input-1" name="rate" class="rating rating-loading"
+                                           data-min="0" data-max="5" data-step="1"
+                                           value="{{ $sellFlat->averageRating }}" data-size="xs">
+                                    <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
+                                    <span class="review-no">{{ $sellFlat->usersRated() }} отзыва</span>
+                                    <br/>
+                                    <button class="btn btn-success">добавить отзыв</button>
+                                </div>
+                                <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
+                            </div>
+                        </form>
                         <h3>{{$sellFlat->number_of_rooms.', '.$sellFlat->town.', '.$sellFlat->address}}</h3>
                         <p>{{ $sellFlat->total_area.' м' }}<sup>2</sup>, &emsp; {{' ' .$sellFlat->floor.' этаж' }}</p>
 

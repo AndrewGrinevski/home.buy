@@ -10,6 +10,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
+                                <a href="{{ route('favorite') }}" class="btn btn-info">Избранные</a>
                                 <h2>Продажа</h2>
                                 <br>
                                 <h3>Продажа квартиры</h3>

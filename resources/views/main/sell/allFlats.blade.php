@@ -19,6 +19,9 @@
                 @foreach($sellFlats as $flat)
                     <div class="panel ps-product__column" data-id="{{ $flat->id }}">
                         <div class="ps-shoe mb-30">
+                            <input id="input-1" name="rate" class="rating rating-loading"
+                                   data-min="0" data-max="5" data-step="1"
+                                   value="{{ $flat->averageRating }}" data-size="xs" disabled>
                             <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
                                     <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
                                 </button>
@@ -27,22 +30,18 @@
                                    href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
                             </div>
                             <div class="ps-shoe__content">
-
                                 <div class="ps-shoe__variants">
-                                    <select class="ps-rating ps-shoe__rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="2">5</option>
-                                    </select>
                                     <div class="col-md-7 col-lg-9 black s-bold fs-14 sm-mb-10">
                                         <div class="autopaddings mb-5">
                                             <span>{{ $flat->floor.' этаж из '.$flat->total_floors.' ; '.$flat->total_area.'/'.$flat->living_area.'/'.$flat->kitchen_area.' м' }}
                                                 <sup>2</sup></span>
                                         </div>
                                         <div class="autopaddings mb-5">
-                                            <span>{{ $flat->wall->type_of_walls.', '.$flat->year_of_construction.' г.' }}</span>
+                                            <span>Тип стен:&ensp;{{ $flat->type_of_walls_id ? $flat->wall->type_of_walls : 'Не указана' }}
+                                                </span>
+                                            <br>
+                                            <span>Год постройки:&ensp;{{ $flat->year_of_construction ? $flat->year_of_construction . ' г.' : 'Не указан' }}</span>
+
                                         </div>
                                     </div>
                                 </div>

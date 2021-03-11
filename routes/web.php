@@ -44,6 +44,7 @@ Route::get('/', 'Main\\MainController@index')->name('mainPage');
 Route::prefix('/sell')->namespace('Main\\Sell')
     ->group(function () {
         Route::get('/flats', 'AllFlatController@index')->name('main.allFlats');
+        Route::post('/flats', 'AllFlatController@flatsFlat')->name('flats.flat');
         Route::post('/ajaxRequest', 'AllFlatController@ajaxRequest')->name('ajaxRequest');
         Route::get('/1-room-flats', 'AllFlatController@showOneRoomFlats')->name('main.showOneRoomFlats');
         Route::get('/2-room-flats', 'AllFlatController@showTwoRoomFlats')->name('main.showTwoRoomFlats');
@@ -79,8 +80,8 @@ Route::prefix('/rent')->namespace('Main\\Rent')
 //User
 Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user','verified'])->group(function () {
     Route::get('/user_id={id}', 'HomeController@index')->name('home');
+    Route::get('/favorite', 'FavoriteController@index')->name('favorite');
     Route::resource('/add/flats/sell', 'AddSellFlatController')->names('home.addSellFlat');
-    Route::resource('/add/room/sell', 'AddSellRoomController')->names('home.addSellRoom');
     Route::resource('/add/apartment/rent', 'AddRentApartmentController')->names('home.addRentApartment');
     Route::resource('/add/flat/rent', 'AddRentFlatController')->names('home.addRentFlat');
 });

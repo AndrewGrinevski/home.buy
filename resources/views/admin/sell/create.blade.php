@@ -124,7 +124,7 @@
                                     <br>
                                     <h4 class="card-title">Описание объекта</h4>
                                     <div class="form-group">
-                                        <textarea class="form-control h-150px" rows="6" id="comment"></textarea>
+                                        <textarea class="form-control h-150px" rows="6" id="comment" name="description"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Видео</label>

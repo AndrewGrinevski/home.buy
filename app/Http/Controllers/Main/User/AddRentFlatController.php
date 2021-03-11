@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Main\User;
 
 use App\Events\AddSellRoomEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Balcony;
-use App\Models\Bathroom;
-use App\Models\Berth;
+use App\Http\Requests\AddRentFlatRequest;
 use App\Models\Room;
 use App\Models\SellApartament;
 use Illuminate\Http\Request;
@@ -42,7 +40,7 @@ class AddRentFlatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddRentFlatRequest $request)
     {
         $paths = [];
 
@@ -112,7 +110,7 @@ class AddRentFlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AddRentFlatRequest $request, $id)
     {
         $sellRoom = SellApartament::findOrFail($id);
         $sellRoom->fill($request->all());

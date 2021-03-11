@@ -21,10 +21,18 @@
                                     <div class="form-group">
                                         <label class="mb-1">Город</label>
                                         <input type="text" class="form-control input-default" name="town" value="{{ $sellRoom->town }}">
+                                        @error('town')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Адрес</label>
                                         <input type="text" class="form-control input-flat"  name="address" value="{{ $sellRoom->address }}">
+                                        @error('address')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div id="map"></div>
                                     <br>
@@ -43,14 +51,34 @@
                                     <div class="form-group mx-sm-3 mb-2 form-inline">
                                         <label class="mb-1">Площадь, м2</label>
                                         <input type="number" class="form-control form-inline" placeholder="Общаяя" name="total_area" value="{{ $sellRoom->total_area }}">
+                                        @error('total_area')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-inline" placeholder="Жилая" name="living_area" value="{{ $sellRoom->living_area }}">
+                                        @error('living_area')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-inline" placeholder="Кухня" name="kitchen_area" value="{{ $sellRoom->kitchen_area }}">
+                                        @error('kitchen_area')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group mx-sm-3 mb-2 form-inline">
                                         <label class="mb-1">Этаж</label>
                                         <input type="number" class="form-control form-inline" placeholder="3" name="floor" value="{{ $sellRoom->floor }}">
+                                        @error('floor')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <label class="mb-1">из</label>
                                         <input type="number" class="form-control form-inline" placeholder="9" name="total_floors" value="{{ $sellRoom->total_floors }}">
+                                        @error('total_floors')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <br>
                                     <h4 class="card-title">Дополнительные опции</h4>
@@ -99,11 +127,19 @@
                                     <br>
                                     <div class="form-group">
                                         <input type="file" name="images[]" multiple class="btn btn-default btn-file">
+                                        @error('images')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <br>
                                     <h4 class="card-title">Описание объекта</h4>
                                     <div class="form-group">
                                         <textarea class="form-control h-150px" rows="6" id="comment" name="description" >{{ $sellRoom->description }}</textarea>
+                                        @error('description')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Видео</label>
@@ -117,6 +153,10 @@
                                     <div class="form-group">
                                         <label class="mb-1">Стоимость аренды в месяц</label>
                                         <input type="number" class="form-control input-flat" name="rent_per_month" value="{{ $sellRoom->rent_per_month }}">
+                                        @error('rent_per_month')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <br>
                                     <h5 class="card-title">Кому сдаётся</h5>

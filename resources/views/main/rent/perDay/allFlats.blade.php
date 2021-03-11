@@ -19,6 +19,9 @@
                 @foreach($sellFlats as $flat)
                     <div class="panel ps-product__column" data-id="{{ $flat->id }}">
                         <div class="ps-shoe mb-30">
+                            <input id="input-1" name="rate" class="rating rating-loading"
+                                   data-min="0" data-max="5" data-step="1"
+                                   value="{{ $flat->averageRating }}" data-size="xs" disabled>
                             <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
                                     <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
                                 </button>
@@ -42,10 +45,10 @@
                                                 <sup>2</sup></span>
                                         </div>
                                         <div class="autopaddings mb-5">
-                                            <span>Цена на ночь: {{ isset($flat->rent_per_night)?'$'. $flat->rent_per_night:'не указана'}}</span>
+                                            <span>Цена на ночь: {{ $flat->rent_per_night ? '$'. $flat->rent_per_night:'не указана'}}</span>
                                         </div>
                                         <div class="autopaddings mb-5">
-                                            <span>Цена на часы: {{ isset($flat->rent_per_hour)?'$'. $flat->rent_per_hour:'не указана'}}</span>
+                                            <span>Цена на часы: {{ $flat->rent_per_hour ? '$'. $flat->rent_per_hour:'не указана'}}</span>
                                         </div>
                                     </div>
                                 </div>

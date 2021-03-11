@@ -20,10 +20,18 @@
                                     <div class="form-group">
                                         <label class="mb-1">Город</label>
                                         <input type="text" class="form-control input-default" name="town">
+                                        @error('town')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Адрес</label>
                                         <input type="text" class="form-control input-flat"  name="address">
+                                        @error('address')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div id="map"></div>
                                     <br>
@@ -42,6 +50,7 @@
                                         <br>
                                         <label class="mb-1">(Не обязательно)</label>
                                         <select class="form-control" name="number_of_separated_rooms_id">
+                                            <option value=""></option>
                                             @foreach($separatedRooms as $separatedRoom)
                                                 <option value="{{ $separatedRoom->id }}">{{ $separatedRoom->number_of_separated_rooms }}</option>
                                             @endforeach
@@ -50,19 +59,38 @@
                                     <div class="form-group mx-sm-3 mb-2 form-inline">
                                         <label class="mb-1">Площадь, м2</label>
                                         <input type="number" class="form-control form-inline" placeholder="Общаяя" name="total_area">
+                                        @error('total_area')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-inline" placeholder="Жилая" name="living_area">
+                                        @error('living_area')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-inline" placeholder="Кухня" name="kitchen_area">
+                                        @error('kitchen_area')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group mx-sm-3 mb-2 form-inline">
                                         <label class="mb-1">Этаж</label>
                                         <input type="number" class="form-control form-inline" placeholder="3" name="floor">
+                                        @error('floor')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <label class="mb-1">из</label>
                                         <input type="number" class="form-control form-inline" placeholder="9" name="total_floors">
+                                        @error('total_floors')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Балкон</label>
                                         <br>
-                                        <label class="mb-1">(Не обязательно)</label>
                                         <select class="form-control" name="balcony_id">
                                             @foreach($balconies as $balcony)
                                             <option value="{{ $balcony->id }}">{{ $balcony->type_of_balcony }}</option>
@@ -72,7 +100,6 @@
                                     <div class="form-group">
                                         <label class="mb-1">Сан. узел</label>
                                         <br>
-                                        <label class="mb-1">(Не обязательно)</label>
                                         <select class="form-control" name="bathroom_id">
                                             @foreach($bathrooms as $bathroom)
                                             <option value="{{ $bathroom->id }}">{{ $bathroom->type_of_bathrooms }}</option>
@@ -82,7 +109,6 @@
                                     <div class="form-group">
                                         <label class="mb-1">Ремонт</label>
                                         <br>
-                                        <label class="mb-1">(Не обязательно)</label>
                                         <select class="form-control" name="apartment_renovation_id">
                                             @foreach($repairs as $repair)
                                                 <option value="{{ $repair->id }}">{{ $repair->type_of_repairs }}</option>
@@ -97,6 +123,7 @@
                                         <br>
                                         <label class="mb-1">(Не обязательно)</label>
                                         <select class="form-control" name="type_of_walls_id">
+                                            <option value=""></option>
                                             @foreach($walls as $wall)
                                                 <option value="{{ $wall->id }}">{{ $wall->type_of_walls }}</option>
                                             @endforeach
@@ -119,11 +146,19 @@
                                     <br>
                                     <div class="form-group">
                                         <input type="file" name="images[]" multiple class="btn btn-default btn-file">
+                                        @error('images')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <br>
                                     <h4 class="card-title">Описание объекта</h4>
                                     <div class="form-group">
-                                        <textarea class="form-control h-150px" rows="6" id="comment"></textarea>
+                                        <textarea class="form-control h-150px" rows="6" id="comment" name="description"></textarea>
+                                        @error('description')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Видео</label>
@@ -137,19 +172,24 @@
                                     <div class="form-group">
                                         <label class="mb-1">Общая цена</label>
                                         <input type="number" class="form-control input-flat" name="price">
+                                        @error('price')
+                                        <br>
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Условия сделки</label>
                                         <br>
                                         <label class="mb-1">(Не обязательно)</label>
                                         <select class="form-control" name="terms_of_a_transaction_id">
+                                            <option value=""></option>
                                             @foreach($transactions as $transaction)
                                                 <option value="{{ $transaction->id }}">{{ $transaction->type_of_transaction }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <br>
-                                    <h4 class="card-title">Контактная информация</h4>
+                                    {{--<h4 class="card-title">Контактная информация</h4>
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Имя контактного лица</label>
@@ -176,7 +216,7 @@
                                         <label class="mb-1">В вашем объявлении будет отображаться кнопка "Написать в Viber"
                                             с возможностью написать вам (только в мобильной версии сайта).</label>
                                         <input type="text" class="form-control input-flat" name="viber_phone">
-                                    </div>
+                                    </div>--}}
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Создать </button>
                                 </form>
                             </div>
