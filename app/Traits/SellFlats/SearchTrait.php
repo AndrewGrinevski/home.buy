@@ -66,17 +66,22 @@ trait SearchTrait
 
     public function search(Request $request)
     {
+
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
         $flatsQuery = SellApartament::query();
+
         //Город
-        if ($request->filled('town')) {
-            $flatsQuery->where('town', 'LIKE', "%{$request->town}%")->orderBy('town');
+        if ($request->filled('town_id')) {
+            $flatsQuery->where('town_id', '=', $request->town_id);
         }
         //Количество комнат
-        if ($request->filled('rooms')) {
-            $flatsQuery->where('number_of_rooms_id', '=', $request->rooms);
+        if ($request->filled('min_rooms')) {
+            $flatsQuery->where('number_of_rooms_id', '>=', $request->min_rooms);
+        }
+        if ($request->filled('max_rooms')) {
+            $flatsQuery->where('number_of_rooms_id', '<=', $request->max_rooms);
         }
         //Цена
         if ($request->filled('min_price')) {
@@ -139,7 +144,7 @@ trait SearchTrait
         $sellFlats = $flatsQuery
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->paginate(6)
+            ->paginate(5)
             ->withPath("?" . $request->getQueryString());
         return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
 

@@ -24,14 +24,13 @@ class AddFlatRequest extends FormRequest
     public function rules()
     {
         return [
-            'town' => 'required|min:3|max:20',
+            'town_id' => 'required',
             'address' => 'required|min:3|max:255',
             'total_area' => 'required|min:1|max:255',
             'living_area' => 'required|min:1|max:255',
             'kitchen_area' => 'required|min:1|max:255',
             'floor' => 'required|min:1|max:255',
             'total_floors' => 'required|min:1|max:255',
-            'images' => 'required',
             'description' => 'required|min:3',
             'price' => 'required|numeric|min:1',
         ];
@@ -40,9 +39,7 @@ class AddFlatRequest extends FormRequest
     public function messages()
     {
         $messages = [
-            'town.min' => 'Поле Город должно содержать не менее :min символов',
-            'town.max' => 'Поле Город должно содержать не более :max символов',
-            'adrress.min' => 'Поле Адрес должно содержать не менее :min символов',
+            'address.min' => 'Поле Адрес должно содержать не менее :min символов',
             'address.max' => 'Поле Адрес должно содержать не более :max символов',
             'total_area.min' => 'Поле Общая площадь должно содержать не менее :min символов',
             'total_area.max' => 'Поле Общая площадь должно содержать не более :max символов',
@@ -52,7 +49,6 @@ class AddFlatRequest extends FormRequest
             'kitchen_area.max' => 'Поле Площадь кухни должно содержать не более :max символов',
             'floor.min' => 'Поле Этаж должно содержать не менее :min символов',
             'floor.max' => 'Поле Общее кол-во этажей должно содержать не более :max символов',
-            'images.required' => 'Поле Фотографии должно быть заполнено',
             'description.min' => 'Поле Описание должно содержать не менее :min символов',
             'price.min' => 'Поле Цена должно содержать не менее :min символов',
         ];

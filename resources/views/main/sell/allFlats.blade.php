@@ -1,10 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
     <link href="{{ asset('main/css/custom.css') }}" rel="stylesheet">
 
     <div class="ps-products-wrap pt-80 pb-80">
@@ -47,13 +43,17 @@
                                 </div>
                                 <div class="ps-shoe__detail"><a class="ps-shoe__name"
                                                                 href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                        {{$flat->number_of_rooms.', '.$flat->town.', '.$flat->address}}</a>
+                                        {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}</a>
                                     <span class="ps-shoe__price">${{ $flat->price }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
+                @else
+                    <div>
+                        <h3 class="bold-header">Ничего не найдено</h3>
+                    </div>
                 @endif
             </div>
 
@@ -76,9 +76,7 @@
                             <h4>Населенный пункт</h4>
                         </div>
                         <ul class="ps-list--checked">
-                            <div class="col">
-                                <input type="text" class="form-control searchFlats" name="town" placeholder="Город" value="{{ request()->town }}">
-                            </div>
+                            <select class="livesearch form-control" name="town_id"></select>
                         </ul>
                     </div>
                 </aside>
@@ -87,7 +85,15 @@
                         <h4>Количество комнат</h4>
                     </div>
                     <div class="form-group">
-                        <select class="form-control searchFlats" name="rooms">
+                        <p>От</p>
+                        <select class="form-control searchFlats" name="min_rooms">
+                            <option value=""></option>
+                            @foreach($rooms as $room)
+                                <option value="{{ $room->id }}">{{ $room->number_of_rooms }}</option>
+                            @endforeach
+                        </select>
+                        <p>До</p>
+                        <select class="form-control searchFlats" name="max_rooms">
                             <option value=""></option>
                             @foreach($rooms as $room)
                                 <option value="{{ $room->id }}">{{ $room->number_of_rooms }}</option>
@@ -225,8 +231,28 @@
             </div>
         </form>
         </div>
-    </div>
 
+    <script type="text/javascript">
+        $('.livesearch').select2({
+            placeholder: 'Выберите город',
+            ajax: {
+                url: '/ajax-autocomplete-search',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.town,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
 

@@ -1,10 +1,11 @@
 @extends('layouts.main')
 @section('content')
 
+
+
     <div class="content-body">
         <div class="container-fluid">
             <div class="row">
-
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -14,16 +15,11 @@
                                     <h4 class="card-title">Местоположение</h4>
                                     <br>
                                     <div class="form-group">
-                                        <label class="mb-1">Координаты</label>
-                                        <input type="text" class="form-control input-default" name="location" id="location">
+                                        <input type="hidden" class="form-control input-default" name="location" id="location">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Город</label>
-                                        <input type="text" class="form-control input-default" name="town">
-                                        @error('town')
-                                        <br>
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <select class="livesearch form-control" name="town_id"></select>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Адрес</label>
@@ -145,11 +141,7 @@
                                     <h4 class="card-title">Фотографии</h4>
                                     <br>
                                     <div class="form-group">
-                                        <input type="file" name="images[]" multiple class="btn btn-default btn-file">
-                                        @error('images')
-                                        <br>
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <input type="file" name="images[]" multiple class="btn btn-default btn-file" required>
                                     </div>
                                     <br>
                                     <h4 class="card-title">Описание объекта</h4>
@@ -189,54 +181,58 @@
                                         </select>
                                     </div>
                                     <br>
-                                    {{--<h4 class="card-title">Контактная информация</h4>
+                                    <h4 class="card-title">Контактная информация</h4>
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Имя контактного лица</label>
                                         <br>
-                                        <label class="mb-1">(Не обязательно)</label>
                                         <input type="text" class="form-control input-flat" name="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="mb-1">Email</label>
-                                        <input type="text" class="form-control input-flat" name="email">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Мобильный телефон</label>
                                         <br>
-                                        <label class="mb-1">Мобильный телефон необходимо подтвердить кодом из СМС.
-                                            Отправка СМС-кода подтверждения бесплатна для вас.</label>
                                         <input type="text" class="form-control input-flat" name="phone">
                                     </div>
-                                    <div class="form-group">
-                                        <label class="mb-1">Номер в Viber</label>
-                                        <br>
-                                        <label class="mb-1">(Не обязательно)</label>
-                                        <br>
-                                        <label class="mb-1">В вашем объявлении будет отображаться кнопка "Написать в Viber"
-                                            с возможностью написать вам (только в мобильной версии сайта).</label>
-                                        <input type="text" class="form-control input-flat" name="viber_phone">
-                                    </div>--}}
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Создать </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
+
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA&callback=initMap&libraries=&v=weekly"
         async
     ></script>
-    <script>
 
+    <script type="text/javascript">
+        $('.livesearch').select2({
+            placeholder: 'Выберите город',
+            ajax: {
+                url: '/ajax-autocomplete-search',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.town,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
+
+    <script>
         let map;
         let markers = [];
-
         function initMap() {
             const Minsk = { lat: 53.900, lng: 27.566 };
             map = new google.maps.Map(document.getElementById("map"), {
@@ -252,7 +248,6 @@
             // Adds a marker at the center of the map.
             addMarker(haightAshbury);
         }
-
         // Adds a marker to the map and push to the array.
         function addMarker(location) {
             const marker = new google.maps.Marker({
@@ -263,19 +258,16 @@
             markers.push(marker);
             document.getElementById('location').value = location.lat()+" , "+location.lng();
         }
-
         // Sets the map on all markers in the array.
         function setMapOnAll(map) {
             for (let i = 0; i < markers.length; i++) {
                 markers[i].setMap(map);
             }
         }
-
         // Removes the markers from the map, but keeps them in the array.
         function clearMarkers() {
             setMapOnAll(null);
         }
-
     </script>
 
 @endsection

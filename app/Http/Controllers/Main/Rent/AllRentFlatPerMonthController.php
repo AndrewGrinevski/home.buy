@@ -7,13 +7,19 @@ use App\Models\Balcony;
 use App\Models\Room;
 use App\Models\SellApartament;
 use App\Models\Wall;
+use App\Traits\DynamicAutocompleteSearchTrait;
+use App\Traits\RaitTrait;
 use App\Traits\RentFlats\RentPerMonthTrait;
+use App\Traits\ShowOtherOffersTrait;
 use Illuminate\Http\Request;
-use willvincent\Rateable\Rating;
+
 
 class AllRentFlatPerMonthController extends Controller
 {
     use RentPerMonthTrait;
+    use ShowOtherOffersTrait;
+    use RaitTrait;
+    use DynamicAutocompleteSearchTrait;
 
     /**
      * Display a listing of the resource.
@@ -41,31 +47,9 @@ class AllRentFlatPerMonthController extends Controller
     public function show($slug)
     {
         $sellFlat = SellApartament::whereSlug($slug)->firstOrFail();
-        return view('main.rent.perMonth.showFlat', compact('sellFlat'));
+        $sellFlats = $this->showOtherOffers($sellFlat);
+        return view('main.rent.perMonth.showFlat', compact('sellFlat', 'sellFlats'));
     }
-
-    public function flatsFlat(Request $request)
-    {
-        request()->validate(['rate' => 'required']);
-        $authId = auth()->id();
-        $flat = SellApartament::find($request->id);
-        $rate = Rating::query()
-            ->where('user_id', '=', "{$authId}")
-            ->where('rateable_id', '=', "{$request->id}")
-            ->get();
-
-        if (isset($rate[0]->rating)) {
-            $flat->rateOnce($request->rate);
-            return redirect()->route('main.allRentFlats.show', ['slug' => $flat->slug]);
-        }else {
-            $rating = new Rating;
-            $rating->rating = $request->rate;
-            $rating->user_id = auth()->id();
-            $flat->ratings()->save($rating);
-            return redirect()->route('main.allRentFlats.show', ['slug' => $flat->slug]);
-        }
-    }
-
 
     /**
      * Show the application dashboard.

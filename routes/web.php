@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//test
+Route::get('/test', 'TestController@index')->name('test');
+Route::get('/test1', 'TestController@index')->name('test');
+Route::get('ajax-autocomplete-search','TestController@selectSearch');
+
 
 Auth::routes(['verify' => true]);
 
@@ -82,6 +87,7 @@ Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user','verifi
     Route::get('/user_id={id}', 'HomeController@index')->name('home');
     Route::get('/favorite', 'FavoriteController@index')->name('favorite');
     Route::resource('/add/flats/sell', 'AddSellFlatController')->names('home.addSellFlat');
+    Route::get('/ajax-autocomplete-search','AddSellFlatController@selectSearch');
     Route::resource('/add/apartment/rent', 'AddRentApartmentController')->names('home.addRentApartment');
     Route::resource('/add/flat/rent', 'AddRentFlatController')->names('home.addRentFlat');
 });

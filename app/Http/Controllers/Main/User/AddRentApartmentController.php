@@ -10,12 +10,14 @@ use App\Models\Bathroom;
 use App\Models\Berth;
 use App\Models\Room;
 use App\Models\SellApartament;
-use Illuminate\Http\Request;
+use App\Traits\DynamicAutocompleteSearchTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AddRentApartmentController extends Controller
 {
+    use DynamicAutocompleteSearchTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -148,9 +150,6 @@ class AddRentApartmentController extends Controller
             $sellRoom->wifi = $request->input('wifi', false);
             $sellRoom->jacuzzi = $request->input('jacuzzi', false);
             $sellRoom->save();
-            event(new AddSellRoomEvent($sellRoom));
-            return redirect()->route('home', ['id' =>auth()->id()]);
-
         }else {
             $sellRoom->fridge = $request->input('fridge', false);
             $sellRoom->elevator = $request->input('elevator', false);
@@ -163,9 +162,10 @@ class AddRentApartmentController extends Controller
             $sellRoom->wifi = $request->input('wifi', false);
             $sellRoom->jacuzzi = $request->input('jacuzzi', false);
             $sellRoom->save();
-            event(new AddSellRoomEvent($sellRoom));
-            return redirect()->route('home', ['id' =>auth()->id()]);
         }
+
+        event(new AddSellRoomEvent($sellRoom));
+        return redirect()->route('home', ['id' =>auth()->id()]);
     }
 
     /**

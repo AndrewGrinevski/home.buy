@@ -16,6 +16,7 @@
             </div>
             <div class="ps-product__columns">
                {{-- @if($sellFlats->count())--}}
+                @isset($sellFlats)
                 @foreach($sellFlats as $sellFlat)
                     @foreach($sellFlat as $flat)
                     <div class="panel ps-product__column" data-id="{{ $flat->id }}">
@@ -27,8 +28,14 @@
                                     <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
                                 </button>
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url($flat->first_img_name) }}" alt="">
+                                @if($flat->rent_per_month == null && $flat->rent_per_day == null)
                                 <a class="ps-shoe__overlay"
                                    href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
+                                @elseif($flat->price == null && $flat->rent_per_day == null)
+                                    <a class="ps-shoe__overlay" href="{{route('main.allRentFlats.show', ['slug' => $flat->slug]) }}"></a>
+                                @else
+                                    <a class="ps-shoe__overlay" href="{{route('main.allRentApartments.show', ['slug' => $flat->slug]) }}"></a>
+                                @endif
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -46,16 +53,41 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ps-shoe__detail"><a class="ps-shoe__name"
-                                                                href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                        {{$flat->number_of_rooms.', '.$flat->town.', '.$flat->address}}</a>
-                                    <span class="ps-shoe__price">${{ $flat->price }}</span>
+                                @if($flat->rent_per_month == null && $flat->rent_per_day == null)
+                                <div class="ps-shoe__detail">
+                                    <a class="ps-shoe__name" href="{{route('main.allFlats.show', ['slug' => $flat->slug]) }}">
+                                        {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}
+                                    </a>
+                                    <span class="ps-shoe__price">
+                                        ${{ $flat->price }}
+                                    </span>
                                 </div>
+                                @elseif($flat->price == null && $flat->rent_per_day == null)
+                                    <div class="ps-shoe__detail">
+                                        <a class="ps-shoe__name" href="{{route('main.allRentFlats.show', ['slug' => $flat->slug]) }}">
+                                            {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}
+                                        </a>
+                                        <span class="ps-shoe__price">
+                                        ${{ $flat->rent_per_month }}
+                                    </span>
+                                    </div>
+                                @else
+                                    <div class="ps-shoe__detail">
+                                        <a class="ps-shoe__name" href="{{route('main.allRentApartments.show', ['slug' => $flat->slug]) }}">
+                                            {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}
+                                        </a>
+                                        <span class="ps-shoe__price">
+                                        ${{ $flat->rent_per_day }}
+                                    </span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
                     @endforeach
                 @endforeach
+                @else <h1>Нет в избранных</h1>
+                @endisset
               {{--  @endif--}}
             </div>
 

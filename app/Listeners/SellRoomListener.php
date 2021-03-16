@@ -32,7 +32,7 @@ class SellRoomListener
             $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'query' => [
                     'key' => 'AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA',
-                    'address' => $event->sellRoom->town .','. $event->sellRoom->address,
+                    'address' => $event->sellRoom->town->town .','. $event->sellRoom->address,
                 ]
             ]);
             $res = json_decode($res->getBody()->getContents(), true);

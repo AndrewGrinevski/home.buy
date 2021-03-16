@@ -14,16 +14,11 @@
                                     <h4 class="card-title">Местоположение</h4>
                                     <br>
                                     <div class="form-group">
-                                        <label class="mb-1">Координаты</label>
-                                        <input type="text" class="form-control input-default" name="location" id="location">
+                                        <input type="hidden" class="form-control input-default" name="location" id="location">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Город</label>
-                                        <input type="text" class="form-control input-default" name="town">
-                                        @error('town')
-                                        <br>
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <select class="livesearch form-control" name="town_id"></select>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Адрес</label>
@@ -123,11 +118,7 @@
                                     <h4 class="card-title">Фотографии</h4>
                                     <br>
                                     <div class="form-group">
-                                        <input type="file" name="images[]" multiple class="btn btn-default btn-file">
-                                        @error('images')
-                                        <br>
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <input type="file" name="images[]" multiple class="btn btn-default btn-file" required>
                                     </div>
                                     <br>
                                     <h4 class="card-title">Описание объекта</h4>
@@ -227,6 +218,28 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA&callback=initMap&libraries=&v=weekly"
         async
     ></script>
+
+    <script type="text/javascript">
+        $('.livesearch').select2({
+            placeholder: 'Выберите город',
+            ajax: {
+                url: '/ajax-autocomplete-search',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.town,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
     <script>
 
         let map;

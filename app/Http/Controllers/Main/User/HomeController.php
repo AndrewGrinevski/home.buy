@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Main\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\SellApartament;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -33,17 +32,17 @@ class HomeController extends Controller
         $sellFlats = SellApartament::query()->where('contacts_id', '=', "{$id}")
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->paginate(6);
+            ->get();
 
         $rentFlatsPerDay = SellApartament::query()->where('contacts_id', '=', "{$id}")
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
-            ->paginate(6);
+            ->get();
 
         $rentFlats = SellApartament::query()->where('contacts_id', '=', "{$id}")
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
-            ->paginate(6);
+            ->get();
 
         return view('main.user.home', compact('sellFlats', 'rentFlatsPerDay', 'rentFlats', 'a', 'b', 'c'));
     }

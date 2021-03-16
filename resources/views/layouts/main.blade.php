@@ -5,7 +5,7 @@
 <html class="ie ie8"><![endif]-->
 <!--[if IE 9]>
 <html class="ie ie9"><![endif]-->
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +20,7 @@
 
     <title>Сайт недвижимости</title>
     <!-- Fonts-->
+
     <link
         href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900"
         rel="stylesheet">
@@ -30,7 +31,7 @@
     <link rel="stylesheet" href="{{ asset('main/plugins/owl-carousel/assets/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('main/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css') }}">
     <link rel="stylesheet" href="{{ asset('main/plugins/slick/slick/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('main/plugins/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
+ {{--   <link rel="stylesheet" href="{{ asset('main/plugins/bootstrap-select/dist/css/bootstrap-select.min.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('main/plugins/Magnific-Popup/dist/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('main/plugins/jquery-ui/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('main/plugins/revolution/css/settings.css') }}">
@@ -47,6 +48,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <link href="{{ asset('css/preview.css') }}" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--WARNING: Respond.js doesn't work if you view the page via file://-->
     <!--[if lt IE 9]>
@@ -103,7 +107,7 @@
             <div class="navigation__column center">
                 <ul class="main-menu menu">
                     @role('user')
-                    <li class="menu-item menu-item-has-children has-mega-menu"><a href="{{ route('main.allFlats') }}">Добавить</a>
+                    <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Добавить</a>
                         <div class="mega-menu">
                             <div class="mega-wrap">
                                 <div class="mega-column">
@@ -180,9 +184,8 @@
             </div>
     </nav>
 </header>
-<main class="ps-main">
+<main class="ps-main" id="app">
     @yield('content')
-
     <div class="ps-footer__copyright">
         <div class="ps-container">
             <div class="row">

@@ -24,7 +24,7 @@ class SellApartament extends Model
         'total_floors','balcony_id','bathroom_id','apartment_renovation_id','type_of_walls_id','year_of_construction','year_of_overhaul','description','youtube_video',
         'price','terms_of_a_transaction_id','contacts_id','fridge','elevator','internet','furniture','washer','rent_per_month','students','with_animals','with_kids','number_of_berths_id',
         'dishes','microwave','tv','wifi','jacuzzi','rent_per_day','rent_per_night','rent_per_hour','number_of_rooms', 'slug', 'slug_room', 'first_img_name','second_img_name','third_img_name','four_img_name',
-        'five_img_name'];
+        'five_img_name', 'town_id'];
 
 
     public function sluggable()
@@ -40,9 +40,16 @@ class SellApartament extends Model
         ];
     }
 
+
+
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function town()
+    {
+        return $this->belongsTo(Town::class, 'town_id');
     }
 
     public function room()

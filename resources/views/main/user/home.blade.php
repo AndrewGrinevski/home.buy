@@ -15,6 +15,7 @@
                                 <br>
                                 <h3>Продажа квартиры</h3>
                             </div>
+                            @if($sellFlats->count())
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -33,7 +34,7 @@
                                     @foreach($sellFlats as $flat)
                                         <tr>
                                             <th>{{ $a+=1 }}</th>
-                                            <td>{{ $flat->town }}</td>
+                                            <td>{{ $flat->town->town }}</td>
                                             <td>{{ $flat->address }}</td>
                                             <td>{{ $flat->room->number_of_rooms }}</td>
                                             <td class="color-primary">${{ $flat->price }}</td>
@@ -48,11 +49,15 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @else
+                                        <h5>Ничего не найдено...</h5>
+                                    @endif
                                     </tbody>
                                 </table>
                                 <h2>Аренда</h2>
                                 <br>
                                 <h3>Аренда квартиры на сутки</h3>
+                                @if($rentFlatsPerDay->count())
                                 <table class="table table-hover">
                                     <thead>
                                     <br>
@@ -70,7 +75,7 @@
                                     @foreach($rentFlatsPerDay as $flat)
                                         <tr>
                                             <th>{{ $b+=1 }}</th>
-                                            <td>{{ $flat->town }}</td>
+                                            <td>{{ $flat->town->town }}</td>
                                             <td>{{ $flat->address }}</td>
                                             <td>{{ $flat->room->number_of_rooms }}</td>
                                             <td class="color-primary">${{ $flat->rent_per_day }}</td>
@@ -85,9 +90,13 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @else
+                                      <h5>Ничего не найдено...</h5>
+                                    @endif
                                     </tbody>
                                 </table>
                                 <h3>Аренда квартиры</h3>
+                                    @if($rentFlats->count())
                                 <table class="table table-hover">
                                     <thead>
                                     <br>
@@ -105,7 +114,7 @@
                                     @foreach($rentFlats as $flat)
                                         <tr>
                                             <th>{{ $c+=1 }}</th>
-                                            <td>{{ $flat->town }}</td>
+                                            <td>{{ $flat->town->town }}</td>
                                             <td>{{ $flat->address }}</td>
                                             <td>{{ $flat->room->number_of_rooms }}</td>
                                             <td class="color-primary">${{ $flat->rent_per_month }}</td>
@@ -120,6 +129,9 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @else
+                                        <h5>Ничего не найдено...</h5>
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

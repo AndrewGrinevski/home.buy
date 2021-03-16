@@ -7,12 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddRentFlatRequest;
 use App\Models\Room;
 use App\Models\SellApartament;
-use Illuminate\Http\Request;
+use App\Traits\DynamicAutocompleteSearchTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AddRentFlatController extends Controller
 {
+    use DynamicAutocompleteSearchTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -132,9 +134,6 @@ class AddRentFlatController extends Controller
             $sellRoom->furniture = $request->input('furniture', false);
             $sellRoom->washer = $request->input('washer', false);
             $sellRoom->save();
-            event(new AddSellRoomEvent($sellRoom));
-            return redirect()->route('home', ['id' =>auth()->id()]);
-
         }else {
             $sellRoom->fridge = $request->input('fridge', false);
             $sellRoom->elevator = $request->input('elevator', false);
@@ -142,9 +141,10 @@ class AddRentFlatController extends Controller
             $sellRoom->furniture = $request->input('furniture', false);
             $sellRoom->washer = $request->input('washer', false);
             $sellRoom->save();
-            event(new AddSellRoomEvent($sellRoom));
-            return redirect()->route('home', ['id' =>auth()->id()]);
         }
+
+        event(new AddSellRoomEvent($sellRoom));
+        return redirect()->route('home', ['id' =>auth()->id()]);
     }
 
     /**

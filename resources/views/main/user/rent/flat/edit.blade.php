@@ -15,16 +15,11 @@
                                     <h4 class="card-title">Местоположение</h4>
                                     <br>
                                     <div class="form-group">
-                                        <label class="mb-1">Координаты</label>
-                                        <input type="text" class="form-control input-default" name="location" id="location" value="{{ $sellRoom->location }}">
+                                        <input type="hidden" class="form-control input-default" name="location" id="location">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Город</label>
-                                        <input type="text" class="form-control input-default" name="town" value="{{ $sellRoom->town }}">
-                                        @error('town')
-                                        <br>
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <select class="livesearch form-control" name="town_id"></select>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Адрес</label>
@@ -127,10 +122,6 @@
                                     <br>
                                     <div class="form-group">
                                         <input type="file" name="images[]" multiple class="btn btn-default btn-file">
-                                        @error('images')
-                                        <br>
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                     <br>
                                     <h4 class="card-title">Описание объекта</h4>
@@ -213,7 +204,8 @@
                                             с возможностью написать вам (только в мобильной версии сайта).</label>
                                         <input type="text" class="form-control input-flat" name="viber_phone" value="{{ $sellRoom->userContact->viber_phone }}">
                                     </div>--}}
-                                    <button type="submit" class="btn mb-1 btn-rounded btn-info"> Изменить </button>
+                                    <button type="submit" class="btn mb-1 btn-rounded btn-danger"> Изменить </button>
+                                    <a href="{{ route('home', ['id' =>auth()->id()]) }}" class="btn mb-1 btn-rounded btn-info">Назад</a>
                                     <br>
                                     <p></p>
                                 </form>
@@ -230,8 +222,29 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA&callback=initMap&libraries=&v=weekly"
         async
     ></script>
-    <script>
 
+    <script type="text/javascript">
+        $('.livesearch').select2({
+            placeholder: 'Выберите город',
+            ajax: {
+                url: '/ajax-autocomplete-search',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.town,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
+    <script>
         let map;
         let markers = [];
 

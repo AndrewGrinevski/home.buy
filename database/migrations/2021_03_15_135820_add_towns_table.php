@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesColumsTable extends Migration
+class AddTownsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class CreateImagesColumsTable extends Migration
     public function up()
     {
         Schema::table('sell_apartaments',function (Blueprint $table) {
-            $table->unsignedBigInteger('image_id');
-            $table->foreign('image_id')
+            $table->unsignedBigInteger('town_id');
+            $table->foreign('town_id')
                 ->references('id')
-                ->on('images');
+                ->on('towns');
         });
     }
 
@@ -29,7 +29,7 @@ class CreateImagesColumsTable extends Migration
     public function down()
     {
         Schema::table('sell_apartaments',function (Blueprint $table) {
-            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('town_id');
         });
     }
 }

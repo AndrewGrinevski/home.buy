@@ -11,7 +11,7 @@ use App\Models\SellApartament;
 use App\Models\Wall;
 use Illuminate\Http\Request;
 
-trait RentPerDay
+trait RentPerDayTrait
 {
     public function showOneRoomFlats()
     {
@@ -23,7 +23,8 @@ trait RentPerDay
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $berths = Berth::all();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
     }
 
     public function showTwoRoomFlats()
@@ -36,7 +37,8 @@ trait RentPerDay
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $berths = Berth::all();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
     }
 
     public function showThreeRoomFlats()
@@ -49,7 +51,8 @@ trait RentPerDay
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $berths = Berth::all();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
     }
 
     public function showFourPlusRoomFlats()
@@ -62,7 +65,8 @@ trait RentPerDay
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $berths = Berth::all();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
     }
 
     public function search(Request $request)
@@ -72,16 +76,22 @@ trait RentPerDay
         $balconies = Balcony::all();
         $flatsQuery = SellApartament::query();
         //Город
-        if ($request->filled('town')) {
-            $flatsQuery->where('town', 'LIKE', "%{$request->town}%")->orderBy('town');
+        if ($request->filled('town_id')) {
+            $flatsQuery->where('town_id', '=', $request->town_id);
         }
         //Количество комнат
-        if ($request->filled('rooms')) {
-            $flatsQuery->where('number_of_rooms_id', '=', $request->rooms);
+        if ($request->filled('min_rooms')) {
+            $flatsQuery->where('number_of_rooms_id', '>=', $request->min_rooms);
+        }
+        if ($request->filled('max_rooms')) {
+            $flatsQuery->where('number_of_rooms_id', '<=', $request->max_rooms);
         }
         //Количество спальных мест
-        if ($request->filled('berths')) {
-            $flatsQuery->where('number_of_berths_id', '=', $request->berths);
+        if ($request->filled('min_berths')) {
+            $flatsQuery->where('number_of_berths_id', '>=', $request->min_berths);
+        }
+        if ($request->filled('max_berths')) {
+            $flatsQuery->where('number_of_berths_id', '<=', $request->max_berths);
         }
         //Цена
         if ($request->filled('min_rent_per_day')) {
