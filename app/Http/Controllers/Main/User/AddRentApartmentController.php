@@ -11,6 +11,7 @@ use App\Models\Berth;
 use App\Models\Room;
 use App\Models\SellApartament;
 use App\Traits\DynamicAutocompleteSearchTrait;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,12 +36,13 @@ class AddRentApartmentController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
         $rooms = Room::all();
         $berths = Berth::all();
         $balconies = Balcony::all();
         $bathrooms = Bathroom::all();
         return view('main.user.rent.apartment.create', compact('rooms','berths',
-            'balconies', 'bathrooms'));
+            'balconies', 'bathrooms', 'user'));
     }
 
     /**
@@ -107,13 +109,14 @@ class AddRentApartmentController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
         $rooms = Room::all();
         $berths = Berth::all();
         $balconies = Balcony::all();
         $bathrooms = Bathroom::all();
         $sellRoom = SellApartament::findOrFail($id);
         return view('main.user.rent.apartment.edit', compact('sellRoom', 'rooms',
-            'balconies', 'bathrooms', 'berths'));
+            'balconies', 'bathrooms', 'berths', 'user'));
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Requests\AddRentFlatRequest;
 use App\Models\Room;
 use App\Models\SellApartament;
 use App\Traits\DynamicAutocompleteSearchTrait;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,7 +34,8 @@ class AddRentFlatController extends Controller
     public function create()
     {
         $rooms = Room::all();
-        return view('main.user.rent.flat.create', compact('rooms'));
+        $user = Auth::user();
+        return view('main.user.rent.flat.create', compact('rooms', 'user'));
     }
 
     /**
@@ -100,9 +102,10 @@ class AddRentFlatController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
         $rooms = Room::all();
         $sellRoom = SellApartament::findOrFail($id);
-        return view('main.user.rent.flat.edit', compact('sellRoom', 'rooms'));
+        return view('main.user.rent.flat.edit', compact('sellRoom', 'rooms', 'user'));
     }
 
     /**

@@ -182,16 +182,17 @@
                                     </div>
                                     <br>
                                     <h4 class="card-title">Контактная информация</h4>
+                                    <label class="mb-1">(Можно изменить в личном кабинете)</label>
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Имя контактного лица</label>
                                         <br>
-                                        <input type="text" class="form-control input-flat" name="name">
+                                        <input type="text" class="form-control input-flat" name="name" value="{{ $user->name }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Мобильный телефон</label>
                                         <br>
-                                        <input type="text" class="form-control input-flat" name="phone">
+                                        <input type="text" class="form-control input-flat" name="phone" value="{{ $user->phone }}" disabled>
                                     </div>
                                     <button type="submit" class="btn mb-1 btn-rounded btn-info"> Создать </button>
                                 </form>

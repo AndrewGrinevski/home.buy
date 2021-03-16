@@ -15,7 +15,7 @@
                                     <h4 class="card-title">Местоположение</h4>
                                     <br>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control input-default" name="location" id="location">
+                                        <input type="hidden" class="form-control input-default" name="location" id="location" value="{{ $sellRoom->location }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Город</label>
@@ -195,34 +195,19 @@
                                         </select>
                                     </div>
                                     <br>
-                                    {{--<h4 class="card-title">Контактная информация</h4>
+                                    <h4 class="card-title">Контактная информация</h4>
+                                    <label class="mb-1">(Можно изменить в личном кабинете)</label>
                                     <br>
                                     <div class="form-group">
                                         <label class="mb-1">Имя контактного лица</label>
                                         <br>
-                                        <label class="mb-1">(Не обязательно)</label>
-                                        <input type="text" class="form-control input-flat" name="name" value="{{ $sellRoom->userContact->name }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="mb-1">Email</label>
-                                        <input type="text" class="form-control input-flat" name="email" value="{{ $sellRoom->userContact->email }}">
+                                        <input type="text" class="form-control input-flat" name="name" value="{{ $user->name }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-1">Мобильный телефон</label>
                                         <br>
-                                        <label class="mb-1">Мобильный телефон необходимо подтвердить кодом из СМС.
-                                            Отправка СМС-кода подтверждения бесплатна для вас.</label>
-                                        <input type="text" class="form-control input-flat" name="phone" value="{{ $sellRoom->userContact->phone }}">
+                                        <input type="text" class="form-control input-flat" name="phone" value="{{ $user->phone }}" disabled>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="mb-1">Номер в Viber</label>
-                                        <br>
-                                        <label class="mb-1">(Не обязательно)</label>
-                                        <br>
-                                        <label class="mb-1">В вашем объявлении будет отображаться кнопка "Написать в Viber"
-                                            с возможностью написать вам (только в мобильной версии сайта).</label>
-                                        <input type="text" class="form-control input-flat" name="viber_phone" value="{{ $sellRoom->userContact->viber_phone }}">
-                                    </div>--}}
                                     <button type="submit" class="btn mb-1 btn-rounded btn-danger"> Изменить </button>
                                     <a href="{{ route('home', ['id' =>auth()->id()]) }}" class="btn mb-1 btn-rounded btn-info">Назад</a>
                                 </form>
@@ -230,8 +215,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

@@ -84,7 +84,13 @@ Route::prefix('/rent')->namespace('Main\\Rent')
 
 //User
 Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user','verified'])->group(function () {
+
+
+
     Route::get('/user_id={id}', 'HomeController@index')->name('home');
+    Route::get('/contacts_information', 'HomeController@profile')->name('profile');
+    Route::post('/contacts_information/{id}', 'HomeController@update')->name('profile.update');
+    Route::get('/contacts_information', 'HomeController@profile')->name('profile');
     Route::get('/favorite', 'FavoriteController@index')->name('favorite');
     Route::resource('/add/flats/sell', 'AddSellFlatController')->names('home.addSellFlat');
     Route::get('/ajax-autocomplete-search','AddSellFlatController@selectSearch');

@@ -14,6 +14,7 @@ use App\Models\SeparatedRoom;
 use App\Models\Transaction;
 use App\Models\Wall;
 use App\Traits\DynamicAutocompleteSearchTrait;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,8 +47,9 @@ class AddSellFlatController extends Controller
         $repairs = Repair::all();
         $walls = Wall::all();
         $transactions = Transaction::all();
+        $user = Auth::user();
         return view('main.user.sell.flat.create', compact('rooms', 'separatedRooms',
-            'balconies', 'bathrooms', 'repairs', 'walls', 'transactions'));
+            'balconies', 'bathrooms', 'repairs', 'walls', 'transactions', 'user'));
     }
 
     /**
@@ -122,8 +124,9 @@ class AddSellFlatController extends Controller
         $walls = Wall::all();
         $transactions = Transaction::all();
         $sellRoom = SellApartament::findOrFail($id);
+        $user = Auth::user();
         return view('main.user.sell.flat.edit', compact('sellRoom', 'rooms', 'separatedRooms',
-            'balconies', 'bathrooms', 'repairs', 'walls', 'transactions'));
+            'balconies', 'bathrooms', 'repairs', 'walls', 'transactions', 'user'));
     }
 
     /**
