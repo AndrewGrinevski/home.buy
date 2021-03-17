@@ -51,14 +51,9 @@ class CreateSellApartamentsTable extends Migration
             $table->integer('year_of_construction')->nullable();
             $table->integer('year_of_overhaul')->nullable();
             $table->unsignedBigInteger('image_id');
-            $table->foreign('image_id')
-                ->references('apartment_id')
-                ->on('image');
-            $table->string('first_img_name',255);
-            $table->string('second_img_name',255);
-            $table->string('third_img_name',255);
-            $table->string('four_img_name',255);
-            $table->string('five_img_name',255);
+            $table->foreign('images_id')
+                ->references('id')
+                ->on('images');
             $table->text('description')->nullable();
             $table->string('youtube_video', 255)->nullable();
             $table->float('price')->nullable();
@@ -71,8 +66,6 @@ class CreateSellApartamentsTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->string('slug')->nullable()->index();
-            $table->string('number_of_rooms')->nullable();
-            $table->string('slug_room')->nullable()->index();
 
             //Аренда квартир
             //Доп. условия аренды квартиры

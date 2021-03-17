@@ -13,6 +13,7 @@ use App\Traits\RaitTrait;
 use App\Traits\RentFlats\RentPerDayTrait;
 use App\Traits\ShowOtherOffersTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AllRentFlatPerDayController extends Controller
@@ -37,7 +38,8 @@ class AllRentFlatPerDayController extends Controller
         $balconies = Balcony::all();
         $walls = Wall::all();
         $berths = Berth::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
+        $user = Auth::user();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths', 'user'));
     }
 
     /**

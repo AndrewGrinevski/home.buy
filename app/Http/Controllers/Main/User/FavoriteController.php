@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main\User;
 use App\Http\Controllers\Controller;
 use App\Models\SellApartament;
 use Illuminate\Support\Facades\Auth;
+use Overtrue\LaravelFavorite\Favorite;
 use Overtrue\LaravelFollow\UserFollower;
 
 class FavoriteController extends Controller
@@ -19,11 +20,11 @@ class FavoriteController extends Controller
     {
         $idUser = Auth::id();
         $sellFlats = null;
-        $follows = UserFollower::query()->where('follower_id', '=', "{$idUser}")->get();
+        $favorite = Favorite::query()->where('user_id', '=', "{$idUser}")->get();
 
-        if (isset($follows)){
-            foreach ($follows as $follow) {
-                $sellFlats[] = SellApartament::query()->where('id', '=', "{$follow->following_id}")->paginate(6);
+        if (isset($favorite)){
+            foreach ($favorite as $item) {
+                $sellFlats[] = SellApartament::query()->where('id', '=', "{$item->favoriteable_id}")->paginate(6);
             }
         }
 

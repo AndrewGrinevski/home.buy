@@ -2,18 +2,17 @@
 
 namespace App;
 
-use App\Models\Role;
 use App\Models\SellApartament;
-use App\Models\UsersRole;
 use App\Traits\RolesTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Overtrue\LaravelFollow\Followable;
+use Overtrue\LaravelFavorite\Traits\Favoriter;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Followable;
+    use Favoriter;
     use Notifiable;
     use RolesTrait;
 

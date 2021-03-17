@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link href="{{ asset('main/css/custom.css') }}" rel="stylesheet">
 
     <div class="ps-products-wrap pt-80 pb-80">
@@ -12,45 +12,57 @@
             </div>
             <div class="ps-product__columns">
                 @if($sellFlats->count())
-                @foreach($sellFlats as $flat)
-                    <div class="panel ps-product__column" data-id="{{ $flat->id }}">
-                        <div class="ps-shoe mb-30">
-                            <input id="input-1" name="rate" class="rating rating-loading"
-                                   data-min="0" data-max="5" data-step="1"
-                                   value="{{ $flat->averageRating }}" data-size="xs" disabled>
-                            <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
-                                    <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
-
-                                </button>
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}" alt="">
-                                <a class="ps-shoe__overlay"
-                                   href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
-                            </div>
-                            <div class="ps-shoe__content">
-                                <div class="ps-shoe__variants">
-                                    <div class="col-md-7 col-lg-9 black s-bold fs-14 sm-mb-10">
-                                        <div class="autopaddings mb-5">
+                    @foreach($sellFlats as $flat)
+                        <div class="panel ps-product__column" data-id="{{ $flat->id }}">
+                            <div class="ps-shoe mb-30">
+                                <input id="input-1" name="rate" class="rating rating-loading"
+                                       data-min="0" data-max="5" data-step="1"
+                                       value="{{ $flat->averageRating }}" data-size="xs" disabled>
+                                <div class="ps-shoe__thumbnail">
+                                    @auth()
+                                        @if($user->hasFavorited($flat))
+                                            <button class="ps-shoe__favorite">
+                                                <i id="like{{$flat->id}}"
+                                                   class="glyphicon glyphicon-heart {{ $flat->favoriters()->count() > 0  ? 'like-post' : '' }}"></i>
+                                            </button>
+                                        @else
+                                            <button class="ps-shoe__favorite">
+                                                <i id="like{{$flat->id}}"
+                                                   class="glyphicon glyphicon-heart"></i>
+                                            </button>
+                                        @endif
+                                    @endauth
+                                    <img
+                                        src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}"
+                                        alt="">
+                                    <a class="ps-shoe__overlay"
+                                       href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
+                                </div>
+                                <div class="ps-shoe__content">
+                                    <div class="ps-shoe__variants">
+                                        <div class="col-md-7 col-lg-9 black s-bold fs-14 sm-mb-10">
+                                            <div class="autopaddings mb-5">
                                             <span>{{ $flat->floor.' этаж из '.$flat->total_floors.' ; '.$flat->total_area.'/'.$flat->living_area.'/'.$flat->kitchen_area.' м' }}
                                                 <sup>2</sup></span>
-                                        </div>
-                                        <div class="autopaddings mb-5">
+                                            </div>
+                                            <div class="autopaddings mb-5">
                                             <span>Тип стен:&ensp;{{ $flat->type_of_walls_id ? $flat->wall->type_of_walls : 'Не указана' }}
                                                 </span>
-                                            <br>
-                                            <span>Год постройки:&ensp;{{ $flat->year_of_construction ? $flat->year_of_construction . ' г.' : 'Не указан' }}</span>
+                                                <br>
+                                                <span>Год постройки:&ensp;{{ $flat->year_of_construction ? $flat->year_of_construction . ' г.' : 'Не указан' }}</span>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="ps-shoe__detail"><a class="ps-shoe__name"
-                                                                href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                        {{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}</a>
-                                    <span class="ps-shoe__price">${{ $flat->price }}</span>
+                                    <div class="ps-shoe__detail"><a class="ps-shoe__name"
+                                                                    href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
+                                            {{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}</a>
+                                        <span class="ps-shoe__price">${{ $flat->price }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 @else
                     <div>
                         <h3 class="bold-header">Ничего не найдено</h3>
@@ -107,10 +119,12 @@
                         <h5>Цена</h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_price" placeholder="От" value="{{ request()->min_price }}">
+                        <input type="number" class="form-control searchFlats" name="min_price" placeholder="От"
+                               value="{{ request()->min_price }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_price" placeholder="До" value="{{ request()->max_price }}">
+                        <input type="number" class="form-control searchFlats" name="max_price" placeholder="До"
+                               value="{{ request()->max_price }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -118,10 +132,12 @@
                         <h5>Общая площадь, м<sup>2</sup></h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_total_area" placeholder="От" value="{{ request()->min_total_area }}">
+                        <input type="number" class="form-control searchFlats" name="min_total_area" placeholder="От"
+                               value="{{ request()->min_total_area }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_total_are" placeholder="До" value="{{ request()->max_total_are }}">
+                        <input type="number" class="form-control searchFlats" name="max_total_are" placeholder="До"
+                               value="{{ request()->max_total_are }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -129,10 +145,12 @@
                         <h5>Жилая площадь, м<sup>2</sup></h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_living_area" placeholder="От" value="{{ request()->min_living_area }}">
+                        <input type="number" class="form-control searchFlats" name="min_living_area" placeholder="От"
+                               value="{{ request()->min_living_area }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_living_area" placeholder="До" value="{{ request()->max_living_area }}">
+                        <input type="number" class="form-control searchFlats" name="max_living_area" placeholder="До"
+                               value="{{ request()->max_living_area }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -140,10 +158,12 @@
                         <h5>Площадь кухни, м<sup>2</sup></h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_kitchen_area" placeholder="От" value="{{ request()->min_kitchen_area }}">
+                        <input type="number" class="form-control searchFlats" name="min_kitchen_area" placeholder="От"
+                               value="{{ request()->min_kitchen_area }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_kitchen_area" placeholder="До" value="{{ request()->max_kitchen_area }}">
+                        <input type="number" class="form-control searchFlats" name="max_kitchen_area" placeholder="До"
+                               value="{{ request()->max_kitchen_area }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -151,10 +171,12 @@
                         <h5>Этаж</h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_floor" placeholder="От" value="{{ request()->min_floor }}">
+                        <input type="number" class="form-control searchFlats" name="min_floor" placeholder="От"
+                               value="{{ request()->min_floor }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_floor" placeholder="До" value="{{ request()->max_floor }}">
+                        <input type="number" class="form-control searchFlats" name="max_floor" placeholder="До"
+                               value="{{ request()->max_floor }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -162,10 +184,12 @@
                         <h5>Этажность</h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_total_floor" placeholder="От" value="{{ request()->min_total_floor }}">
+                        <input type="number" class="form-control searchFlats" name="min_total_floor" placeholder="От"
+                               value="{{ request()->min_total_floor }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_total_floor" placeholder="До" value="{{ request()->max_total_floor }}">
+                        <input type="number" class="form-control searchFlats" name="max_total_floor" placeholder="До"
+                               value="{{ request()->max_total_floor }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -173,10 +197,12 @@
                         <h5>Год постройки</h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_year" placeholder="От" value="{{ request()->min_year }}">
+                        <input type="number" class="form-control searchFlats" name="min_year" placeholder="От"
+                               value="{{ request()->min_year }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_year" placeholder="До" value="{{ request()->max_year }}">
+                        <input type="number" class="form-control searchFlats" name="max_year" placeholder="До"
+                               value="{{ request()->max_year }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
@@ -231,7 +257,7 @@
                 <!--                    a(href='#').ps-btn PURCHASE-->
             </div>
         </form>
-        </div>
+    </div>
 
     <script type="text/javascript">
         $('.livesearch').select2({
@@ -255,25 +281,25 @@
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('i.glyphicon-heart, i.glyphicon-heart-empty').click(function(){
+            $('i.glyphicon-heart, i.glyphicon-heart-empty').click(function () {
                 var id = $(this).parents(".panel").data('id');
                 var cObjId = this.id;
                 var cObj = $(this);
 
                 $.ajax({
-                    type:'POST',
-                    url:'/sell/ajaxRequest',
-                    data:{id:id},
-                    success:function(data){
-                        if(jQuery.isEmptyObject(data.success.attached)){
+                    type: 'POST',
+                    url: '/sell/ajaxRequest',
+                    data: {id: id},
+                    success: function (data) {
+                        if (jQuery.isEmptyObject(data.success.attached)) {
                             $(cObj).removeClass("like-post");
-                        }else{
+                        } else {
                             $(cObj).addClass("like-post");
                         }
                     }

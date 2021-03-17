@@ -12,6 +12,7 @@ use App\Traits\RaitTrait;
 use App\Traits\SellFlats\SearchTrait;
 use App\Traits\ShowOtherOffersTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AllFlatController extends Controller
@@ -37,7 +38,8 @@ class AllFlatController extends Controller
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $user = Auth::user();
+        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
     }
 
     /**
@@ -61,7 +63,7 @@ class AllFlatController extends Controller
     public function ajaxRequest(Request $request){
 
         $sellFlats = SellApartament::find($request->id);
-        $response = auth()->user()->toggleFollow($sellFlats);
+        $response = auth()->user()->toggleFavorite($sellFlats);
         return response()->json(['success'=>$response]);
     }
 }

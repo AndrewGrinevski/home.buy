@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\SellApartament;
 use App\Models\Wall;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 trait SearchTrait
 {
@@ -22,7 +23,8 @@ trait SearchTrait
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $user = Auth::user();
+        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
     }
 
     public function showTwoRoomFlats()
@@ -35,7 +37,8 @@ trait SearchTrait
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $user = Auth::user();
+        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
     }
 
     public function showThreeRoomFlats()
@@ -48,7 +51,8 @@ trait SearchTrait
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $user = Auth::user();
+        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
     }
 
     public function showFourPlusRoomFlats()
@@ -61,7 +65,8 @@ trait SearchTrait
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
-        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        $user = Auth::user();
+        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
     }
 
     public function search(Request $request)

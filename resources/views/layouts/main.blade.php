@@ -137,7 +137,6 @@
                                         <li><a href="{{ route('main.showTwoRoomFlats') }}">2-комнатные</a></li>
                                         <li><a href="{{ route('main.showThreeRoomFlats') }}">3-комнатные</a></li>
                                         <li><a href="{{ route('main.showFourPlusRoomFlats') }}">4-комнатные и более</a>
-                                        <li><a href="#">Недорогие квартиры</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -153,7 +152,6 @@
                                         <li><a href="{{ route('main.showRentTwoRoomFlats') }}">2-комнатные</a></li>
                                         <li><a href="{{ route('main.showRentThreeRoomFlats') }}">3-комнатные</a></li>
                                         <li><a href="{{ route('main.showRentFourPlusRoomFlats') }}">4-комнатные и более</a></li>
-                                        <li><a href="#">Недорогие квартиры</a></li>
                                     </ul>
                                 </div>
                                 <div class="mega-column">
@@ -163,7 +161,6 @@
                                     <li><a href="{{ route('main.showRentTwoRoomApartments') }}">2-комнатные</a></li>
                                     <li><a href="{{ route('main.showRentThreeRoomApartments') }}">3-комнатные</a></li>
                                     <li><a href="{{ route('main.showRentFourPlusRoomApartments') }}">4-комнатные и более</a></li>
-                                    <li><a href="#">Недорогие квартиры</a></li>
                                 </ul>
                             </div>
                             </div>

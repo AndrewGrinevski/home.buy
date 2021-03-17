@@ -16,19 +16,19 @@
                         <div class="ps-product__preview">
                             <div class="ps-product__variants">
                                 <div class="item"><img
-                                        src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->first_img_name) }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->first_img_name) }}"
                                         alt=""></div>
                                 <div class="item"><img
-                                        src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->second_img_name) }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->second_img_name) }}"
                                         alt=""></div>
                                 <div class="item"><img
-                                        src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->third_img_name) }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->third_img_name) }}"
                                         alt=""></div>
                                 <div class="item"><img
-                                        src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->four_img_name) }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->four_img_name) }}"
                                         alt=""></div>
                                 <div class="item"><img
-                                        src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->five_img_name) }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->five_img_name) }}"
                                         alt=""></div>
                             </div>
                             <a class="popup-youtube ps-product__video" href="{{ $sellFlat->youtube_video }}"><img
@@ -37,19 +37,19 @@
                         </div>
                         <div class="ps-product__image">
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->first_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->first_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->second_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->second_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->third_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->third_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->four_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->four_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->five_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->five_img_name) }}"
                                                    alt=""></div>
                         </div>
                     </div>
@@ -214,10 +214,10 @@
                                         <div class="ps-shoe__thumbnail">
                                             <button class="ps-shoe__favorite">
                                                 <i id="like{{$flat->id}}"
-                                                   class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
+                                                   class="glyphicon glyphicon-heart {{ $flat->favoriters()->count() > 0  ? 'like-post' : '' }}"></i>
                                             </button>
                                             <img
-                                                src="{{ \Illuminate\Support\Facades\Storage::url($flat->first_img_name) }}"
+                                                src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}"
                                                 alt="">
                                             <a class="ps-shoe__overlay"
                                                href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>

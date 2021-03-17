@@ -10,6 +10,7 @@ use App\Models\Room;
 use App\Models\SellApartament;
 use App\Models\Wall;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 trait RentPerDayTrait
 {
@@ -24,7 +25,8 @@ trait RentPerDayTrait
         $balconies = Balcony::all();
         $walls = Wall::all();
         $berths = Berth::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
+        $user = Auth::user();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths', 'user'));
     }
 
     public function showTwoRoomFlats()
@@ -38,7 +40,8 @@ trait RentPerDayTrait
         $balconies = Balcony::all();
         $walls = Wall::all();
         $berths = Berth::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
+        $user = Auth::user();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths', 'user'));
     }
 
     public function showThreeRoomFlats()
@@ -52,7 +55,8 @@ trait RentPerDayTrait
         $balconies = Balcony::all();
         $walls = Wall::all();
         $berths = Berth::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
+        $user = Auth::user();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths', 'user'));
     }
 
     public function showFourPlusRoomFlats()
@@ -66,7 +70,8 @@ trait RentPerDayTrait
         $balconies = Balcony::all();
         $walls = Wall::all();
         $berths = Berth::all();
-        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths'));
+        $user = Auth::user();
+        return view('main.rent.perDay.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'berths', 'user'));
     }
 
     public function search(Request $request)

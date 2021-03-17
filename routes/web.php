@@ -44,7 +44,7 @@ Route::prefix('admins')->middleware(['role:admin'])->namespace('Admin\\Sell')
 
 //Main
 Route::get('/', 'Main\\MainController@index')->name('mainPage');
-
+Route::post('/ajaxRequest', 'Main\\MainController@ajaxRequest')->name('ajaxRequest');
 //Sell
 Route::prefix('/sell')->namespace('Main\\Sell')
     ->group(function () {
@@ -84,8 +84,6 @@ Route::prefix('/rent')->namespace('Main\\Rent')
 
 //User
 Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user','verified'])->group(function () {
-
-
 
     Route::get('/user_id={id}', 'HomeController@index')->name('home');
     Route::get('/contacts_information', 'HomeController@profile')->name('profile');

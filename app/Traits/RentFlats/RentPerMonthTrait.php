@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\SellApartament;
 use App\Models\Wall;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 trait RentPerMonthTrait
 {
@@ -20,7 +21,8 @@ trait RentPerMonthTrait
             ->where('rent_per_day', '=', null)
             ->orderBy('updated_at')->paginate(6);
         $rooms = Room::all();
-        return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms'));
+        $user = Auth::user();
+        return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms', 'user'));
     }
 
     public function showTwoRoomFlats()
@@ -31,7 +33,8 @@ trait RentPerMonthTrait
             ->where('rent_per_day', '=', null)
             ->orderBy('updated_at')->paginate(6);
         $rooms = Room::all();
-        return view('main.rent.perMonth.allFlats', compact('sellFlats', 'rooms'));
+        $user = Auth::user();
+        return view('main.rent.perMonth.allFlats', compact('sellFlats', 'rooms', 'user'));
     }
 
     public function showThreeRoomFlats()
@@ -42,7 +45,8 @@ trait RentPerMonthTrait
             ->where('rent_per_day', '=', null)
             ->orderBy('updated_at')->paginate(6);
         $rooms = Room::all();
-        return view('main.rent.perMonth.allFlats', compact('sellFlats', 'rooms'));
+        $user = Auth::user();
+        return view('main.rent.perMonth.allFlats', compact('sellFlats', 'rooms', 'user'));
     }
 
     public function showFourPlusRoomFlats()
@@ -53,7 +57,8 @@ trait RentPerMonthTrait
             ->where('rent_per_day', '=', null)
             ->orderBy('updated_at')->paginate(6);
         $rooms = Room::all();
-        return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms'));
+        $user = Auth::user();
+        return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms', 'user'));
     }
 
     public function search(Request $request)
