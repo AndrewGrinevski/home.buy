@@ -62,7 +62,6 @@ class AllFlatController extends Controller
 
         $sellFlats = SellApartament::find($request->id);
         $response = auth()->user()->toggleFollow($sellFlats);
-
         return response()->json(['success'=>$response]);
     }
 }

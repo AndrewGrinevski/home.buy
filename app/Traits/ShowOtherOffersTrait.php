@@ -24,7 +24,6 @@ trait ShowOtherOffersTrait
             $sellFlats = $this->showThreeRoomFlats()->sellFlats;
         } elseif ($sellFlat->rent_per_month == null && $sellFlat->rent_per_day == null && $sellFlat->room->number_of_rooms > 3) {
             $sellFlats = $this->showFourPlusRoomFlats()->sellFlats;
-
         } elseif ($sellFlat->rent_per_month == null && $sellFlat->price == null && $sellFlat->room->number_of_rooms == 1) {
             $sellFlats = $this->showOneRoomFlats()->sellFlats;
         } elseif ($sellFlat->rent_per_month == null && $sellFlat->price == null && $sellFlat->room->number_of_rooms == 2) {

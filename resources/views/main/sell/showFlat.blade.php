@@ -37,19 +37,19 @@
                         </div>
                         <div class="ps-product__image">
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->first_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->first_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->second_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->second_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->third_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->third_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->fourd_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->four_img_name) }}"
                                                    alt=""></div>
                             <div class="item"><img class="zoom"
-                                                   src="{{ \Illuminate\Support\Facades\Storage::url($sellFlat->five_img_name) }}"
+                                                   src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->five_img_name) }}"
                                                    alt=""></div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
                         </div>
                         </form>
-                        <h3>{{$sellFlat->number_of_rooms.', '.$sellFlat->town->town.', '.$sellFlat->address}}</h3>
+                        <h3>{{$sellFlat->room->number_of_rooms.'-комнатная квартира'.', '.$sellFlat->town->town.', '.$sellFlat->address}}</h3>
                         <p>{{ $sellFlat->total_area.' м' }}<sup>2</sup>, &emsp; {{' ' .$sellFlat->floor.' этаж' }}</p>
 
                         <h3 style="color: #CF6A4C">$ {{ $sellFlat->price }}</h3>
@@ -240,7 +240,7 @@
                                             </div>
                                             <div class="ps-shoe__detail"><a class="ps-shoe__name"
                                                                             href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                                    <br>{{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}} </a>
+                                                    <br>{{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}} </a>
                                                 <span class="ps-shoe__price">${{ $flat->price }}</span>
                                             </div>
                                         </div>

@@ -21,7 +21,7 @@
                             <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
                                     <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
                                 </button>
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($flat->first_img_name) }}" alt="">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}" alt="">
                                 <a class="ps-shoe__overlay"
                                    href="{{ route('main.allRentFlats.show', ['slug' => $flat->slug]) }}"></a>
                             </div>
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="ps-shoe__detail"><a class="ps-shoe__name"
                                                                 href="{{ route('main.allRentFlats.show', ['slug' => $flat->slug]) }}">
-                                        {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}</a>
+                                        {{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}</a>
                                     <span class="ps-shoe__price">${{ $flat->rent_per_month }}</span>
                                 </div>
                             </div>

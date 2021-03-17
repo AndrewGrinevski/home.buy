@@ -20,11 +20,10 @@ class SellApartament extends Model
      * @return array
      */
 
-    protected $fillable =['location','town','address','number_of_rooms_id','number_of_separated_rooms_id','total_area','living_area','kitchen_area','sells_area','floor',
+    protected $fillable = ['location','town','address','number_of_rooms_id','number_of_separated_rooms_id','total_area','living_area','kitchen_area','sells_area','floor',
         'total_floors','balcony_id','bathroom_id','apartment_renovation_id','type_of_walls_id','year_of_construction','year_of_overhaul','description','youtube_video',
         'price','terms_of_a_transaction_id','contacts_id','fridge','elevator','internet','furniture','washer','rent_per_month','students','with_animals','with_kids','number_of_berths_id',
-        'dishes','microwave','tv','wifi','jacuzzi','rent_per_day','rent_per_night','rent_per_hour','number_of_rooms', 'slug', 'slug_room', 'first_img_name','second_img_name','third_img_name','four_img_name',
-        'five_img_name', 'town_id'];
+        'dishes','microwave','tv','wifi','jacuzzi','rent_per_day','rent_per_night','rent_per_hour','slug', 'town_id', 'images_id'];
 
 
     public function sluggable()
@@ -32,19 +31,14 @@ class SellApartament extends Model
         return [
           'slug' => [
               'source' => 'address'
+          ]
+    ];
 
-          ],
-            'slug_room' => [
-                'source' => 'number_of_rooms'
-            ]
-        ];
     }
 
-
-
-    public function images()
+    public function image()
     {
-        return $this->hasMany(Image::class);
+        return $this->belongsTo(Image::class, 'images_id');
     }
 
     public function town()

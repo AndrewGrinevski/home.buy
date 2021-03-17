@@ -20,7 +20,7 @@
                                                 <div class="ps-shoe__thumbnail"><button class="ps-shoe__favorite">
                                                         <i id="like{{$flat->id}}" class="glyphicon glyphicon-heart {{ $flat->followers()->count() > 0  ? 'like-post' : '' }}"></i>
                                                     </button>
-                                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($flat->first_img_name) }}" alt="">
+                                                    <img src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}" alt="">
                                                     @if($flat->rent_per_month == null && $flat->rent_per_day == null)
                                                         <a class="ps-shoe__overlay"
                                                            href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
@@ -49,7 +49,7 @@
                                                     @if($flat->rent_per_month == null && $flat->rent_per_day == null)
                                                         <div class="ps-shoe__detail">
                                                             <a class="ps-shoe__name" href="{{route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                                                {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}
+                                                                {{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}
                                                             </a>
                                                             <span class="ps-shoe__price">
                                         ${{ $flat->price }}
@@ -58,7 +58,7 @@
                                                     @elseif($flat->price == null && $flat->rent_per_day == null)
                                                         <div class="ps-shoe__detail">
                                                             <a class="ps-shoe__name" href="{{route('main.allRentFlats.show', ['slug' => $flat->slug]) }}">
-                                                                {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}
+                                                                {{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}
                                                             </a>
                                                             <span class="ps-shoe__price">
                                         ${{ $flat->rent_per_month }}
@@ -67,7 +67,7 @@
                                                     @else
                                                         <div class="ps-shoe__detail">
                                                             <a class="ps-shoe__name" href="{{route('main.allRentApartments.show', ['slug' => $flat->slug]) }}">
-                                                                {{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}}
+                                                                {{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}
                                                             </a>
                                                             <span class="ps-shoe__price">
                                         ${{ $flat->rent_per_day }}

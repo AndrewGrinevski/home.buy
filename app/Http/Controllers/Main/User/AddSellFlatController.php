@@ -7,21 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddFlatRequest;
 use App\Models\Balcony;
 use App\Models\Bathroom;
+use App\Models\Image;
 use App\Models\Repair;
 use App\Models\Room;
 use App\Models\SellApartament;
 use App\Models\SeparatedRoom;
 use App\Models\Transaction;
 use App\Models\Wall;
+use App\Traits\CreateUpdateImagesTrait;
 use App\Traits\DynamicAutocompleteSearchTrait;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+
 
 class AddSellFlatController extends Controller
 {
 
     use DynamicAutocompleteSearchTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -60,42 +62,21 @@ class AddSellFlatController extends Controller
      */
     public function store(AddFlatRequest $request)
     {
-        $paths = [];
-
-        foreach ($request->file('images') as $file) {
-            $paths[] = $file->store('usersImage');
-        }
-
+        $requestImages = $request->file('images');
         $params = $request->all();
-        $params['first_img_name'] = $paths[0];
-        $params['second_img_name'] = $paths[1];
-        $params['third_img_name'] = $paths[2];
-        $params['four_img_name'] = $paths[3];
-        $params['five_img_name'] = $paths[4];
-        $params['contacts_id'] = Auth::id();
-        if ($params['number_of_rooms_id'] == 1) {
-            $params['number_of_rooms'] = '1-комнатная квартира';
-        } elseif ($params['number_of_rooms_id'] == 2) {
-            $params['number_of_rooms'] = '2-комнатная квартира';
-        } elseif ($params['number_of_rooms_id'] == 3) {
-            $params['number_of_rooms'] = '3-комнатная квартира';
-        } elseif ($params['number_of_rooms_id'] == 4) {
-            $params['number_of_rooms'] = '4-комнатная квартира';
-        } elseif ($params['number_of_rooms_id'] == 5) {
-            $params['number_of_rooms'] = '5-комнатная квартира';
-        } elseif ($params['number_of_rooms_id'] == 6) {
-            $params['number_of_rooms'] = '6-комнатная квартира';
-        } elseif ($params['number_of_rooms_id'] == 9) {
-            $params['number_of_rooms'] = '7-комнатная квартира';
-        }
-        $sellRoom = SellApartament::create($params);
-        //foreach ($paths as $path) {
-        //    Image::create(['apartament_id'=>$sellRoom->id,'image'=>$path]);
-        //}
 
+        $createImages = CreateUpdateImagesTrait::createImages($requestImages,$params);
+
+        $images =  Image::create($createImages);
+
+        $params['images_id'] = $images->id;
+        $params['contacts_id'] = Auth::id();
+
+        $sellRoom = SellApartament::create($params);
         event(new AddSellRoomEvent($sellRoom));
         return redirect()->route('home', ['id' => auth()->id()]);
     }
+
 
     /**
      * Display the specified resource.
@@ -140,25 +121,14 @@ class AddSellFlatController extends Controller
     {
 
         $sellRoom = SellApartament::findOrFail($id);
+        $images = Image::findOrFail($sellRoom->images_id);
         $sellRoom->fill($request->all());
+        $issetRequestImages =$request->file();
+        $requestImages =$request->file('images');
 
-        if (($request->file()) != null) {
-            $paths = [];
-            Storage::delete([$sellRoom->first_img_name, $sellRoom->second_img_name, $sellRoom->third_img_name, $sellRoom->four_img_name, $sellRoom->five_img_name]);
-            foreach ($request->file('images') as $file) {
-                $paths[] = $file->store('usersImage');
-            }
+        CreateUpdateImagesTrait::updateImages($images,$issetRequestImages,$requestImages);
 
-            $sellRoom['first_img_name'] = $paths[0];
-            $sellRoom['second_img_name'] = $paths[1];
-            $sellRoom['third_img_name'] = $paths[2];
-            $sellRoom['four_img_name'] = $paths[3];
-            $sellRoom['five_img_name'] = $paths[4];
-            $sellRoom->save();
-        } else {
-            $sellRoom->save();
-
-        }
+        $sellRoom->save();
 
         event(new AddSellRoomEvent($sellRoom));
         return redirect()->route('home', ['id' => auth()->id()]);
@@ -176,7 +146,5 @@ class AddSellFlatController extends Controller
         $sellRoom->delete();
         return redirect()->route('home', ['id' => auth()->id()]);
     }
-
-
 
 }

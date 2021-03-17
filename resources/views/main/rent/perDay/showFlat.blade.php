@@ -79,7 +79,7 @@
                                 <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
                             </div>
                         </form>
-                        <h3>{{$sellFlat->number_of_rooms.', '.$sellFlat->town->town.', '.$sellFlat->address}}</h3>
+                        <h3>{{$sellFlat->room->number_of_rooms.'-комнатная квартира'.', '.$sellFlat->town->town.', '.$sellFlat->address}}</h3>
                         <p>{{ $sellFlat->total_area.' м' }}<sup>2</sup>, &emsp; {{' ' .$sellFlat->floor.' этаж' }}</p>
 
                         <h3 style="color: #CF6A4C">$ {{ $sellFlat->rent_per_day }}</h3>
@@ -292,7 +292,7 @@
                                             </div>
                                             <div class="ps-shoe__detail"><a class="ps-shoe__name"
                                                                             href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                                    <br>{{$flat->number_of_rooms.', '.$flat->town->town.', '.$flat->address}} </a>
+                                                    <br>{{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}} </a>
                                                 <span class="ps-shoe__price">${{ $flat->rent_per_day }}</span>
                                             </div>
                                         </div>

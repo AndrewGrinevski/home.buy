@@ -29,6 +29,7 @@
                                         <th>Кол-во комнат</th>
                                         <th>Стоимость</th>
                                         <th>Дата добавления</th>
+                                        <th>Дата редактирования</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -40,6 +41,7 @@
                                             <td>{{ $flat->room->number_of_rooms }}</td>
                                             <td class="color-primary">${{ $flat->price }}</td>
                                             <td class="color-primary">{{ $flat->created_at }}</td>
+                                            <td class="color-primary">{{ $flat->updated_at }}</td>
                                             <td> <a href="{{ route('home.addSellFlat.edit', ['sell'=>$flat->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
                                             <td>
                                                 <form action="{{ route('home.addSellFlat.destroy', ['sell'=>$flat->id ])}}" method="post">
@@ -70,6 +72,7 @@
                                         <th>Кол-во комнат</th>
                                         <th>Цена на сутки</th>
                                         <th>Дата добавления</th>
+                                        <th>Дата редактирования</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -81,6 +84,7 @@
                                             <td>{{ $flat->room->number_of_rooms }}</td>
                                             <td class="color-primary">${{ $flat->rent_per_day }}</td>
                                             <td class="color-primary">{{ $flat->created_at }}</td>
+                                            <td class="color-primary">{{ $flat->updated_at }}</td>
                                             <td> <a href="{{ route('home.addRentApartment.edit', ['rent'=>$flat->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
                                             <td>
                                                 <form action="{{ route('home.addRentApartment.destroy', ['rent'=>$flat->id ])}}" method="post">
@@ -109,6 +113,7 @@
                                         <th>Кол-во комнат</th>
                                         <th>Стоимость аренды в месяц</th>
                                         <th>Дата добавления</th>
+                                        <th>Дата редактирования</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -120,6 +125,7 @@
                                             <td>{{ $flat->room->number_of_rooms }}</td>
                                             <td class="color-primary">${{ $flat->rent_per_month }}</td>
                                             <td class="color-primary">{{ $flat->created_at }}</td>
+                                            <td class="color-primary">{{ $flat->updated_at }}</td>
                                             <td> <a href="{{ route('home.addRentFlat.edit', ['rent'=>$flat->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
                                             <td>
                                                 <form action="{{ route('home.addRentFlat.destroy', ['rent'=>$flat->id ])}}" method="post">
