@@ -71,7 +71,8 @@
                                 <div class="rating">
                                     <input id="input-1" name="rate" class="rating rating-loading"
                                            data-min="0" data-max="5" data-step="1"
-                                           value="{{ $sellFlat->averageRating }}" data-size="xs">
+                                           value="{{ $sellFlat->averageRating }}" data-size="xs" @if(is_null(auth()->user())) disabled>
+                                    <p>(Только зарегистрированные пользователи могут оставлять отзыв)</p> @endif
                                     <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
                                     <span class="review-no">{{ $sellFlat->usersRated() }} отзыва</span>
                                     <br/>
