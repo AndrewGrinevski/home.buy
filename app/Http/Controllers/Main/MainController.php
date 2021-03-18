@@ -19,7 +19,11 @@ class MainController extends Controller
      */
     public function index()
     {
-        $sellFlats = SellApartament::query()->latest()->limit(4)->get();
+        $sellFlats = SellApartament::query()
+            ->where('is_banned', '=', false)
+            ->latest()
+            ->limit(6)
+            ->get();
 
         $rooms = Room::all();
         $walls = Wall::all();

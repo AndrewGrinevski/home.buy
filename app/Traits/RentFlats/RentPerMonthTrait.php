@@ -19,7 +19,8 @@ trait RentPerMonthTrait
             ->where('number_of_rooms_id', '=', '1')
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $user = Auth::user();
         return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms', 'user'));
@@ -31,7 +32,8 @@ trait RentPerMonthTrait
             ->where('number_of_rooms_id', '=', '2')
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $user = Auth::user();
         return view('main.rent.perMonth.allFlats', compact('sellFlats', 'rooms', 'user'));
@@ -43,7 +45,8 @@ trait RentPerMonthTrait
             ->where('number_of_rooms_id', '=', '3')
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $user = Auth::user();
         return view('main.rent.perMonth.allFlats', compact('sellFlats', 'rooms', 'user'));
@@ -55,7 +58,8 @@ trait RentPerMonthTrait
             ->where('number_of_rooms_id', '>', '3')
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $user = Auth::user();
         return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms', 'user'));
@@ -63,6 +67,7 @@ trait RentPerMonthTrait
 
     public function search(Request $request)
     {
+        $user = Auth::user();
         $rooms = Room::all();
         $flatsQuery = SellApartament::query();
         //Город
@@ -122,9 +127,10 @@ trait RentPerMonthTrait
         $sellFlats = $flatsQuery
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
-            ->paginate(6)
+            ->where('is_banned', '=', false)
+            ->paginate(8)
             ->withPath("?" . $request->getQueryString());
-        return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms'));
+        return view('main.rent.perMonth.allFlats', compact('sellFlats','rooms', 'user'));
 
     }
 

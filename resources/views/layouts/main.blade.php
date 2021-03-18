@@ -72,16 +72,35 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
-                    <p>460 West 34th Street, 15th floor, New York - Hotline: 804-377-3580 - 804-399-3580</p>
                 </div>
                 <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
                     @role('admin')
-                        <div class="header__actions"><a href="{{ route('dashboard') }}">Админ</a></div>
+                        <div class="header__actions"><a href="{{ route('dashboard') }}">Admin</a></div>
+                    <div class="header__actions"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Get logout</a>
+                    </div>
+                    <div class="header__actions">
+                        <p> {{ Auth::user()->name }}&emsp;</p>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @endrole
+                    @role('moderator')
+                    <div class="header__actions"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Get logout</a></div>
+                    <div class="header__actions"> <a href="{{ route('home.moderator', ['id' =>auth()->id()]) }}">Home moderator</a></div>
+                    <div class="header__actions">
+                        <p> {{ Auth::user()->name }}&emsp;</p>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                     @endrole
                     @guest
                         <div class="header__actions"><a href="{{ route('login') }}">Login & Regiser</a></div>
                     @endguest
-                    @auth()
+                    @role('user')
                         <div class="header__actions"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Get logout</a></div>
                             <div class="header__actions"> <a href="{{ route('home', ['id' =>auth()->id()]) }}">Home</a></div>
@@ -91,7 +110,7 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                    @endauth
+                    @endrole
                 </div>
 
             </div>
@@ -165,17 +184,6 @@
                             </div>
                             </div>
                         </div>
-                    </li>
-                    <li class="menu-item menu-item-has-children dropdown"><a href="#">Новости</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item menu-item-has-children dropdown"><a href="blog-grid.html">Blog-grid</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="blog-grid.html">Blog Grid 1</a></li>
-                                    <li class="menu-item"><a href="blog-grid-2.html">Blog Grid 2</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="blog-list.html">Blog List</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>

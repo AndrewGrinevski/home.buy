@@ -30,17 +30,19 @@ class AllFlatController extends Controller
      */
     public function index()
     {
-
         $sellFlats = SellApartament::query()
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->paginate(6);
+            ->where('is_banned', '=', false)
+            ->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
         $user = Auth::user();
+
         return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
     }
+
 
     /**
      * Display the specified resource.
@@ -51,8 +53,9 @@ class AllFlatController extends Controller
     public function show($slug)
     {
         $sellFlat = SellApartament::whereSlug($slug)->firstOrFail();
+        $location = explode(',', $sellFlat->location);
         $sellFlats = $this->showOtherOffers($sellFlat);
-        return view('main.sell.showFlat', compact('sellFlat', 'sellFlats'));
+        return view('main.sell.showFlat', compact('sellFlat', 'sellFlats', 'location'));
     }
 
     /**

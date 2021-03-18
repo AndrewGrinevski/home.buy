@@ -17,6 +17,7 @@ trait DynamicAutocompleteSearchTrait
             $search = $request->q;
             $towns = Town::query()->select("id", "town")
                 ->where('town', 'LIKE', "%$search%")
+                ->where('is_banned', '=', false)
                 ->get();
         }
         return response()->json($towns);

@@ -26,9 +26,6 @@ class AdminController extends Controller
             ->where('rent_per_month', '=', null)
             ->get();
 
-      /* $s = ($allAds / $sellFlats ) * 100;*/
-
-
         return view('admin.dashboard', compact('allAds','users', 'sellFlats', 'rentFlatPerMonth', 'rentFlatPerDay'));
     }
 }

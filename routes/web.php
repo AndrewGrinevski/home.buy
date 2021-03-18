@@ -50,12 +50,13 @@ Route::prefix('/sell')->namespace('Main\\Sell')
     ->group(function () {
         Route::get('/flats', 'AllFlatController@index')->name('main.allFlats');
         Route::post('/flats', 'AllFlatController@flatsFlat')->name('flats.flat');
+        Route::get('/ajaxRequestMap', 'AllFlatController@ajaxRequestMap')->name('ajaxRequestMap');
         Route::post('/ajaxRequest', 'AllFlatController@ajaxRequest')->name('ajaxRequest');
         Route::get('/1-room-flats', 'AllFlatController@showOneRoomFlats')->name('main.showOneRoomFlats');
         Route::get('/2-room-flats', 'AllFlatController@showTwoRoomFlats')->name('main.showTwoRoomFlats');
         Route::get('/3-room-flats', 'AllFlatController@showThreeRoomFlats')->name('main.showThreeRoomFlats');
         Route::get('/4+room-flats', 'AllFlatController@showFourPlusRoomFlats')->name('main.showFourPlusRoomFlats');
-        Route::get('/flats/{slug}', 'AllFlatController@show')->name('main.allFlats.show');
+            Route::get('/flats/{slug}', 'AllFlatController@show')->name('main.allFlats.show');
         Route::get('/search', 'AllFlatController@search')->name('main.search');
     });
 
@@ -83,16 +84,23 @@ Route::prefix('/rent')->namespace('Main\\Rent')
     });
 
 //User
-Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user','verified'])->group(function () {
-
+Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user', 'verified'])->group(function () {
     Route::get('/user_id={id}', 'HomeController@index')->name('home');
     Route::get('/contacts_information', 'HomeController@profile')->name('profile');
     Route::post('/contacts_information/{id}', 'HomeController@update')->name('profile.update');
-    Route::get('/contacts_information', 'HomeController@profile')->name('profile');
     Route::get('/favorite', 'FavoriteController@index')->name('favorite');
     Route::resource('/add/flats/sell', 'AddSellFlatController')->names('home.addSellFlat');
     Route::get('/ajax-autocomplete-search','AddSellFlatController@selectSearch');
     Route::resource('/add/apartment/rent', 'AddRentApartmentController')->names('home.addRentApartment');
     Route::resource('/add/flat/rent', 'AddRentFlatController')->names('home.addRentFlat');
+});
+
+//Moderator
+
+Route::prefix('/home-moderator')->namespace('Main\\Moderator')->middleware(['role:moderator', 'verified'])->group(function () {
+    Route::get('/moderator_id={id}', 'HomeController@index')->name('home.moderator');
+    Route::get('/contacts_information', 'HomeController@profile')->name('profile.moderator');
+    Route::post('/contacts_information/{id}', 'HomeController@update')->name('profile.moderator.update');
+    Route::post('/block-unblock', 'HomeController@blockUnblock')->name('blockUnblock.moderator');
 });
 

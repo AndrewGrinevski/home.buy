@@ -61,7 +61,10 @@ class AddRentApartmentController extends Controller
         $createImages = CreateUpdateImagesTrait::createImages($requestImages,$params);
 
         $images =  Image::create($createImages);
-
+        $the_character = '&';
+        if (stripos($params['youtube_video'], $the_character) !== false) {
+            $params['youtube_video'] = stristr($params['youtube_video'], '&', true);
+        }
         $params['images_id'] = $images->id;
         $params['contacts_id'] = Auth::id();
 
@@ -117,6 +120,10 @@ class AddRentApartmentController extends Controller
 
         CreateUpdateImagesTrait::updateImages($images,$issetRequestImages,$requestImages);
 
+        $the_character = '&';
+        if (stripos($sellRoom->youtube_video, $the_character) !== false) {
+            $sellRoom->youtube_video = stristr($sellRoom->youtube_video, '&', true);
+        }
         $sellRoom->fridge = $request->input('fridge', false);
         $sellRoom->elevator = $request->input('elevator', false);
         $sellRoom->internet = $request->input('internet', false);

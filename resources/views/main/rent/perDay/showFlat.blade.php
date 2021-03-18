@@ -98,8 +98,15 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-
-
+                    <br>
+                    <br>
+                    <br>
+                    <div class="hidden"
+                         data-lat="{{ $location[0] }}"
+                         data-lng="{{ $location[1] }}"
+                         data-address="{{ $sellFlat->address }}"
+                    ></div>
+                    <div id="map"></div>
                     <div class="ps-content pt-80 pb-80">
                         <div class="ps-cart-listing ps-table--compare">
                             <table class="table ps-cart__table">
@@ -209,35 +216,28 @@
                             <br>
                             <p>{{ $sellFlat->description }}</p>
                         </div>
-                        <div class="tab-pane" role="tabpanel" id="tab_02">
-                            <p class="mb-20">1 review for <strong>Shoes Air Jordan</strong></p>
-                            <div class="ps-review">
-                                <div class="ps-review__thumbnail"><img src="{{asset('main/images/shoe/1.jpg')}}" alt="">
-                                </div>
-                                <div class="ps-review__content">
-                                    <header>
-                                        <select class="ps-rating">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                        <p>By<a href=""> Alena Studio</a> - November 25, 2017</p>
-                                    </header>
-                                    <p>Soufflé danish gummi bears tart. Pie wafer icing. Gummies jelly beans powder.
-                                        Chocolate bar pudding macaroon candy canes chocolate apple pie chocolate cake.
-                                        Sweet caramels sesame snaps halvah bear claw wafer. Sweet roll soufflé muffin
-                                        topping muffin brownie. Tart bear claw cake tiramisu chocolate bar gummies
-                                        dragée lemon drops brownie.</p>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                        @role('moderator')
+                        <form action="{{ route('blockUnblock.moderator') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="block" value="1">
+                            <input type="hidden" name="id" value="{{ $sellFlat->id }}">
+                            <button type="submit" class="btn btn-danger">Заблокировать</button>
+                        </form>
+                        <br>
+                        <form action="{{ route('blockUnblock.moderator') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="unblock" value="1">
+                            <input type="hidden" name="id" value="{{ $sellFlat->id }}">
+                            <button type="submit" class="btn btn-info">Разблокировать</button>
+                        </form>
+                        @endrole
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div @if($sellFlat->is_banned) style="  background-image: url({{ asset('main/images/block.png') }} );" @endif>
     <div class="ps-section ps-section--top-sales ps-owl-root pt-40 pb-80">
         <div class="ps-container">
             <div class="ps-section__header mb-50">
@@ -305,4 +305,36 @@
             </div>
         </div>
     </div>
+    </div>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA&callback=initMap&libraries=&v=weekly"
+        async
+    ></script>
+    <script type="text/javascript">
+        $("#input-id").rating();
+    </script>
+    <script>
+        let map;
+        let markers = [];
+
+        function initMap() {
+            var myLat = $('div.hidden').data('lat');
+            var myLng = $('div.hidden').data('lng');
+            var address = $('div.hidden').data('address');
+            const myLatLnsg = { lat: 54, lng:27 };
+            const myLatLng = { lat: myLat, lng: myLng };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: myLatLng,
+                mapTypeId: "terrain",
+            });
+
+            new google.maps.Marker({
+                map,
+
+                position: myLatLng,
+                title: address,
+            });
+        }
+    </script>
 @endsection

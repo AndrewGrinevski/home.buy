@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <form action="{{ route('profile.update', ['id'=>$user->id ]) }}" method="POST">
+    <form action="{{ route('profile.moderator.update', ['id'=>$user->id ]) }}" method="POST">
         @csrf
     <h4 class="card-title">Контактная информация</h4>
     <br>

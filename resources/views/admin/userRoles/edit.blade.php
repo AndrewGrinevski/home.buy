@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('admin.addRole.update', ['add_role'=>$userRole->id ]) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('admin.addRole.update', ['add_role'=>$userRole[0]->id ]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
@@ -22,7 +22,7 @@
                                         <select class="form-control" name="role_id">
                                             @foreach($roles as $role)
                                                 <option value="{{ $role->id }}"
-                                                        @if($role->id == $userRole->role_id) selected @endif>
+                                                        @if($role->id == $userRole[0]->role_id) selected @endif>
                                                     {{ $role->roleName }}</option>
                                             @endforeach
                                         </select>

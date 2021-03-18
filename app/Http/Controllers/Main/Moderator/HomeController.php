@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Main\User;
+namespace App\Http\Controllers\Main\Moderator;
 
 use App\Http\Controllers\Controller;
 use App\Models\SellApartament;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,33 +29,30 @@ class HomeController extends Controller
         $a = 0;
         $b = 0;
         $c = 0;
-        $id = Auth::id();
-        $sellFlats = SellApartament::query()->where('contacts_id', '=', "{$id}")
+        $sellFlats = SellApartament::query()
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->get();
-
-        $rentFlatsPerDay = SellApartament::query()->where('contacts_id', '=', "{$id}")
-            ->where('price', '=', null)
-            ->where('rent_per_month', '=', null)
-            ->get();
-
-        $rentFlats = SellApartament::query()->where('contacts_id', '=', "{$id}")
-            ->where('price', '=', null)
-            ->where('rent_per_day', '=', null)
-            ->get();
-
-        $banned = SellApartament::query()
             ->where('is_banned', '=', true)
             ->get();
 
-        return view('main.user.home', compact('sellFlats', 'rentFlatsPerDay', 'rentFlats', 'banned', 'a', 'b', 'c'));
+        $rentFlatsPerDay = SellApartament::query()
+            ->where('price', '=', null)
+            ->where('rent_per_month', '=', null)
+            ->where('is_banned', '=', true)
+            ->get();
+
+        $rentFlats = SellApartament::query()
+            ->where('price', '=', null)
+            ->where('rent_per_day', '=', null)
+            ->where('is_banned', '=', true)
+            ->get();
+        return view('main.moderator.home', compact('sellFlats', 'rentFlatsPerDay', 'rentFlats', 'a', 'b', 'c'));
     }
 
     public function profile()
     {
         $user = Auth::user();
-        return view('main.user.profile', compact('user'));
+        return view('main.moderator.profile', compact('user'));
     }
 
     public function update(Request $request)
@@ -63,6 +60,24 @@ class HomeController extends Controller
         $user = Auth::user();
         $user->fill($request->all());
         $user->save();
-        return redirect()->route('home', ['id' => auth()->id()]);
+        return redirect()->route('home.moderator', ['id' => auth()->id()]);
+    }
+
+    public function blockUnblock(Request $request)
+    {
+        $user =Auth::id();
+        if (isset($request->block)) {
+            $blockFlat = SellApartament::findOrFail($request->id);
+            $blockFlat->is_banned = 1;
+            $blockFlat->save();
+        } else {
+            $blockFlat = SellApartament::findOrFail($request->id);
+            $blockFlat->is_banned = 0;
+            $blockFlat->is_fixed = 0;
+            $blockFlat->save();
+        }
+
+        return redirect()->route('home.moderator', $user);
     }
 }
+

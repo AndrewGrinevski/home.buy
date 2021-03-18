@@ -68,7 +68,10 @@ class AddSellFlatController extends Controller
         $createImages = CreateUpdateImagesTrait::createImages($requestImages,$params);
 
         $images =  Image::create($createImages);
-
+        $the_character = '&';
+        if (stripos($params['youtube_video'], $the_character) !== false) {
+            $params['youtube_video'] = stristr($params['youtube_video'], '&', true);
+        }
         $params['images_id'] = $images->id;
         $params['contacts_id'] = Auth::id();
 
@@ -128,9 +131,14 @@ class AddSellFlatController extends Controller
 
         CreateUpdateImagesTrait::updateImages($images,$issetRequestImages,$requestImages);
 
-        $sellRoom->save();
+        $the_character = '&';
+        if (stripos($sellRoom->youtube_video, $the_character) !== false) {
+            $sellRoom->youtube_video = stristr($sellRoom->youtube_video, '&', true);
+        }
 
+        $sellRoom->save();
         event(new AddSellRoomEvent($sellRoom));
+
         return redirect()->route('home', ['id' => auth()->id()]);
     }
 

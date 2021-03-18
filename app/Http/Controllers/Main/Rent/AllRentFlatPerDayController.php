@@ -33,7 +33,8 @@ class AllRentFlatPerDayController extends Controller
         $sellFlats = SellApartament::query()
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
-            ->paginate(6);
+            ->where('is_banned', '=', false)
+            ->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
@@ -51,8 +52,10 @@ class AllRentFlatPerDayController extends Controller
     public function show($slug)
     {
         $sellFlat = SellApartament::whereSlug($slug)->firstOrFail();
+        $location = explode(',', $sellFlat->location);
         $sellFlats = $this->showOtherOffers($sellFlat);
-        return view('main.rent.perDay.showFlat', compact('sellFlat', 'sellFlats'));
+
+        return view('main.rent.perDay.showFlat', compact('sellFlat', 'sellFlats', 'location'));
     }
 
     /**

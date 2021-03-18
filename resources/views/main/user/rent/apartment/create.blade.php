@@ -28,8 +28,6 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div id="map"></div>
-                                    <br>
                                     <h4 class="card-title">Параметры помещения</h4>
                                     <br>
                                     <div class="form-group">
@@ -246,17 +244,10 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA&callback=initMap&libraries=&v=weekly"
-        async
-    ></script>
-
-    <script type="text/javascript">
+        <script type="text/javascript">
         $('.livesearch').select2({
             placeholder: 'Выберите город',
             ajax: {
@@ -277,49 +268,4 @@
             }
         });
     </script>
-    <script>
-        let map;
-        let markers = [];
-
-        function initMap() {
-            const Minsk = { lat: 53.900, lng: 27.566 };
-            map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14,
-                center: Minsk,
-                mapTypeId: "terrain",
-            });
-            // This event listener will call addMarker() when the map is clicked.
-            map.addListener("click", (event) => {
-                addMarker(event.latLng);
-            });
-
-            // Adds a marker at the center of the map.
-            addMarker(haightAshbury);
-        }
-
-        // Adds a marker to the map and push to the array.
-        function addMarker(location) {
-            const marker = new google.maps.Marker({
-                position: location,
-                map: map,
-            });
-            clearMarkers();
-            markers.push(marker);
-            document.getElementById('location').value = location.lat()+" , "+location.lng();
-        }
-
-        // Sets the map on all markers in the array.
-        function setMapOnAll(map) {
-            for (let i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
-
-        // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-            setMapOnAll(null);
-        }
-
-    </script>
-
 @endsection

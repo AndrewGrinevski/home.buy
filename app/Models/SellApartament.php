@@ -23,7 +23,7 @@ class SellApartament extends Model
     protected $fillable = ['location','town','address','number_of_rooms_id','number_of_separated_rooms_id','total_area','living_area','kitchen_area','sells_area','floor',
         'total_floors','balcony_id','bathroom_id','apartment_renovation_id','type_of_walls_id','year_of_construction','year_of_overhaul','description','youtube_video',
         'price','terms_of_a_transaction_id','contacts_id','fridge','elevator','internet','furniture','washer','rent_per_month','students','with_animals','with_kids','number_of_berths_id',
-        'dishes','microwave','tv','wifi','jacuzzi','rent_per_day','rent_per_night','rent_per_hour','slug', 'town_id', 'images_id'];
+        'dishes','microwave','tv','wifi','jacuzzi','rent_per_day','rent_per_night','rent_per_hour','slug', 'town_id', 'images_id', 'is_banned', 'is_fixed'];
 
 
     public function sluggable()

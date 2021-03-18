@@ -8,6 +8,7 @@
             </div>
         </div>
     </div>
+<div @if($sellFlat->is_banned) style="  background-image: url({{ asset('main/images/block.png') }} );" @endif>
     <div class="ps-product--detail pt-60">
         <div class="ps-container">
             <div class="row">
@@ -54,30 +55,35 @@
                         </div>
                     </div>
                     <div class="ps-product__thumbnail--mobile">
-                        <div class="ps-product__main-img"><img src="{{asset('main/images/shoe/1.jpg')}}" alt=""></div>
+                        <div class="ps-product__main-img"><img
+                                src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->first_img_name) }}"
+                                alt=""></div>
                         <div class="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true"
                              data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false"
                              data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3"
                              data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on"><img
-                                src="{{asset('main/images/shoe/1.jpg')}}" alt=""><img
-                                src="{{asset('main/images/shoe/2.jpg')}}" alt=""><img
-                                src="{{asset('main/images/shoe/3.jpg')}}" alt=""></div>
+                                src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->second_img_name) }}"
+                                alt=""><img
+                                src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->third_img_name) }}"
+                                alt=""><img
+                                src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$sellFlat->image->four_img_name) }}"
+                                alt=""></div>
                     </div>
                     <div class="ps-product__info">
                         <form action="{{ route('flats.flat') }}" method="POST">
                             @csrf
-                        <div class="ps-product__rating">
-                            <div class="rating">
-                                <input id="input-1" name="rate" class="rating rating-loading"
-                                       data-min="0" data-max="5" data-step="1"
-                                       value="{{ $sellFlat->averageRating }}" data-size="xs">
+                            <div class="ps-product__rating">
+                                <div class="rating">
+                                    <input id="input-1" name="rate" class="rating rating-loading"
+                                           data-min="0" data-max="5" data-step="1"
+                                           value="{{ $sellFlat->averageRating }}" data-size="xs">
+                                    <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
+                                    <span class="review-no">{{ $sellFlat->usersRated() }} отзыва</span>
+                                    <br/>
+                                    <button class="btn btn-success">добавить отзыв</button>
+                                </div>
                                 <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
-                                <span class="review-no">{{ $sellFlat->usersRated() }} отзыва</span>
-                                <br/>
-                                <button class="btn btn-success">добавить отзыв</button>
                             </div>
-                            <input type="hidden" name="id" required="" value="{{ $sellFlat->id }}">
-                        </div>
                         </form>
                         <h3>{{$sellFlat->room->number_of_rooms.'-комнатная квартира'.', '.$sellFlat->town->town.', '.$sellFlat->address}}</h3>
                         <p>{{ $sellFlat->total_area.' м' }}<sup>2</sup>, &emsp; {{' ' .$sellFlat->floor.' этаж' }}</p>
@@ -92,8 +98,15 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-
-
+                    <br>
+                    <br>
+                    <br>
+                    <div class="hidden"
+                         data-lat="{{ $location[0] }}"
+                         data-lng="{{ $location[1] }}"
+                         data-address="{{ $sellFlat->address }}"
+                    ></div>
+                    <div id="map"></div>
                     <div class="ps-content pt-80 pb-80">
                         <div class="ps-cart-listing ps-table--compare">
                             <table class="table ps-cart__table">
@@ -147,7 +160,7 @@
                                 <tr>
                                     <td>Комнат раздельных</td>
                                     <td>{{ $sellFlat->number_of_separated_rooms_id ? $sellFlat->separatedRoom->number_of_separated_rooms : 'Не указано' }}
-                                        </td>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Этаж</td>
@@ -179,8 +192,22 @@
                             <br>
                             <p>{{ $sellFlat->description }}</p>
                         </div>
-
                     </div>
+                    @role('moderator')
+                    <form action="{{ route('blockUnblock.moderator') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="block" value="1">
+                        <input type="hidden" name="id" value="{{ $sellFlat->id }}">
+                        <button type="submit" class="btn btn-danger">Заблокировать</button>
+                    </form>
+                    <br>
+                    <form action="{{ route('blockUnblock.moderator') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="unblock" value="1">
+                        <input type="hidden" name="id" value="{{ $sellFlat->id }}">
+                        <button type="submit" class="btn btn-info">Разблокировать</button>
+                    </form>
+                    @endrole
                 </div>
             </div>
         </div>
@@ -240,7 +267,8 @@
                                             </div>
                                             <div class="ps-shoe__detail"><a class="ps-shoe__name"
                                                                             href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
-                                                    <br>{{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}} </a>
+                                                    <br>{{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}}
+                                                </a>
                                                 <span class="ps-shoe__price">${{ $flat->price }}</span>
                                             </div>
                                         </div>
@@ -253,7 +281,36 @@
             </div>
         </div>
     </div>
+</div>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA&callback=initMap&libraries=&v=weekly"
+        async
+    ></script>
     <script type="text/javascript">
         $("#input-id").rating();
+    </script>
+    <script>
+        let map;
+        let markers = [];
+
+        function initMap() {
+            var myLat = $('div.hidden').data('lat');
+            var myLng = $('div.hidden').data('lng');
+            var address = $('div.hidden').data('address');
+            const myLatLnsg = {lat: 54, lng: 27};
+            const myLatLng = {lat: myLat, lng: myLng};
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: myLatLng,
+                mapTypeId: "terrain",
+            });
+
+            new google.maps.Marker({
+                map,
+
+                position: myLatLng,
+                title: address,
+            });
+        }
     </script>
 @endsection

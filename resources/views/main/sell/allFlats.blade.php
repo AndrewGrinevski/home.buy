@@ -69,9 +69,7 @@
                     </div>
                 @endif
             </div>
-
             <div class="ps-product-action">
-
                 <div>
                     {{ $sellFlats->links() }}
                 </div>
@@ -307,5 +305,4 @@
             });
         });
     </script>
-
 @endsection

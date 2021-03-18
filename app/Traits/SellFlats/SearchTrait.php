@@ -19,7 +19,8 @@ trait SearchTrait
             ->where('number_of_rooms_id', '=', '1')
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
@@ -33,7 +34,8 @@ trait SearchTrait
             ->where('number_of_rooms_id', '=', '2')
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
@@ -47,7 +49,8 @@ trait SearchTrait
             ->where('number_of_rooms_id', '=', '3')
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
@@ -61,7 +64,8 @@ trait SearchTrait
             ->where('number_of_rooms_id', '>', '3')
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->orderBy('updated_at')->paginate(6);
+            ->where('is_banned', '=', false)
+            ->orderBy('updated_at')->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
         $walls = Wall::all();
@@ -76,6 +80,7 @@ trait SearchTrait
         $balconies = Balcony::all();
         $walls = Wall::all();
         $flatsQuery = SellApartament::query();
+        $user = Auth::user();
 
         //Город
         if ($request->filled('town_id')) {
@@ -149,9 +154,10 @@ trait SearchTrait
         $sellFlats = $flatsQuery
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
-            ->paginate(5)
+            ->where('is_banned', '=', false)
+            ->paginate(8)
             ->withPath("?" . $request->getQueryString());
-        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies'));
+        return view('main.sell.allFlats', compact('sellFlats', 'walls', 'rooms', 'balconies', 'user'));
 
     }
 }
