@@ -10,7 +10,7 @@ use App\Models\Bathroom;
 use App\Models\Image;
 use App\Models\Repair;
 use App\Models\Room;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use App\Models\SeparatedRoom;
 use App\Models\Transaction;
 use App\Models\Wall;
@@ -50,7 +50,7 @@ class AddSellFlatController extends Controller
         $walls = Wall::all();
         $transactions = Transaction::all();
         $user = Auth::user();
-        return view('main.user.sell.flat.create', compact('rooms', 'separatedRooms',
+        return view('main.user.user.flat.create', compact('rooms', 'separatedRooms',
             'balconies', 'bathrooms', 'repairs', 'walls', 'transactions', 'user'));
     }
 
@@ -75,7 +75,7 @@ class AddSellFlatController extends Controller
         $params['images_id'] = $images->id;
         $params['contacts_id'] = Auth::id();
 
-        $sellRoom = SellApartament::create($params);
+        $sellRoom = sellApartment::create($params);
         event(new AddSellRoomEvent($sellRoom));
         return redirect()->route('home', ['id' => auth()->id()]);
     }
@@ -107,9 +107,9 @@ class AddSellFlatController extends Controller
         $repairs = Repair::all();
         $walls = Wall::all();
         $transactions = Transaction::all();
-        $sellRoom = SellApartament::findOrFail($id);
+        $sellRoom = sellApartment::findOrFail($id);
         $user = Auth::user();
-        return view('main.user.sell.flat.edit', compact('sellRoom', 'rooms', 'separatedRooms',
+        return view('main.user.user.flat.edit', compact('sellRoom', 'rooms', 'separatedRooms',
             'balconies', 'bathrooms', 'repairs', 'walls', 'transactions', 'user'));
     }
 
@@ -123,7 +123,7 @@ class AddSellFlatController extends Controller
     public function update(AddFlatRequest $request, $id)
     {
 
-        $sellRoom = SellApartament::findOrFail($id);
+        $sellRoom = sellApartment::findOrFail($id);
         $images = Image::findOrFail($sellRoom->images_id);
         $sellRoom->fill($request->all());
         $issetRequestImages =$request->file();
@@ -145,12 +145,12 @@ class AddSellFlatController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param int $id
-     * @param \App\Models\SellApartament $sellApartament
+     * @param \App\Models\sellApartment $sellApartament
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $sellRoom = SellApartament::findOrFail($id);
+        $sellRoom = sellApartment::findOrFail($id);
         $sellRoom->delete();
         return redirect()->route('home', ['id' => auth()->id()]);
     }

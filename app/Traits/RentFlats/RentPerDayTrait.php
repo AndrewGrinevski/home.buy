@@ -7,7 +7,7 @@ namespace App\Traits\RentFlats;
 use App\Models\Balcony;
 use App\Models\Berth;
 use App\Models\Room;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use App\Models\Wall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ trait RentPerDayTrait
 {
     public function showOneRoomFlats()
     {
-        $sellFlats = SellApartament::query()
+        $sellFlats = sellApartment::query()
             ->where('number_of_rooms_id', '=', '1')
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
@@ -32,7 +32,7 @@ trait RentPerDayTrait
 
     public function showTwoRoomFlats()
     {
-        $sellFlats = SellApartament::query()
+        $sellFlats = sellApartment::query()
             ->where('number_of_rooms_id', '=', '2')
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
@@ -48,7 +48,7 @@ trait RentPerDayTrait
 
     public function showThreeRoomFlats()
     {
-        $sellFlats = SellApartament::query()
+        $sellFlats = sellApartment::query()
             ->where('number_of_rooms_id', '=', '3')
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
@@ -64,7 +64,7 @@ trait RentPerDayTrait
 
     public function showFourPlusRoomFlats()
     {
-        $sellFlats = SellApartament::query()
+        $sellFlats = sellApartment::query()
             ->where('number_of_rooms_id', '>', '3')
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
@@ -84,7 +84,7 @@ trait RentPerDayTrait
         $rooms = Room::all();
         $berths = Berth::all();
         $balconies = Balcony::all();
-        $flatsQuery = SellApartament::query();
+        $flatsQuery = sellApartment::query();
         //Город
         if ($request->filled('town_id')) {
             $flatsQuery->where('town_id', '=', $request->town_id);

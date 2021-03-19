@@ -18,7 +18,6 @@ class RoleMiddleware
     {
         if (Auth::guest() || !Auth::user()->hasRole($role))
         {
-            echo "lol";
             abort(403);
         }
         return $next($request);

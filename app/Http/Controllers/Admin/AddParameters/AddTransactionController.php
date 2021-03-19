@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Sell;
+namespace App\Http\Controllers\Admin\AddParameters;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bathroom;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class AddBathroomController extends Controller
+class AddTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AddBathroomController extends Controller
      */
     public function index()
     {
-        $bathrooms = Bathroom::all();
-        return view('admin.sell.addParam.bathroom.index', compact('bathrooms'));
+        $transactions = Transaction::all();
+        return view('admin.addParam.transactions.index', compact('transactions'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AddBathroomController extends Controller
      */
     public function create()
     {
-        return view('admin.sell.addParam.bathroom.create');
+        return view('admin.addParam.transactions.create');
     }
 
     /**
@@ -37,8 +37,8 @@ class AddBathroomController extends Controller
      */
     public function store(Request $request)
     {
-        Bathroom::create($request->all());
-        return redirect()->route('admin.addParam.bathroom.index');
+        Transaction::create($request->all());
+        return redirect()->route('admin.addParam.transaction.index');
     }
 
     /**
@@ -60,8 +60,8 @@ class AddBathroomController extends Controller
      */
     public function edit($id)
     {
-        $bathroom = Bathroom::findOrFail($id);
-        return view('admin.sell.addParam.bathroom.edit', compact('bathroom'));
+        $transaction = Transaction::findOrFail($id);
+        return view('admin.addParam.transactions.edit', compact('transaction'));
     }
 
     /**
@@ -73,10 +73,10 @@ class AddBathroomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bathroom = Bathroom::findOrFail($id);
-        $bathroom->fill($request->all());
-        $bathroom->save();
-        return redirect()->route('admin.addParam.bathroom.index');
+        $transaction = Transaction::findOrFail($id);
+        $transaction->fill($request->all());
+        $transaction->save();
+        return redirect()->route('admin.addParam.transaction.index');
     }
 
     /**
@@ -87,8 +87,8 @@ class AddBathroomController extends Controller
      */
     public function destroy($id)
     {
-        $bathroom = Bathroom::findOrFail($id);
-        $bathroom->delete();
-        return redirect()->route('admin.addParam.bathroom.index');
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+        return redirect()->route('admin.addParam.transaction.index');
     }
 }

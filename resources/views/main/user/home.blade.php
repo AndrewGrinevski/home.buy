@@ -42,11 +42,11 @@
                                                 <td class="color-primary">${{ $flat->price }}</td>
                                                 <td class="color-primary">{{ $flat->created_at }}</td>
                                                 <td class="color-primary">{{ $flat->updated_at }}</td>
-                                                <td><a href="{{ route('home.addSellFlat.edit', ['sell'=>$flat->id ]) }}"
+                                                <td><a href="{{ route('home.addSellFlat.edit', ['user'=>$flat->id ]) }}"
                                                        class="btn mb-1 btn-rounded btn-info">Редактировать</a></td>
                                                 <td>
                                                     <form
-                                                        action="{{ route('home.addSellFlat.destroy', ['sell'=>$flat->id ])}}"
+                                                        action="{{ route('home.addSellFlat.destroy', ['user'=>$flat->id ])}}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
@@ -215,12 +215,12 @@
                                                             @else
                                                                 <td class="color-primary">Продажа квартиры</td>
                                                                 <td>
-                                                                    <a href="{{ route('home.addSellFlat.edit', ['sell'=>$item->id ]) }}"
+                                                                    <a href="{{ route('home.addSellFlat.edit', ['user'=>$item->id ]) }}"
                                                                        class="btn mb-1 btn-rounded btn-info">Редактировать</a>
                                                                 </td>
                                                                 <td>
                                                                     <form
-                                                                        action="{{ route('home.addSellFlat.destroy', ['sell'=>$item->id ])}}"
+                                                                        action="{{ route('home.addSellFlat.destroy', ['user'=>$item->id ])}}"
                                                                         method="post">
                                                                         @csrf
                                                                         @method('DELETE')

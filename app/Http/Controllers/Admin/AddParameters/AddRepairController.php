@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Sell;
+namespace App\Http\Controllers\Admin\AddParameters;
 
 use App\Http\Controllers\Controller;
 use App\Models\Repair;
@@ -16,7 +16,7 @@ class AddRepairController extends Controller
     public function index()
     {
         $repairs = Repair::all();
-        return view('admin.sell.addParam.repair.index', compact('repairs'));
+        return view('admin.addParam.repairs.index', compact('repairs'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AddRepairController extends Controller
      */
     public function create()
     {
-        return view('admin.sell.addParam.repair.create');
+        return view('admin.addParam.repairs.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class AddRepairController extends Controller
     public function edit($id)
     {
         $repair = Repair::findOrFail($id);
-        return view('admin.sell.addParam.repair.edit', compact('repair'));
+        return view('admin.addParam.repairs.edit', compact('repair'));
     }
 
     /**

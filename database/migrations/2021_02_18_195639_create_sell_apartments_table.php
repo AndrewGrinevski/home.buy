@@ -13,10 +13,13 @@ class CreateSellApartamentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sell_apartaments', function (Blueprint $table) {
+        Schema::create('sell_apartments', function (Blueprint $table) {
             $table->id();
             $table->string('location', 255);
-            $table->string('town', 255);
+            $table->unsignedBigInteger('town_id');
+            $table->foreign('town_id')
+                ->references('id')
+                ->on('towns');
             $table->string('address', 255);
             $table->unsignedBigInteger('number_of_rooms_id');
             $table->foreign('number_of_rooms_id')
@@ -50,7 +53,7 @@ class CreateSellApartamentsTable extends Migration
                 ->on('walls');
             $table->integer('year_of_construction')->nullable();
             $table->integer('year_of_overhaul')->nullable();
-            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('images_id');
             $table->foreign('images_id')
                 ->references('id')
                 ->on('images');
@@ -66,7 +69,9 @@ class CreateSellApartamentsTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->string('slug')->nullable()->index();
-
+            //Блокировка
+            $table->boolean('is_banned')->default(false);
+            $table->boolean('is_fixed')->default(false);
             //Аренда квартир
             //Доп. условия аренды квартиры
             $table->boolean('fridge')->default(false);

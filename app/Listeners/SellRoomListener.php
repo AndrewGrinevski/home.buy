@@ -28,7 +28,7 @@ class SellRoomListener
     {
         if (!$event->sellRoom->location)
         {
-            $client = new \GuzzleHttp\Client();
+            $client = new Client();
             $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json', [
                 'query' => [
                     'key' => 'AIzaSyDfHZ-HzPD0c1Rxq9fZCSZuvzXcZ_oFGvA',

@@ -8,8 +8,8 @@ class Room extends Model
 {
     protected $fillable = ['number_of_rooms'];
 
-    public function sellApartament()
+    public function SellApartment()
     {
-        return $this->hasMany(SellApartament::class);
+        return $this->hasMany(SellApartment::class);
     }
 }

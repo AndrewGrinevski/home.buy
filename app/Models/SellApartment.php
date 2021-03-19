@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use willvincent\Rateable\Rateable;
 
-class SellApartament extends Model
+class SellApartment extends Model
 {
     use Sluggable;
     use Favoriteable;

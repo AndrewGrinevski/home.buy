@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Main\Moderator;
 
 use App\Http\Controllers\Controller;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,19 +29,19 @@ class HomeController extends Controller
         $a = 0;
         $b = 0;
         $c = 0;
-        $sellFlats = SellApartament::query()
+        $sellFlats = sellApartment::query()
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
             ->where('is_banned', '=', true)
             ->get();
 
-        $rentFlatsPerDay = SellApartament::query()
+        $rentFlatsPerDay = sellApartment::query()
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
             ->where('is_banned', '=', true)
             ->get();
 
-        $rentFlats = SellApartament::query()
+        $rentFlats = sellApartment::query()
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
             ->where('is_banned', '=', true)
@@ -67,11 +67,11 @@ class HomeController extends Controller
     {
         $user =Auth::id();
         if (isset($request->block)) {
-            $blockFlat = SellApartament::findOrFail($request->id);
+            $blockFlat = sellApartment::findOrFail($request->id);
             $blockFlat->is_banned = 1;
             $blockFlat->save();
         } else {
-            $blockFlat = SellApartament::findOrFail($request->id);
+            $blockFlat = sellApartment::findOrFail($request->id);
             $blockFlat->is_banned = 0;
             $blockFlat->is_fixed = 0;
             $blockFlat->save();

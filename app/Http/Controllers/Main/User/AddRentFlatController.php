@@ -7,13 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddRentFlatRequest;
 use App\Models\Image;
 use App\Models\Room;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use App\Traits\CreateUpdateImagesTrait;
 use App\Traits\DynamicAutocompleteSearchTrait;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-
 class AddRentFlatController extends Controller
 {
     use DynamicAutocompleteSearchTrait;
@@ -61,7 +58,7 @@ class AddRentFlatController extends Controller
         $params['images_id'] = $images->id;
         $params['contacts_id'] = Auth::id();
 
-        $sellRoom = SellApartament::create($params);
+        $sellRoom = sellApartment::create($params);
         event(new AddSellRoomEvent($sellRoom));
 
         return redirect()->route('home', ['id' => auth()->id()]);
@@ -88,7 +85,7 @@ class AddRentFlatController extends Controller
     {
         $user = Auth::user();
         $rooms = Room::all();
-        $sellRoom = SellApartament::findOrFail($id);
+        $sellRoom = sellApartment::findOrFail($id);
         return view('main.user.rent.flat.edit', compact('sellRoom', 'rooms', 'user'));
     }
 
@@ -101,7 +98,7 @@ class AddRentFlatController extends Controller
      */
     public function update(AddRentFlatRequest $request, $id)
     {
-        $sellRoom = SellApartament::findOrFail($id);
+        $sellRoom = sellApartment::findOrFail($id);
         $images = Image::findOrFail($sellRoom->images_id);
         $sellRoom->fill($request->all());
         $issetRequestImages =$request->file();
@@ -129,12 +126,12 @@ class AddRentFlatController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param  int  $id
-     * @param  \App\Models\SellApartament  $sellApartament
+     * @param  \App\Models\sellApartment  $sellApartament
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $sellRoom = SellApartament::findOrFail($id);
+        $sellRoom = sellApartment::findOrFail($id);
         $sellRoom->delete();
         return redirect()->route('home', ['id' =>auth()->id()]);
     }

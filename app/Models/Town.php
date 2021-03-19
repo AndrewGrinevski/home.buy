@@ -8,8 +8,8 @@ class Town extends Model
 {
     protected $fillable = ['town'];
 
-    public function sellApartament()
+    public function SellApartment()
     {
-        return $this->hasMany(SellApartament::class);
+        return $this->hasMany(SellApartment::class);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Sell;
+namespace App\Http\Controllers\Admin\AddParameters;
 
 use App\Http\Controllers\Controller;
-use App\Models\SeparatedRoom;
+use App\Models\Town;
 use Illuminate\Http\Request;
 
-class AddSeparatedRoomController extends Controller
+class AddTownController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AddSeparatedRoomController extends Controller
      */
     public function index()
     {
-        $separatedRooms = SeparatedRoom::all();
-        return view('admin.sell.addParam.separatedRooms.index', compact('separatedRooms'));
+        $towns = Town::paginate(15);
+        return view('admin.addParam.towns.index', compact('towns'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AddSeparatedRoomController extends Controller
      */
     public function create()
     {
-        return view('admin.sell.addParam.separatedRooms.create');
+        return view('admin.addParam.towns.create');
     }
 
     /**
@@ -37,8 +37,8 @@ class AddSeparatedRoomController extends Controller
      */
     public function store(Request $request)
     {
-        SeparatedRoom::create($request->all());
-        return redirect()->route('admin.addParam.separatedRoom.index');
+        Town::create($request->all());
+        return redirect()->route('admin.addParam.towns.index');
     }
 
     /**
@@ -60,8 +60,8 @@ class AddSeparatedRoomController extends Controller
      */
     public function edit($id)
     {
-        $separatedRoom = SeparatedRoom::findOrFail($id);
-        return view('admin.sell.addParam.separatedRooms.edit', compact('separatedRoom'));
+        $town = Town::findOrFail($id);
+        return view('admin.addParam.towns.edit', compact('town'));
     }
 
     /**
@@ -73,10 +73,10 @@ class AddSeparatedRoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $separatedRoom = SeparatedRoom::findOrFail($id);
-        $separatedRoom->fill($request->all());
-        $separatedRoom->save();
-        return redirect()->route('admin.addParam.separatedRoom.index');
+        $town = Town::findOrFail($id);
+        $town->fill($request->all());
+        $town->save();
+        return redirect()->route('admin.addParam.balcony.index');
     }
 
     /**
@@ -87,8 +87,8 @@ class AddSeparatedRoomController extends Controller
      */
     public function destroy($id)
     {
-        $separatedRoom = SeparatedRoom::findOrFail($id);
-        $separatedRoom->delete();
-        return redirect()->route('admin.addParam.separatedRoom.index');
+        $town = Town::findOrFail($id);
+        $town->delete();
+        return redirect()->route('admin.addParam.balcony.index');
     }
 }

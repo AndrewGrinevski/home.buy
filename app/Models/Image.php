@@ -10,9 +10,9 @@ class Image extends Model
         'five_img_name'];
 
 
-    public function sellApartament()
+    public function SellApartment()
     {
-        return $this->hasOne(SellApartament::class);
+        return $this->hasOne(SellApartment::class);
     }
 
 }

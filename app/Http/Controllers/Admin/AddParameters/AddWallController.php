@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Sell;
+namespace App\Http\Controllers\Admin\AddParameters;
 
 use App\Http\Controllers\Controller;
-use App\Models\Berth;
+use App\Models\Wall;
 use Illuminate\Http\Request;
 
-class AddBerthController extends Controller
+class AddWallController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AddBerthController extends Controller
      */
     public function index()
     {
-        $berths = Berth::all();
-        return view('admin.sell.addParam.berth.index', compact('berths'));
+        $walls = Wall::all();
+        return view('admin.addParam.walls.index', compact('walls'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AddBerthController extends Controller
      */
     public function create()
     {
-        return view('admin.sell.addParam.berth.create');
+        return view('admin.addParam.walls.create');
     }
 
     /**
@@ -37,8 +37,8 @@ class AddBerthController extends Controller
      */
     public function store(Request $request)
     {
-        Berth::create($request->all());
-        return redirect()->route('admin.addParam.berth.index');
+        Wall::create($request->all());
+        return redirect()->route('admin.addParam.wall.index');
     }
 
     /**
@@ -60,8 +60,8 @@ class AddBerthController extends Controller
      */
     public function edit($id)
     {
-        $berth = Berth::findOrFail($id);
-        return view('admin.sell.addParam.berth.edit', compact('berth'));
+        $wall = Wall::findOrFail($id);
+        return view('admin.addParam.walls.edit', compact('wall'));
     }
 
     /**
@@ -73,10 +73,10 @@ class AddBerthController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $berth = Berth::findOrFail($id);
-        $berth->fill($request->all());
-        $berth->save();
-        return redirect()->route('admin.addParam.berth.index');
+        $wall = Wall::findOrFail($id);
+        $wall->fill($request->all());
+        $wall->save();
+        return redirect()->route('admin.addParam.wall.index');
     }
 
     /**
@@ -87,8 +87,8 @@ class AddBerthController extends Controller
      */
     public function destroy($id)
     {
-        $berth = Berth::findOrFail($id);
-        $berth->delete();
-        return redirect()->route('admin.addParam.berth.index');
+        $wall = Wall::findOrFail($id);
+        $wall->delete();
+        return redirect()->route('admin.addParam.wall.index');
     }
 }

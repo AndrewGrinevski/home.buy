@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Main\Sell;
 use App\Http\Controllers\Controller;
 use App\Models\Balcony;
 use App\Models\Room;
-use App\Models\SellApartament;
+use App\Models\SellApartment;
 use App\Models\Wall;
 use App\Traits\DynamicAutocompleteSearchTrait;
 use App\Traits\RaitTrait;
@@ -30,10 +30,12 @@ class AllFlatController extends Controller
      */
     public function index()
     {
-        $sellFlats = SellApartament::query()
+
+        $sellFlats = SellApartment::query()
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
             ->where('is_banned', '=', false)
+            ->latest()
             ->paginate(8);
         $rooms = Room::all();
         $balconies = Balcony::all();
@@ -52,7 +54,7 @@ class AllFlatController extends Controller
      */
     public function show($slug)
     {
-        $sellFlat = SellApartament::whereSlug($slug)->firstOrFail();
+        $sellFlat = SellApartment::whereSlug($slug)->firstOrFail();
         $location = explode(',', $sellFlat->location);
         $sellFlats = $this->showOtherOffers($sellFlat);
         return view('main.sell.showFlat', compact('sellFlat', 'sellFlats', 'location'));
@@ -65,7 +67,7 @@ class AllFlatController extends Controller
      */
     public function ajaxRequest(Request $request){
 
-        $sellFlats = SellApartament::find($request->id);
+        $sellFlats = SellApartment::find($request->id);
         $response = auth()->user()->toggleFavorite($sellFlats);
         return response()->json(['success'=>$response]);
     }

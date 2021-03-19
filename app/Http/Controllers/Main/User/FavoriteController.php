@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Main\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use Illuminate\Support\Facades\Auth;
 use Overtrue\LaravelFavorite\Favorite;
-use Overtrue\LaravelFollow\UserFollower;
 
 class FavoriteController extends Controller
 {
@@ -24,7 +23,7 @@ class FavoriteController extends Controller
 
         if (isset($favorite)){
             foreach ($favorite as $item) {
-                $sellFlats[] = SellApartament::query()->where('id', '=', "{$item->favoriteable_id}")->paginate(6);
+                $sellFlats[] = sellApartment::query()->where('id', '=', "{$item->favoriteable_id}")->paginate(6);
             }
         }
 

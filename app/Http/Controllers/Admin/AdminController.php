@@ -3,25 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use App\User;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function index()
     {
         $users = User::all();
-        $allAds = SellApartament::all();
-        $sellFlats = SellApartament::query()
+        $allAds = sellApartment::all();
+        $sellFlats = sellApartment::query()
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
             ->get();
-        $rentFlatPerMonth = SellApartament::query()
+        $rentFlatPerMonth = sellApartment::query()
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
             ->get();
-        $rentFlatPerDay = SellApartament::query()
+        $rentFlatPerDay = sellApartment::query()
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
             ->get();

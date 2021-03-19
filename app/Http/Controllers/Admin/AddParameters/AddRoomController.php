@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Sell;
+namespace App\Http\Controllers\Admin\AddParameters;
 
 use App\Http\Controllers\Controller;
 use App\Models\Room;
@@ -17,7 +17,7 @@ class AddRoomController extends Controller
     public function index()
     {
         $rooms = Room::paginate(15);
-        return view('admin.sell.addParam.rooms.index', compact('rooms'));
+        return view('admin.addParam.rooms.index', compact('rooms'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AddRoomController extends Controller
      */
     public function create()
     {
-        return view('admin.sell.addParam.rooms.create');
+        return view('admin.addParam.rooms.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class AddRoomController extends Controller
     public function edit(Room $room, $id)
     {
         $room = Room::findOrFail($id);
-        return view('admin.sell.addParam.rooms.edit', compact('room'));
+        return view('admin.addParam.rooms.edit', compact('room'));
     }
 
     /**

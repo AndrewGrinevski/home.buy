@@ -9,50 +9,42 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>Роли пользователей</h4>
+                                <h4>Населенный пункт</h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
+                                    <a href="{{ route('admin.addParam.town.create') }}" class="btn mb-1 btn-rounded btn-info">Добавить Н.п.</a>
                                     <tr>
                                         <th>#</th>
-                                        <th>Пользователь</th>
-                                        <th>Роль</th>
-                                        <th>Email</th>
-                                        <th>Дата добавления</th>
-                                        <th>Дата изменения</th>
+                                        <th>Город</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($userRoles as $userRole)
+                                    @foreach($towns as $town)
                                     <tr>
-                                        <th>{{ $id+=1}}</th>
-                                        <td>{{$userRole->name}}</td>
-                                        <td>{{$userRole->roleName}}</td>
-                                        <td>{{$userRole->email}}</td>
-                                        <td>{{$userRole->created_at}}</td>
-                                        <td class="color-primary">{{$userRole->updated_at}}</td>
-                                        <td> <a href="{{ route('admin.addRole.edit', ['add_role'=>$userRole->user_id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
+                                        <th>{{ $town->id }}</th>
+                                        <td>{{ $town->town }}</td>
+                                        <td> <a href="{{ route('admin.addParam.town.edit', ['town'=>$town->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
+
                                         <td>
-                                            <form action="{{ route('admin.addRole.destroy', ['add_role'=>$userRole->user_id ])}}" method="post">
+                                            <form action="{{ route('admin.addParam.town.destroy', ['town'=>$town->id ])}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Удалить</button>
+                                                <button class="btn btn-danger" type="submit">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
+                        {{ $towns->links() }}
                     </div>
                     <!-- /# card -->
                 </div>
-                <div>
-                    {{--{{ $userRoles->links() }}--}}
-                </div>
+
             </div>
         </div>
         <!-- #/ container -->

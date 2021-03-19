@@ -4,7 +4,7 @@
 namespace App\Traits;
 
 
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use Illuminate\Http\Request;
 use willvincent\Rateable\Rating;
 
@@ -15,7 +15,7 @@ trait RaitTrait
 
         request()->validate(['rate' => 'required']);
         $authId = auth()->id();
-        $flat = SellApartament::find($request->id);
+        $flat = sellApartment::find($request->id);
         $rate = Rating::query()
             ->where('user_id', '=', "{$authId}")
             ->where('rateable_id', '=', "{$request->id}")

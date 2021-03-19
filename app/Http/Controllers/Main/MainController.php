@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Models\Balcony;
 use App\Models\Room;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use App\Models\Wall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,7 @@ class MainController extends Controller
      */
     public function index()
     {
-        $sellFlats = SellApartament::query()
+        $sellFlats = sellApartment::query()
             ->where('is_banned', '=', false)
             ->latest()
             ->limit(6)
@@ -39,7 +39,7 @@ class MainController extends Controller
      */
     public function ajaxRequest(Request $request){
 
-        $sellFlats = SellApartament::find($request->id);
+        $sellFlats = sellApartment::find($request->id);
         $response = auth()->user()->toggleFavorite($sellFlats);
         return response()->json(['success'=>$response]);
     }

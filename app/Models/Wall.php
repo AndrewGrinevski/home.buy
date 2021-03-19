@@ -8,9 +8,9 @@ class Wall extends Model
 {
     protected $fillable = ['type_of_walls'];
 
-    public function sellApartament()
+    public function SellApartment()
     {
-        return $this->hasMany(SellApartament::class);
+        return $this->hasMany(SellApartment::class);
     }
 
 }

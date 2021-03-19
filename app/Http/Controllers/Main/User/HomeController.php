@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Main\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\SellApartament;
+use App\Models\sellApartment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -30,22 +30,22 @@ class HomeController extends Controller
         $b = 0;
         $c = 0;
         $id = Auth::id();
-        $sellFlats = SellApartament::query()->where('contacts_id', '=', "{$id}")
+        $sellFlats = sellApartment::query()->where('contacts_id', '=', "{$id}")
             ->where('rent_per_month', '=', null)
             ->where('rent_per_day', '=', null)
             ->get();
 
-        $rentFlatsPerDay = SellApartament::query()->where('contacts_id', '=', "{$id}")
+        $rentFlatsPerDay = sellApartment::query()->where('contacts_id', '=', "{$id}")
             ->where('price', '=', null)
             ->where('rent_per_month', '=', null)
             ->get();
 
-        $rentFlats = SellApartament::query()->where('contacts_id', '=', "{$id}")
+        $rentFlats = sellApartment::query()->where('contacts_id', '=', "{$id}")
             ->where('price', '=', null)
             ->where('rent_per_day', '=', null)
             ->get();
 
-        $banned = SellApartament::query()
+        $banned = sellApartment::query()
             ->where('is_banned', '=', true)
             ->get();
 

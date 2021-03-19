@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\SellApartament;
+use App\Models\SellApartment;
 use App\Traits\RolesTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,9 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function sellApartament()
+    public function sellApartment()
     {
-        return $this->hasMany(SellApartament::class);
+        return $this->hasMany(SellApartment::class);
     }
 
 

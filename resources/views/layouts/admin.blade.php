@@ -65,7 +65,7 @@
     ***********************************-->
     <div class="header" >
         <div class="float-right">
-            <button class="btn  color-white"><a href="{{ route('mainPage') }}">На сайт</a></button>
+            <a class="btn btn-dark" href="{{ route('mainPage') }}">На сайт</a>
         </div><br>
     </div>
     <!--**********************************
@@ -78,24 +78,12 @@
     <div class="nk-sidebar">
         <div class="nk-nav-scroll">
             <ul class="metismenu" id="menu">
-                <li class="nav-label">Продажа</li>
-                <li>
-                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Квартиры</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('admin.sellFlats.index') }}">Все</a></li>
-                        <li><a href="#">1-комнатные</a></li>
-                        <li><a href="#">2-комнатные</a></li>
-                        <li><a href="#">3-комнатные</a></li>
-                        <li><a href="#">4-комнатные</a></li>
-                    </ul>
-                </li>
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="icon-speedometer menu-icon"></i><span class="nav-text">Доп. парам. помещения</span>
                     </a>
                     <ul aria-expanded="false">
+                        <li><a href="{{ route('admin.addParam.town.index') }}">Населенный <пункт></пункт></a></li>
                         <li><a href="{{ route('admin.addParam.room.index') }}">Кол-во комнат</a></li>
                         <li><a href="{{ route('admin.addParam.separatedRoom.index') }}">Кол-во отдельных комнат</a></li>
                         <li><a href="{{ route('admin.addParam.berth.index') }}">Кол-во спальных мест</a></li>
@@ -106,31 +94,12 @@
                         <li><a href="{{ route('admin.addParam.transaction.index') }}">Условия сделки</a></li>
                     </ul>
                 </li>
-                <li class="nav-label">Аренда</li>
                 <li>
-                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="icon-envelope menu-icon"></i> <span class="nav-text">Квартиры</span>
+                    <a href="{{ route('admin.showUsers.index') }}" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text">Пользователи</span>
                     </a>
-                    <ul aria-expanded="false">
-                        <li><a href="#">Все</a></li>
-                        <li><a href="#">1-комнатные</a></li>
-                        <li><a href="#">2-комнатные</a></li>
-                        <li><a href="#">3-комнатные</a></li>
-                        <li><a href="#">4-комнатные</a></li>
-                    </ul>
                 </li>
-                <li>
-                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">На сутки</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="./index.html">Все</a></li>
-                        <li><a href="#">1-комнатные</a></li>
-                        <li><a href="#">2-комнатные</a></li>
-                        <li><a href="#">3-комнатные</a></li>
-                        <li><a href="#">4-комнатные</a></li>
-                    </ul>
-                </li>
+
                 <li>
                     <a href="{{ route('admin.addRole.index') }}" aria-expanded="false">
                         <i class="icon-badge menu-icon"></i><span class="nav-text">Роли</span>

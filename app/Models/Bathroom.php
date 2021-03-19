@@ -8,9 +8,9 @@ class Bathroom extends Model
 {
     protected $fillable = ['type_of_bathrooms'];
 
-    public function sellApartament()
+    public function sellApartment()
     {
-        return $this->hasMany(SellApartament::class);
+        return $this->hasMany(SellApartment::class);
     }
 }
 

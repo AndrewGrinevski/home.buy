@@ -8,8 +8,8 @@ class Repair extends Model
 {
     protected $fillable = ['type_of_repairs'];
 
-    public function balcony()
+    public function SellApartment()
     {
-        return $this->belongsTo(Balcony::class, 'type_of_balcony_id');
+        return $this->hasMany(SellApartment::class);
     }
 }

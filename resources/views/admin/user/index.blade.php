@@ -9,35 +9,28 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4>Список недвижимости</h4>
+                                <h4>Список пользователей</h4>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                    <a href="{{ route('admin.sellFlats.create') }}" class="btn mb-1 btn-rounded btn-info">Добавить недвижимость</a>
                                     <tr>
                                         <th>#</th>
-                                        <th>Город</th>
-                                        <th>Адрес</th>
-                                        <th>Кол-во комнат</th>
-                                        <th>email пользователя</th>
-                                        <th>Стоимость</th>
+                                        <th>Имя</th>
+                                        <th>Email</th>
                                         <th>Дата добавления</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($flats as $flat)
+                                    @foreach($users as $user)
                                     <tr>
-                                        <th>{{$flat->id}}</th>
-                                        <td>{{$flat->town}}</td>
-                                        <td>{{$flat->address}}</td>
-                                        <td>{{$flat->room->number_of_rooms}}</td>
-                                        <td>{{$flat->user->email}}</td>
-                                        <td class="color-primary">${{$flat->price}}</td>
-                                        <td class="color-primary">{{$flat->created_at}}</td>
-                                        <td> <a href="{{ route('admin.sellFlats.edit', ['flat'=>$flat->id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
+                                        <th>{{$user->id}}</th>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$user->created_at}}</td>
+                                        <td> <a href="{{ route('admin.showUsers.show', ['show_user'=>$user->id ]) }}" class="btn mb-1 btn-rounded btn-info">Просмотреть</a> </td>
                                         <td>
-                                            <form action="{{ route('admin.sellFlats.destroy', ['flat'=>$flat->id ])}}" method="post">
+                                            <form action="{{ route('admin.showUsers.destroy', ['show_user'=>$user->id ])}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Удалить</button>
@@ -54,7 +47,7 @@
                     <!-- /# card -->
                 </div>
                 <div>
-                    {{ $flats->links() }}
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>

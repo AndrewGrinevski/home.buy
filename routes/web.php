@@ -13,34 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//test
-Route::get('/test', 'TestController@index')->name('test');
-Route::get('/test1', 'TestController@index')->name('test');
-Route::get('ajax-autocomplete-search','TestController@selectSearch');
-
-
 Auth::routes(['verify' => true]);
 
 //Admin
 Route::prefix('admins')->middleware(['role:admin'])->namespace('Admin')
     ->group(function () {
         Route::get('/', 'AdminController@index')->name('dashboard');
+        Route::resource('/show_users', 'ShowUserAdsController')->names('admin.showUsers');
         Route::resource('/add_role', 'AddRoleController')->names('admin.addRole');
     });
-
-Route::prefix('admins')->middleware(['role:admin'])->namespace('Admin\\Sell')
+Route::prefix('admins')->middleware(['role:admin'])->namespace('Admin\\AddParameters')
     ->group(function () {
-        Route::resource('/sell/flats', 'SellApartamentController')->names('admin.sellFlats');
-        Route::resource('/sell/add_param/number_of_rooms', 'AddRoomController')->names('admin.addParam.room');
-        Route::resource('/sell/add_param/number_of_separated_rooms', 'AddSeparatedRoomController')->names('admin.addParam.separatedRoom');
-        Route::resource('/sell/add_param/berth', 'AddBerthController')->names('admin.addParam.berth');
-        Route::resource('/sell/add_param/balcony', 'AddBalconyController')->names('admin.addParam.balcony');
-        Route::resource('/sell/add_param/bathroom', 'AddBathroomController')->names('admin.addParam.bathroom');
-        Route::resource('/sell/add_param/repair', 'AddRepairController')->names('admin.addParam.repair');
-        Route::resource('/sell/add_param/wall', 'AddWallController')->names('admin.addParam.wall');
-        Route::resource('/sell/add_param/transaction', 'AddTransactionController')->names('admin.addParam.transaction');
+        Route::resource('/add_param/towns', 'AddTownController')->names('admin.addParam.town');
+        Route::resource('/add_param/number_of_rooms', 'AddRoomController')->names('admin.addParam.room');
+        Route::resource('/add_param/number_of_separated_rooms', 'AddSeparatedRoomController')->names('admin.addParam.separatedRoom');
+        Route::resource('/add_param/berths', 'AddBerthController')->names('admin.addParam.berth');
+        Route::resource('/add_param/balconies', 'AddBalconyController')->names('admin.addParam.balcony');
+        Route::resource('/add_param/bathrooms', 'AddBathroomController')->names('admin.addParam.bathroom');
+        Route::resource('/add_param/repairs', 'AddRepairController')->names('admin.addParam.repair');
+        Route::resource('/add_param/walls', 'AddWallController')->names('admin.addParam.wall');
+        Route::resource('/add_param/transactions', 'AddTransactionController')->names('admin.addParam.transaction');
     });
-
 
 //Main
 Route::get('/', 'Main\\MainController@index')->name('mainPage');
@@ -50,7 +43,6 @@ Route::prefix('/sell')->namespace('Main\\Sell')
     ->group(function () {
         Route::get('/flats', 'AllFlatController@index')->name('main.allFlats');
         Route::post('/flats', 'AllFlatController@flatsFlat')->name('flats.flat');
-        Route::get('/ajaxRequestMap', 'AllFlatController@ajaxRequestMap')->name('ajaxRequestMap');
         Route::post('/ajaxRequest', 'AllFlatController@ajaxRequest')->name('ajaxRequest');
         Route::get('/1-room-flats', 'AllFlatController@showOneRoomFlats')->name('main.showOneRoomFlats');
         Route::get('/2-room-flats', 'AllFlatController@showTwoRoomFlats')->name('main.showTwoRoomFlats');
@@ -89,7 +81,7 @@ Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user', 'verif
     Route::get('/contacts_information', 'HomeController@profile')->name('profile');
     Route::post('/contacts_information/{id}', 'HomeController@update')->name('profile.update');
     Route::get('/favorite', 'FavoriteController@index')->name('favorite');
-    Route::resource('/add/flats/sell', 'AddSellFlatController')->names('home.addSellFlat');
+    Route::resource('/add/flats/user', 'AddSellFlatController')->names('home.addSellFlat');
     Route::get('/ajax-autocomplete-search','AddSellFlatController@selectSearch');
     Route::resource('/add/apartment/rent', 'AddRentApartmentController')->names('home.addRentApartment');
     Route::resource('/add/flat/rent', 'AddRentFlatController')->names('home.addRentFlat');

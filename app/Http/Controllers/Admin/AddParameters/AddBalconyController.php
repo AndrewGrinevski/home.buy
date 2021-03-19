@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Sell;
+namespace App\Http\Controllers\Admin\AddParameters;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transaction;
+use App\Models\Balcony;
 use Illuminate\Http\Request;
 
-class AddTransactionController extends Controller
+class AddBalconyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AddTransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
-        return view('admin.sell.addParam.transaction.index', compact('transactions'));
+        $balconies = Balcony::all();
+        return view('admin.addParam.balconies.index', compact('balconies'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AddTransactionController extends Controller
      */
     public function create()
     {
-        return view('admin.sell.addParam.transaction.create');
+        return view('admin.addParam.balconies.create');
     }
 
     /**
@@ -37,8 +37,8 @@ class AddTransactionController extends Controller
      */
     public function store(Request $request)
     {
-        Transaction::create($request->all());
-        return redirect()->route('admin.addParam.transaction.index');
+        Balcony::create($request->all());
+        return redirect()->route('admin.addParam.balcony.index');
     }
 
     /**
@@ -60,8 +60,8 @@ class AddTransactionController extends Controller
      */
     public function edit($id)
     {
-        $transaction = Transaction::findOrFail($id);
-        return view('admin.sell.addParam.transaction.edit', compact('transaction'));
+        $balcony = Balcony::findOrFail($id);
+        return view('admin.addParam.balconies.edit', compact('balcony'));
     }
 
     /**
@@ -73,10 +73,10 @@ class AddTransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $transaction = Transaction::findOrFail($id);
-        $transaction->fill($request->all());
-        $transaction->save();
-        return redirect()->route('admin.addParam.transaction.index');
+        $balcony = Balcony::findOrFail($id);
+        $balcony->fill($request->all());
+        $balcony->save();
+        return redirect()->route('admin.addParam.balcony.index');
     }
 
     /**
@@ -87,8 +87,8 @@ class AddTransactionController extends Controller
      */
     public function destroy($id)
     {
-        $transaction = Transaction::findOrFail($id);
-        $transaction->delete();
-        return redirect()->route('admin.addParam.transaction.index');
+        $balcony = Balcony::findOrFail($id);
+        $balcony->delete();
+        return redirect()->route('admin.addParam.balcony.index');
     }
 }
