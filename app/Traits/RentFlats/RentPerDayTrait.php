@@ -105,10 +105,10 @@ trait RentPerDayTrait
         }
         //Цена
         if ($request->filled('min_rent_per_day')) {
-            $flatsQuery->where('price', '>=', $request->min_rent_per_day);
+            $flatsQuery->where('rent_per_day', '>=', $request->min_rent_per_day);
         }
         if ($request->filled('max_rent_per_day')) {
-            $flatsQuery->where('price', '<=', $request->max_rent_per_day);
+            $flatsQuery->where('rent_per_day', '<=', $request->max_rent_per_day);
         }
         //Общая площадь
         if ($request->filled('min_total_area')) {

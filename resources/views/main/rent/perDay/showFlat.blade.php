@@ -270,7 +270,7 @@
                                                 src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}"
                                                 alt="">
                                             <a class="ps-shoe__overlay"
-                                               href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}"></a>
+                                               href="{{ route('main.allRentApartments.show', ['slug' => $flat->slug]) }}"></a>
                                         </div>
                                         <div class="ps-shoe__content">
                                             <div class="ps-shoe__variants">
@@ -288,7 +288,7 @@
                                                 </div>
                                             </div>
                                             <div class="ps-shoe__detail"><a class="ps-shoe__name"
-                                                                            href="{{ route('main.allFlats.show', ['slug' => $flat->slug]) }}">
+                                                                            href="{{ route('main.allRentApartments.show', ['slug' => $flat->slug]) }}">
                                                     <br>{{$flat->room->number_of_rooms.'-комнатная квартира'.', '.$flat->town->town.', '.$flat->address}} </a>
                                                 <span class="ps-shoe__price">${{ $flat->rent_per_day }}</span>
                                             </div>

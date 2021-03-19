@@ -83,10 +83,10 @@ trait RentPerMonthTrait
         }
         //Цена
         if ($request->filled('min_rent_per_month')) {
-            $flatsQuery->where('price', '>=', $request->min_rent_per_month);
+            $flatsQuery->where('rent_per_month', '>=', $request->min_rent_per_month);
         }
         if ($request->filled('max_rent_per_month')) {
-            $flatsQuery->where('price', '<=', $request->max_rent_per_month);
+            $flatsQuery->where('rent_per_month', '<=', $request->max_rent_per_month);
         }
         //Общая площадь
         if ($request->filled('min_total_area')) {

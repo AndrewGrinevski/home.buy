@@ -118,10 +118,10 @@
                         <h5>Цена</h5>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="min_price" placeholder="От" value="{{ request()->min_rent_per_month }}">
+                        <input type="number" class="form-control searchFlats" name="min_rent_per_month" placeholder="От" value="{{ request()->min_rent_per_month }}">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control searchFlats" name="max_price" placeholder="До" value="{{ request()->max_rent_per_month }}">
+                        <input type="number" class="form-control searchFlats" name="max_rent_per_month" placeholder="До" value="{{ request()->max_rent_per_month }}">
                     </div>
                 </aside>
                 <aside class="ps-widget--sidebar ps-widget--filter">
