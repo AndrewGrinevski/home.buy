@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Balcony;
 use App\Models\Room;
 use App\Models\sellApartment;
+use App\Models\Town;
 use App\Models\Wall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

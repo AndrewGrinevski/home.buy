@@ -7,7 +7,7 @@ use App\Models\Balcony;
 use App\Models\Room;
 use App\Models\SellApartment;
 use App\Models\Wall;
-use App\Traits\DynamicAutocompleteSearchTrait;
+use App\Traits\FavoriteTrait;
 use App\Traits\RaitTrait;
 use App\Traits\SellFlats\SearchTrait;
 use App\Traits\ShowOtherOffersTrait;
@@ -20,7 +20,7 @@ class AllFlatController extends Controller
     use SearchTrait;
     use ShowOtherOffersTrait;
     use RaitTrait;
-    use DynamicAutocompleteSearchTrait;
+    use FavoriteTrait;
 
 
     /**
@@ -57,18 +57,7 @@ class AllFlatController extends Controller
         $sellFlat = SellApartment::whereSlug($slug)->firstOrFail();
         $location = explode(',', $sellFlat->location);
         $sellFlats = $this->showOtherOffers($sellFlat);
-        return view('main.sell.showFlat', compact('sellFlat', 'sellFlats', 'location'));
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function ajaxRequest(Request $request){
-
-        $sellFlats = SellApartment::find($request->id);
-        $response = auth()->user()->toggleFavorite($sellFlats);
-        return response()->json(['success'=>$response]);
+        $user = Auth::user();
+        return view('main.sell.showFlat', compact('sellFlat', 'sellFlats', 'location', 'user'));
     }
 }

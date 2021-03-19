@@ -37,18 +37,17 @@ Route::prefix('admins')->middleware(['role:admin'])->namespace('Admin\\AddParame
 
 //Main
 Route::get('/', 'Main\\MainController@index')->name('mainPage');
-Route::post('/ajaxRequest', 'Main\\MainController@ajaxRequest')->name('ajaxRequest');
+
 //Sell
 Route::prefix('/sell')->namespace('Main\\Sell')
     ->group(function () {
         Route::get('/flats', 'AllFlatController@index')->name('main.allFlats');
         Route::post('/flats', 'AllFlatController@flatsFlat')->name('flats.flat');
-        Route::post('/ajaxRequest', 'AllFlatController@ajaxRequest')->name('ajaxRequest');
         Route::get('/1-room-flats', 'AllFlatController@showOneRoomFlats')->name('main.showOneRoomFlats');
         Route::get('/2-room-flats', 'AllFlatController@showTwoRoomFlats')->name('main.showTwoRoomFlats');
         Route::get('/3-room-flats', 'AllFlatController@showThreeRoomFlats')->name('main.showThreeRoomFlats');
         Route::get('/4+room-flats', 'AllFlatController@showFourPlusRoomFlats')->name('main.showFourPlusRoomFlats');
-            Route::get('/flats/{slug}', 'AllFlatController@show')->name('main.allFlats.show');
+        Route::get('/flats/{slug}', 'AllFlatController@show')->name('main.allFlats.show');
         Route::get('/search', 'AllFlatController@search')->name('main.search');
     });
 
@@ -57,7 +56,6 @@ Route::prefix('/rent')->namespace('Main\\Rent')
     ->group(function () {
         //Flats per month
         Route::get('/flats', 'AllRentFlatPerMonthController@index')->name('main.allRentFlats');
-        Route::post('/ajaxRequest', 'AllRentFlatPerMonthController@ajaxRequest')->name('main.ajaxRequest');
         Route::get('/1-room-flats', 'AllRentFlatPerMonthController@showOneRoomFlats')->name('main.showRentOneRoomFlats');
         Route::get('/2-room-flats', 'AllRentFlatPerMonthController@showTwoRoomFlats')->name('main.showRentTwoRoomFlats');
         Route::get('/3-room-flats', 'AllRentFlatPerMonthController@showThreeRoomFlats')->name('main.showRentThreeRoomFlats');
@@ -66,7 +64,6 @@ Route::prefix('/rent')->namespace('Main\\Rent')
         Route::get('/flat/search', 'AllRentFlatPerMonthController@search')->name('main.rentSearch');
         //Flats per day
         Route::get('/apartments', 'AllRentFlatPerDayController@index')->name('main.allRentApartments');
-        Route::post('/ajaxRequest', 'AllRentFlatPerDayController@ajaxRequest')->name('main.ajaxRequest');
         Route::get('/1-room-apartment', 'AllRentFlatPerDayController@showOneRoomFlats')->name('main.showRentOneRoomApartments');
         Route::get('/2-room-apartment', 'AllRentFlatPerDayController@showTwoRoomFlats')->name('main.showRentTwoRoomApartments');
         Route::get('/3-room-apartment', 'AllRentFlatPerDayController@showThreeRoomFlats')->name('main.showRentThreeRoomApartments');
@@ -75,14 +72,18 @@ Route::prefix('/rent')->namespace('Main\\Rent')
         Route::get('/apartments/search', 'AllRentFlatPerDayController@search')->name('main.rentApartmentsSearch');
     });
 
+//Ajax
+Route::post('/ajaxRequest', 'Main\\Sell\\AllFlatController@ajaxRequest')->name('ajaxRequest');
+Route::get('/ajax-autocomplete-search','Main\\TownSearchController@selectSearch');
+
 //User
+
 Route::prefix('/home')->namespace('Main\\User')->middleware(['role:user', 'verified'])->group(function () {
     Route::get('/user_id={id}', 'HomeController@index')->name('home');
     Route::get('/contacts_information', 'HomeController@profile')->name('profile');
     Route::post('/contacts_information/{id}', 'HomeController@update')->name('profile.update');
     Route::get('/favorite', 'FavoriteController@index')->name('favorite');
-    Route::resource('/add/flats/user', 'AddSellFlatController')->names('home.addSellFlat');
-    Route::get('/ajax-autocomplete-search','AddSellFlatController@selectSearch');
+    Route::resource('/add/flats/sell', 'AddSellFlatController')->names('home.addSellFlat');
     Route::resource('/add/apartment/rent', 'AddRentApartmentController')->names('home.addRentApartment');
     Route::resource('/add/flat/rent', 'AddRentFlatController')->names('home.addRentFlat');
 });

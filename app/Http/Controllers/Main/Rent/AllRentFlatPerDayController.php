@@ -8,7 +8,6 @@ use App\Models\Berth;
 use App\Models\Room;
 use App\Models\sellApartment;
 use App\Models\Wall;
-use App\Traits\DynamicAutocompleteSearchTrait;
 use App\Traits\RaitTrait;
 use App\Traits\RentFlats\RentPerDayTrait;
 use App\Traits\ShowOtherOffersTrait;
@@ -21,7 +20,7 @@ class AllRentFlatPerDayController extends Controller
     use RentPerDayTrait;
     use ShowOtherOffersTrait;
     use RaitTrait;
-    use DynamicAutocompleteSearchTrait;
+
 
     /**
      * Display a listing of the resource.
@@ -55,8 +54,8 @@ class AllRentFlatPerDayController extends Controller
         $sellFlat = sellApartment::whereSlug($slug)->firstOrFail();
         $location = explode(',', $sellFlat->location);
         $sellFlats = $this->showOtherOffers($sellFlat);
-
-        return view('main.rent.perDay.showFlat', compact('sellFlat', 'sellFlats', 'location'));
+        $user = Auth::user();
+        return view('main.rent.perDay.showFlat', compact('sellFlat', 'sellFlats', 'location', 'user'));
     }
 
     /**

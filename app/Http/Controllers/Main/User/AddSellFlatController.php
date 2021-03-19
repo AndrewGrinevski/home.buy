@@ -15,15 +15,11 @@ use App\Models\SeparatedRoom;
 use App\Models\Transaction;
 use App\Models\Wall;
 use App\Traits\CreateUpdateImagesTrait;
-use App\Traits\DynamicAutocompleteSearchTrait;
 use Illuminate\Support\Facades\Auth;
 
 
 class AddSellFlatController extends Controller
 {
-
-    use DynamicAutocompleteSearchTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -50,7 +46,7 @@ class AddSellFlatController extends Controller
         $walls = Wall::all();
         $transactions = Transaction::all();
         $user = Auth::user();
-        return view('main.user.user.flat.create', compact('rooms', 'separatedRooms',
+        return view('main.user.sell.flat.create', compact('rooms', 'separatedRooms',
             'balconies', 'bathrooms', 'repairs', 'walls', 'transactions', 'user'));
     }
 
@@ -109,7 +105,7 @@ class AddSellFlatController extends Controller
         $transactions = Transaction::all();
         $sellRoom = sellApartment::findOrFail($id);
         $user = Auth::user();
-        return view('main.user.user.flat.edit', compact('sellRoom', 'rooms', 'separatedRooms',
+        return view('main.user.sell.flat.edit', compact('sellRoom', 'rooms', 'separatedRooms',
             'balconies', 'bathrooms', 'repairs', 'walls', 'transactions', 'user'));
     }
 

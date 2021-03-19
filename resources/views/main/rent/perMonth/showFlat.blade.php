@@ -238,19 +238,6 @@
                                                data-min="0" data-max="5" data-step="1"
                                                value="{{ $flat->averageRating }}" data-size="xs" disabled>
                                         <div class="ps-shoe__thumbnail">
-                                            @auth()
-                                                @if($user->hasFavorited($flat))
-                                                    <button class="ps-shoe__favorite">
-                                                        <i id="like{{$flat->id}}"
-                                                           class="glyphicon glyphicon-heart {{ $flat->favoriters()->count() > 0  ? 'like-post' : '' }}"></i>
-                                                    </button>
-                                                @else
-                                                    <button class="ps-shoe__favorite">
-                                                        <i id="like{{$flat->id}}"
-                                                           class="glyphicon glyphicon-heart"></i>
-                                                    </button>
-                                                @endif
-                                            @endauth
                                             <img
                                                 src="{{ \Illuminate\Support\Facades\Storage::url(\App\Http\Controllers\Controller::PATH_IMG.$flat->image->first_img_name) }}"
                                                 alt="">

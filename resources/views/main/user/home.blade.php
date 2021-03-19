@@ -42,11 +42,11 @@
                                                 <td class="color-primary">${{ $flat->price }}</td>
                                                 <td class="color-primary">{{ $flat->created_at }}</td>
                                                 <td class="color-primary">{{ $flat->updated_at }}</td>
-                                                <td><a href="{{ route('home.addSellFlat.edit', ['user'=>$flat->id ]) }}"
+                                                <td><a href="{{ route('home.addSellFlat.edit', ['sell'=>$flat->id ]) }}"
                                                        class="btn mb-1 btn-rounded btn-info">Редактировать</a></td>
                                                 <td>
                                                     <form
-                                                        action="{{ route('home.addSellFlat.destroy', ['user'=>$flat->id ])}}"
+                                                        action="{{ route('home.addSellFlat.destroy', ['sell'=>$flat->id ])}}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')

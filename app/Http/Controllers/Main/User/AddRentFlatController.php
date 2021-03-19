@@ -9,11 +9,10 @@ use App\Models\Image;
 use App\Models\Room;
 use App\Models\sellApartment;
 use App\Traits\CreateUpdateImagesTrait;
-use App\Traits\DynamicAutocompleteSearchTrait;
+
 use Illuminate\Support\Facades\Auth;
 class AddRentFlatController extends Controller
 {
-    use DynamicAutocompleteSearchTrait;
 
     /**
      * Display a listing of the resource.

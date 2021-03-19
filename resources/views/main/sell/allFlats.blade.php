@@ -292,7 +292,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/sell/ajaxRequest',
+                    url: '/ajaxRequest',
                     data: {id: id},
                     success: function (data) {
                         if (jQuery.isEmptyObject(data.success.attached)) {

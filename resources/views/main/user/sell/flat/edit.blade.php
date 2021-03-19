@@ -7,7 +7,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('home.addSellFlat.update', ['user'=>$sellRoom->id ]) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('home.addSellFlat.update', ['sell'=>$sellRoom->id ]) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <h4 class="card-title">Местоположение</h4>
@@ -235,6 +235,7 @@
                 dataType: 'json',
                 delay: 250,
                 processResults: function (data) {
+                    console.log('sdsd')
                     return {
                         results: $.map(data, function (item) {
                             return {

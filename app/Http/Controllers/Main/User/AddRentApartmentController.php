@@ -12,13 +12,10 @@ use App\Models\Image;
 use App\Models\Room;
 use App\Models\sellApartment;
 use App\Traits\CreateUpdateImagesTrait;
-use App\Traits\DynamicAutocompleteSearchTrait;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class AddRentApartmentController extends Controller
 {
-    use DynamicAutocompleteSearchTrait;
 
     /**
      * Display a listing of the resource.
