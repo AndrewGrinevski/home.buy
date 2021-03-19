@@ -215,12 +215,12 @@
                                                             @else
                                                                 <td class="color-primary">Продажа квартиры</td>
                                                                 <td>
-                                                                    <a href="{{ route('home.addSellFlat.edit', ['user'=>$item->id ]) }}"
+                                                                    <a href="{{ route('home.addSellFlat.edit', ['sell'=>$item->id ]) }}"
                                                                        class="btn mb-1 btn-rounded btn-info">Редактировать</a>
                                                                 </td>
                                                                 <td>
                                                                     <form
-                                                                        action="{{ route('home.addSellFlat.destroy', ['user'=>$item->id ])}}"
+                                                                        action="{{ route('home.addSellFlat.destroy', ['sell'=>$item->id ])}}"
                                                                         method="post">
                                                                         @csrf
                                                                         @method('DELETE')

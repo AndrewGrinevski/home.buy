@@ -28,18 +28,11 @@
                                     <tr>
                                         <th>{{ $id+=1}}</th>
                                         <td>{{$userRole->name}}</td>
-                                        <td>{{$userRole->roleName}}</td>
+                                        <td>{{$userRole->role_name}}</td>
                                         <td>{{$userRole->email}}</td>
                                         <td>{{$userRole->created_at}}</td>
                                         <td class="color-primary">{{$userRole->updated_at}}</td>
                                         <td> <a href="{{ route('admin.addRole.edit', ['add_role'=>$userRole->user_id ]) }}" class="btn mb-1 btn-rounded btn-info">Редактировать</a> </td>
-                                        <td>
-                                            <form action="{{ route('admin.addRole.destroy', ['add_role'=>$userRole->user_id ])}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Удалить</button>
-                                            </form>
-                                        </td>
                                     </tr>
                                     @endforeach
                                     </tbody>

@@ -16,7 +16,7 @@ trait RolesTrait
     public function hasRole(... $roles)
     {
         foreach ($roles as $role) {
-            if ($this->roles->contains('roleName', $role)) {
+            if ($this->roles->contains('role_name', $role)) {
                 return true;
             }
         }

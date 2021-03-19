@@ -83,7 +83,7 @@
                         <i class="icon-speedometer menu-icon"></i><span class="nav-text">Доп. парам. помещения</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('admin.addParam.town.index') }}">Населенный <пункт></пункт></a></li>
+                        <li><a href="{{ route('admin.addParam.town.index') }}">Населенный пункт</a></li>
                         <li><a href="{{ route('admin.addParam.room.index') }}">Кол-во комнат</a></li>
                         <li><a href="{{ route('admin.addParam.separatedRoom.index') }}">Кол-во отдельных комнат</a></li>
                         <li><a href="{{ route('admin.addParam.berth.index') }}">Кол-во спальных мест</a></li>
@@ -99,7 +99,6 @@
                         <i class="icon-badge menu-icon"></i><span class="nav-text">Пользователи</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="{{ route('admin.addRole.index') }}" aria-expanded="false">
                         <i class="icon-badge menu-icon"></i><span class="nav-text">Роли</span>

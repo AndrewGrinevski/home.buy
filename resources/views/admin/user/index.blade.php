@@ -29,13 +29,6 @@
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->created_at}}</td>
                                         <td> <a href="{{ route('admin.showUsers.show', ['show_user'=>$user->id ]) }}" class="btn mb-1 btn-rounded btn-info">Просмотреть</a> </td>
-                                        <td>
-                                            <form action="{{ route('admin.showUsers.destroy', ['show_user'=>$user->id ])}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" type="submit">Удалить</button>
-                                            </form>
-                                        </td>
                                     </tr>
                                     @endforeach
                                     </tbody>

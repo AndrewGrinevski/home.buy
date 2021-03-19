@@ -219,6 +219,7 @@
                         </div>
                     </div>
                         @role('moderator')
+                    @if(!$sellFlat->is_banned)
                         <form action="{{ route('blockUnblock.moderator') }}" method="POST">
                             @csrf
                             <input type="hidden" name="block" value="1">
@@ -226,12 +227,15 @@
                             <button type="submit" class="btn btn-danger">Заблокировать</button>
                         </form>
                         <br>
+                    @else
                         <form action="{{ route('blockUnblock.moderator') }}" method="POST">
                             @csrf
                             <input type="hidden" name="unblock" value="1">
                             <input type="hidden" name="id" value="{{ $sellFlat->id }}">
                             <button type="submit" class="btn btn-info">Разблокировать</button>
                         </form>
+                        <br>
+                    @endif
                         @endrole
                     </div>
                 </div>

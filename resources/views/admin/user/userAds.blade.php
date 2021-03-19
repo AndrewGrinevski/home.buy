@@ -87,9 +87,13 @@
                                                     <td class="color-primary">{{ $flat->created_at }}</td>
                                                     <td class="color-primary">{{ $flat->updated_at }}</td>
                                                     <td> <a href="{{ route('main.allRentApartments.show', ['slug'=>$flat->slug ]) }}" class="btn mb-1 btn-rounded btn-info">Посмотреть</a> </td>
-                                                    @if($flat->is_fixed)
-                                                        <td> <button disabled class="btn btn-warning">Исправлено</button> </td>
-                                                    @endif
+                                                    <td>
+                                                        <form action="{{ route('admin.showUsers.destroy', ['show_user'=>$flat->id ])}}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger" type="submit">Удалить</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             @else
@@ -126,9 +130,13 @@
                                                         <td class="color-primary">{{ $flat->created_at }}</td>
                                                         <td class="color-primary">{{ $flat->updated_at }}</td>
                                                         <td> <a href="{{ route('main.allRentFlats.show', ['slug'=>$flat->slug ]) }}" class="btn mb-1 btn-rounded btn-info">Посмотреть</a> </td>
-                                                        @if($flat->is_fixed)
-                                                            <td> <button disabled class="btn btn-warning">Исправлено</button> </td>
-                                                        @endif
+                                                        <td>
+                                                            <form action="{{ route('admin.showUsers.destroy', ['show_user'=>$flat->id ])}}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger" type="submit">Удалить</button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                                 @else
